@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="pl-PL">
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Auta</title>
+ 
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <img src="../../static/images/Tiri-260x370.png" width="165" height="120" th:src="@{/images/Tir-550x400.png}"/>
+    <h2>Szczegóły pojazdu</h2>
+        <div>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">truck id:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${truck.id}">Truck Id</p></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">nr rejestracyjny:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${truck.registrationNumber}">nr rejestacyjny</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Producent:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${truck.producer}">Producent</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Model:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${truck.model}">Model</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Rok produkcji:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${truck.productionYear}">Rok produkcji</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Euro Standard:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${truck.euroStandard}">EURO Standard</p>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-sm-2 control-label">KM:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${truck.horsePower}">KM</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Aktywny:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${truck.Active}">KM</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Data utworzenia:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${truck.creationDate}">KM</p>
+                    </div>
+                </div>
+            </form>
+    </div>
+</div>
+ 
+</body>
+</html>

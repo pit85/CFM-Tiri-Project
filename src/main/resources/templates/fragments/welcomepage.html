@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="pl-PL">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+ 
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+ 
+    <link href="../../static/css/tiri.css"
+          th:href="@{css/tiri.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+ 
+<div class="container">
+    <div th:fragment="header">
+        <div class="jumbotron">
+            <div class="row text-center">
+                <div class="">
+                    <h2>Tiri - System zarządzania flotą</h2>
+ 
+                    <h4>Aplikacja utworzona przy pomocy Spring Boot, JPA, Security, Thymeleaf</h4>
+                </div>
+            </div>
+            <div class="row text-center">
+                <img src="../../static/images/Tiri-260x370.png" width="260" height="370"
+                     th:src="@{/images/Tiri-260x370.png}"/>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

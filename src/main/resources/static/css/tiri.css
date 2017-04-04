@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+input[type=submit] {
+     background:none!important;
+     border:none;
+     padding:0!important;
+     color: blue;
+     text-decoration: underline;
+     cursor:pointer;
+}
+
+#login {
+    padding: 5px 0;
+    border: none;
+    text-align: right;
+}
