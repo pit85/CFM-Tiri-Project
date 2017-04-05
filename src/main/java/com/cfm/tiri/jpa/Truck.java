@@ -5,8 +5,7 @@ import javax.persistence.*;
 
 @Entity
 public class Truck {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+
 	private Integer id;
 
 	@Version
@@ -20,8 +19,20 @@ public class Truck {
 	private boolean Active;
 	private LocalDate creationDate;
 
-	public Truck() {
-		setCreationDate();
+	public Truck(){
+	}
+	
+	public Truck(Integer version, String registrationNumber, String producer, String model, 
+			String euroStandard, int productionYear, int horsePower, boolean Active, LocalDate creationDate){
+		this.version = version;
+		this.registrationNumber = registrationNumber;
+		this.producer = producer;
+		this.model = model;
+		this.euroStandard = euroStandard;
+		this.productionYear = productionYear;
+		this.horsePower = horsePower;
+		this.Active =Active;
+		this.creationDate = creationDate;
 	}
 
 	public Integer getVersion() {
@@ -31,7 +42,10 @@ public class Truck {
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
-
+	
+    @Id
+    @Column(name = "ID_TRUCK")
+    @GeneratedValue
 	public Integer getId() {
 		return id;
 	}
@@ -100,9 +114,8 @@ public class Truck {
 		return creationDate;
 	}
 
-	public void setCreationDate() {
-		LocalDate currentDate = LocalDate.now();
-		this.creationDate = currentDate;
+	public void setCreationDate(LocalDate creationDate) {
+		this.creationDate = LocalDate.now();
 	}
 
 }
