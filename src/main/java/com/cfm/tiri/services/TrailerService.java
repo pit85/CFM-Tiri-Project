@@ -1,0 +1,13 @@
+package com.cfm.tiri.services;
+
+import com.cfm.tiri.jpa.Trailer;
+
+public interface TrailerService {
+
+	Iterable<Trailer> listAllTrailers();
+
+	Trailer getTrailerById(Integer id);
+
+	Trailer saveTrailer(Trailer trailer);
+
+}

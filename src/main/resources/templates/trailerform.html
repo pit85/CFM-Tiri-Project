@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Dodaj ciężarówkę</title>
+    <title>Dodaj naczepę</title>
  
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
@@ -11,12 +11,12 @@
      <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
      
     	<div class="container">
-    		<img src="../../static/images/tir-550x400.png" width="165" height="120" th:src="@{/images/tir-550x400.png}"/>
+    		<img src="../../static/images/trailer-1200x400.png" width="360" height="120" th:src="@{/images/trailer-1200x400.png}"/>
     	</div>
     	
-    <h2>Dodaj ciężarówkę: </h2>
+    <h2>Dodaj naczepę: </h2>
     <div>
-        <form class="form-horizontal" th:object="${truck}" th:action="@{/truck}" method="post">
+        <form class="form-horizontal" th:object="${trailer}" th:action="@{/trailer}" method="post">
             <input type="hidden" th:field="*{id}"/>
             <input type="hidden" th:field="*{version}"/>
             <input type="hidden" th:field="*{creationDate}"/>
@@ -45,15 +45,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">EURO Standard:</label>
+                <label class="col-sm-2 control-label">Rodzaj naczepy:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" th:field="*{euroStandard}"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">KM:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" th:field="*{horsePower}"/>
+                    <input type="text" class="form-control" th:field="*{trailerType}"/>
                 </div>
             </div>
             <div class="form-group">

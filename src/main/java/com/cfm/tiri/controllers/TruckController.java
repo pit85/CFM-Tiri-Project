@@ -52,9 +52,5 @@ public class TruckController {
         return "redirect:/truck/" + truck.getId();
     }
     
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(){
-         return "login";
-    }
 
 }

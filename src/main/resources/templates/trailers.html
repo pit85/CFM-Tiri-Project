@@ -3,7 +3,7 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head lang="pl-PL">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Lista ciężarówek</title>
+<title>Lista naczep</title>
 <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
 <body>
@@ -11,19 +11,19 @@
 		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 		<div>
 			<div class="container">
-				<img src="../../static/images/tir-550x400.png" width="165"
-					height="120" th:src="@{/images/tir-550x400.png}" />
+				<img src="../../static/images/trailer-1200x400.png" width="360"
+					height="120" th:src="@{/images/trailer-1200x400.png}" />
 			</div>
 
 			<div class="col-sm-10" sec:authorize="hasRole('ADMIN')">
 				<h5>
-					<a href="#" th:href="@{/truck/new}">Dodaj ciężarówkę</a>
+					<a href="#" th:href="@{/trailer/new}">Dodaj Naczepę</a>
 				</h5>
 			</div>
 		</div>
-		<div th:if="${not #lists.isEmpty(trucks)}">
+		<div th:if="${not #lists.isEmpty(trailers)}">
 			<div class="col-sm-10">
-				<h2>Lista ciężarówek</h2>
+				<h2>Lista naczep</h2>
 			</div>
 			<table class="table table-striped">
 				<tr>
@@ -32,32 +32,28 @@
 					<th>producent</th>
 					<th>model</th>
 					<th>rok produkcji</th>
-					<th>EURO Standard</th>
-					<th>KM</th>
-					<th>Aktywny</th>
+					<th>Rodzaj naczepy</th>
+					<th>Aktywna</th>
 					<th>Data utworzenia</th>
 					<th sec:authorize="hasAnyRole('USER','ADMIN')">Otwórz</th>
 					<th sec:authorize="hasRole('ADMIN')">Edytuj</th>
 				</tr>
-				<tr th:each="truck : ${trucks}">
-					<td th:text="${truck.id}"><a href="/truck/${truck.id}">Id</a></td>
-					<td th:text="${truck.registrationNumber}">nr rejestracyjny</td>
-					<td th:text="${truck.producer}">producer</td>
-					<td th:text="${truck.model}">model</td>
-					<td th:text="${truck.productionYear}">rok produkcji</td>
-					<td th:text="${truck.euroStandard}">EURO Standard</td>
-					<td th:text="${truck.horsePower}">KM</td>
-					<td th:text="${truck.Active}">Aktywny</td>
-					<td th:text="${truck.creationDate}">Data utworzenia</td>
+				<tr th:each="trailer : ${trailers}">
+					<td th:text="${trailer.id}"><a href="/trailer/${trailer.id}">Id</a></td>
+					<td th:text="${trailer.registrationNumber}">nr rejestracyjny</td>
+					<td th:text="${trailer.producer}">producer</td>
+					<td th:text="${trailer.model}">model</td>
+					<td th:text="${trailer.productionYear}">rok produkcji</td>
+					<td th:text="${trailer.trailerType}">Rodzaj naczepy</td>
+					<td th:text="${trailer.Active}">Aktywna</td>
+					<td th:text="${trailer.creationDate}">Data utworzenia</td>
 					<td sec:authorize="hasAnyRole('USER','ADMIN')"><a
-						th:href="${ '/truck/' + truck.id}">Otwórz</a></td>
+						th:href="${ '/trailer/' + trailer.id}">Otwórz</a></td>
 					<td sec:authorize="hasRole('ADMIN')"><a
-						th:href="${'/truck/edit/' + truck.id}">Edytuj</a></td>
+						th:href="${'/trailer/edit/' + trailer.id}">Edytuj</a></td>
 				</tr>
 			</table>
-
 		</div>
 	</div>
-
 </body>
 </html>
