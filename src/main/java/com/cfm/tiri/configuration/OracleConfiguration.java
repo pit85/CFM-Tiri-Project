@@ -48,17 +48,5 @@ public class OracleConfiguration {
         dataSource.setFastConnectionFailoverEnabled(true);
         return dataSource;
     }
-    /*
-    @Bean
-    public EntityManager entityManager() throws SQLException {
-        return entityManagerFactory().getObject().createEntityManager();
-    }
 
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws SQLException {
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
-        em.setPackagesToScan("com.cfm.tiri.jpa");
-        return em;
-    }*/
 }
