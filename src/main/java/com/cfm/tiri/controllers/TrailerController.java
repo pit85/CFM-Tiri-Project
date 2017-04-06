@@ -1,10 +1,16 @@
 package com.cfm.tiri.controllers;
 
 import com.cfm.tiri.jpa.Trailer;
+import com.cfm.tiri.jpa.TrailerType;
 import com.cfm.tiri.services.TrailerService;
+import com.cfm.tiri.services.TrailerTypeService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,10 +19,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class TrailerController {
 
     private TrailerService trailerService;
+    private TrailerTypeService trailerTypeService;
 
     @Autowired
     public void setTrailerService(TrailerService trailerService) {
         this.trailerService = trailerService;
+    }
+    
+    @Autowired
+    public void setTrailerTypeService(TrailerTypeService trailerTypeService) {
+        this.trailerTypeService = trailerTypeService;
     }
 
     @RequestMapping(value = "/trailers", method = RequestMethod.GET)
@@ -50,6 +62,11 @@ public class TrailerController {
     	trailerService.saveTrailer(trailer);
 
         return "redirect:/trailer/" + trailer.getId();
+    }
+    
+    @ModelAttribute("allTrailerTypes")
+    public List<TrailerType> listAllTrailerTypes() {
+        return (List<TrailerType>) this.trailerTypeService.listAllTrailerTypes();
     }
     
 

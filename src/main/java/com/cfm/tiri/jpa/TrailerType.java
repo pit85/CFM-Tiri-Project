@@ -13,15 +13,15 @@ public class TrailerType {
 	@Version //Specifies the version field or property of an entity class that serves as its optimistic lock value. The version is used to ensure integrity when performing the merge operation and for optimistic concurrency control.
 	private Integer version;
 	
-	private String trailerType;
+	private String name;
 	private Set<Trailer> trailers;
 	
 	
 	public TrailerType(){	
 	}
 	
-	public TrailerType(String trailerType){
-		this.trailerType = trailerType;
+	public TrailerType(String name){
+		this.name = name;
 	}
 	
 	public Integer getVersion() {
@@ -52,11 +52,11 @@ public class TrailerType {
 		this.trailers = trailers;
 	}
 	
-	public String getTrailerType() {
-		return trailerType;
+	public String getName() {
+		return name;
 	}
-	public void setTrailerType(String trailerType) {
-		this.trailerType = trailerType;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 
