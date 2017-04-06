@@ -35,8 +35,8 @@
 					<th>Rodzaj naczepy</th>
 					<th>Aktywna</th>
 					<th>Data utworzenia</th>
-					<th sec:authorize="hasAnyRole('USER','ADMIN')">Otwórz</th>
-					<th sec:authorize="hasRole('ADMIN')">Edytuj</th>
+					<th sec:authorize="hasAnyAuthorities('USER','ADMIN')">Otwórz</th>
+					<th sec:authorize="hasAuthority('ADMIN')">Edytuj</th>
 				</tr>
 				<tr th:each="trailer : ${trailers}">
 					<td th:text="${trailer.id}"><a href="/trailer/${trailer.id}">Id</a></td>
@@ -47,9 +47,9 @@
 					<td th:text="${trailer.trailerType.name}">Rodzaj naczepy</td>
 					<td th:text="${trailer.Active}">Aktywna</td>
 					<td th:text="${trailer.creationDate}">Data utworzenia</td>
-					<td sec:authorize="hasAnyRole('USER','ADMIN')"><a
+					<td sec:authorize="hasAnyAuthorities('USER','ADMIN')"><a
 						th:href="${ '/trailer/' + trailer.id}">Otwórz</a></td>
-					<td sec:authorize="hasRole('ADMIN')"><a
+					<td sec:authorize="hasAuthority('ADMIN')"><a
 						th:href="${'/trailer/edit/' + trailer.id}">Edytuj</a></td>
 				</tr>
 			</table>
