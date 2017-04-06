@@ -50,7 +50,7 @@ public class Trailer {
 	
     @Id
     @Column(name = "ID_TRAILER")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	public Integer getId() {
 		return id;
 	}
@@ -116,14 +116,5 @@ public class Trailer {
 		this.trailerType = trailerType;
 	}
 	
-/*
-	public int getIdTrailerType(){
-		return idTrailerType;
-	}
-
-	public void setIdTrailerType(int idTrailerType){
-		this.idTrailerType = idTrailerType;
-	}
-*/
 
 }

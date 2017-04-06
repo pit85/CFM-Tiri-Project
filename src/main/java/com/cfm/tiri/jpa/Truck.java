@@ -32,7 +32,8 @@ public class Truck {
 		this.productionYear = productionYear;
 		this.horsePower = horsePower;
 		this.Active =Active;
-		this.creationDate = creationDate;
+		this.creationDate = LocalDate.now();
+
 	}
 
 	public Integer getVersion() {
@@ -45,7 +46,7 @@ public class Truck {
 	
     @Id
     @Column(name = "ID_TRUCK")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	public Integer getId() {
 		return id;
 	}
