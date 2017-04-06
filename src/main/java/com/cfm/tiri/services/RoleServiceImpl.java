@@ -22,7 +22,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Role> listAll() {
+    public List<?> listAll() {
         List<Role> roles = new ArrayList<>();
         roleRepository.findAll().forEach(roles::add);
         return roles;
@@ -42,8 +42,4 @@ public class RoleServiceImpl implements RoleService {
     public void delete(Integer id) {
         roleRepository.delete(id);
     }
-
-
-
-
 }

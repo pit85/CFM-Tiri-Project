@@ -7,11 +7,8 @@ import com.cfm.tiri.jpa.Role;
  
 public interface RoleService extends CRUDService<Role> {
 	
-	List<Role> listAll();
+	List<?> listAll();
 
-	Role getById(Integer id);
-
-	Role saveOrUpdate(Role role);
 	
 	
 }

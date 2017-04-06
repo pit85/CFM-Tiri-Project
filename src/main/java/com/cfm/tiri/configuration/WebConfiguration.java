@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  
 
 @SpringBootApplication
-@ComponentScan({"com.cfm.tiri"})
+@ComponentScan(basePackages = {"com.cfm.tiri.security","com.cfm.tiri.mapservices","com.cfm.tiri.bootstrap","com.cfm.tiri.controllers","com.cfm.tiri.converters","com.cfm.tiri.services","com.cfm.tiri.jpaservices"} )
 @EntityScan("com.cfm.tiri.jpa")
 @EnableJpaRepositories("com.cfm.tiri.repositories")
 

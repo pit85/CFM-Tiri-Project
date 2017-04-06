@@ -16,7 +16,7 @@ import java.util.List;
 public class RoleServiceJpaImpl extends AbstractJpaDaoService implements RoleService {
 
     @Override
-    public List<Role> listAll() {
+    public List<?> listAll() {
         EntityManager em = emf.createEntityManager();
 
         return em.createQuery("from Role", Role.class).getResultList();

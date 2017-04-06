@@ -6,9 +6,7 @@ import com.cfm.tiri.jpa.Truck;
 import com.cfm.tiri.jpa.Role;
 import com.cfm.tiri.jpa.User;
 import com.cfm.tiri.repositories.TruckRepository;
-import com.cfm.tiri.repositories.UserRepository;
 import com.cfm.tiri.repositories.TrailerTypeRepository;
-import com.cfm.tiri.repositories.RoleRepository;
 import com.cfm.tiri.repositories.TrailerRepository;
 import com.cfm.tiri.services.RoleService;
 import com.cfm.tiri.services.UserService;
@@ -27,8 +25,6 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
     private TruckRepository truckRepository;
     private TrailerTypeRepository trailerTypeRepository;
     private TrailerRepository trailerRepository;
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
     
     private UserService userService;
     private RoleService roleService;
@@ -48,16 +44,6 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
     @Autowired
     public void setTrailerRepository(TrailerRepository trailerRepository) {
         this.trailerRepository = trailerRepository;
-    }
-    
-    @Autowired
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-    
-    @Autowired
-    public void setRoleRepository(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
     }
  
     @Autowired
@@ -156,14 +142,14 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
         user1.setUsername("user");
         user1.setPassword("user");
         userService.saveOrUpdate(user1);
-
+ 
         User user2 = new User();
         user2.setUsername("admin");
         user2.setPassword("admin");
         userService.saveOrUpdate(user2);
-
+ 
     }
-
+ 
     private void loadRoles() {
         Role role = new Role();
         role.setRole("USER");
@@ -177,7 +163,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
     private void assignUsersToUserRole() {
         List<Role> roles = (List<Role>) roleService.listAll();
         List<User> users = (List<User>) userService.listAll();
-
+ 
         roles.forEach(role -> {
             if (role.getRole().equalsIgnoreCase("USER")) {
                 users.forEach(user -> {
@@ -192,7 +178,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
     private void assignUsersToAdminRole() {
         List<Role> roles = (List<Role>) roleService.listAll();
         List<User> users = (List<User>) userService.listAll();
-
+ 
         roles.forEach(role -> {
             if (role.getRole().equalsIgnoreCase("ADMIN")) {
                 users.forEach(user -> {
