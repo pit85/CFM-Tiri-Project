@@ -53,8 +53,8 @@
 					
 					
 					<select
-						th:field="*{trailerType.name}">
-						<option th:each="trailerType : ${allTrailerTypes}" th:value="${trailerType}"
+						th:field="*{idTrailerType}">
+						<option th:each="trailerType : ${allTrailerTypes}" th:value="${trailerType.id}"
 							th:text="${trailerType.name}">Rodzaj naczepy</option>
 					</select>
 

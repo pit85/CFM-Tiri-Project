@@ -28,7 +28,7 @@ public class Trailer {
 	public Trailer(){
 	}
 	
-	public Trailer(Integer version, String registrationNumber, String producer, String model, int productionYear, boolean Active, TrailerType trailerType, LocalDate creationDate){
+	public Trailer(Integer version, String registrationNumber, String producer, String model, int productionYear, boolean Active, TrailerType trailerType, int idTrailerType ,LocalDate creationDate){
 		this.version = version;
 		this.registrationNumber = registrationNumber;
 		this.producer = producer;
@@ -36,6 +36,7 @@ public class Trailer {
 		this.productionYear = productionYear;
 		this.Active = Active;
 		this.trailerType = trailerType;
+		this.idTrailerType = idTrailerType;
 		this.creationDate = LocalDate.now();
 	}
 	
@@ -105,7 +106,7 @@ public class Trailer {
 		this.creationDate = LocalDate.now();
 	}
 	
-	@ManyToOne(cascade = CascadeType.ALL )
+	@ManyToOne(cascade = CascadeType.MERGE )
     @JoinColumn(name = "ID_TRAILER_TYPE")
     public TrailerType getTrailerType() {
         return trailerType;
@@ -114,5 +115,15 @@ public class Trailer {
 	public void setTrailerType(TrailerType trailerType){
 		this.trailerType = trailerType;
 	}
+	
+/*
+	public int getIdTrailerType(){
+		return idTrailerType;
+	}
+
+	public void setIdTrailerType(int idTrailerType){
+		this.idTrailerType = idTrailerType;
+	}
+*/
 
 }

@@ -43,7 +43,7 @@ public class TrailerType {
     	this.id = id;
     }
 	
-	@OneToMany(mappedBy = "trailerType", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "trailerType", cascade = CascadeType.MERGE)
 	public Set<Trailer> getTrailers() {
 		return trailers;
 	}
