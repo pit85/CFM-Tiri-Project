@@ -102,10 +102,10 @@ public class Trailer {
 	}
 
 	public void setCreationDate(LocalDate creationDate) {
-		this.creationDate = creationDate;
+		this.creationDate = LocalDate.now();
 	}
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL )
     @JoinColumn(name = "ID_TRAILER_TYPE")
     public TrailerType getTrailerType() {
         return trailerType;
