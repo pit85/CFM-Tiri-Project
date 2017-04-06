@@ -106,7 +106,7 @@ public class Trailer {
 		this.creationDate = LocalDate.now();
 	}
 	
-	@ManyToOne(cascade = CascadeType.MERGE )
+	@ManyToOne
     @JoinColumn(name = "ID_TRAILER_TYPE")
     public TrailerType getTrailerType() {
         return trailerType;
