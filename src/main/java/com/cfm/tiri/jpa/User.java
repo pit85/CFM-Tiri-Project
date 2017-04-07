@@ -116,14 +116,6 @@ public class User {
 		this.email = email;
 	}
 
-	public int getIdRole() {
-		return idRole;
-	}
-
-	public void setIdRole(int idRole) {
-		this.idRole = idRole;
-	}
-
 	public Boolean getActive() {
 		return active;
 	}
@@ -141,7 +133,7 @@ public class User {
 	}
 
 	@ManyToOne
-    @JoinColumn(name = "ID_TRAILER_TYPE")
+    @JoinColumn(name = "ID_ROLE")
 	public Role getRole() {
 		return role;
 	}
