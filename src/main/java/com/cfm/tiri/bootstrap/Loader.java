@@ -128,14 +128,14 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
 		log.info("Zapisano naczepę - id: " + wSC0001.getId());
 		
 		Role admin = new Role();
-		admin.setRole("ADMIN");
+		admin.setName("ADMIN");
 		admin.setVersion(0);
 		roleRepository.save(admin);
 		
 		log.info("Zapisano rolę - id: " + admin.getId());
 		
 		Role user = new Role();
-		user.setRole("USER");
+		user.setName("USER");
 		user.setVersion(0);
 		roleRepository.save(user);
 		
@@ -148,7 +148,7 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
 		user1.setPassword("akowalski");
 		user1.setMobilePhone("602123123");
 		user1.setEmail("akowalski@tester.pl");
-		user1.setIdRole(2);
+		user1.setRole(admin);
 		user1.setActive(true);
 	
 		userRepository.save(user1);
@@ -162,7 +162,7 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
 		user2.setPassword("knowak");
 		user2.setMobilePhone("602234123");
 		user2.setEmail("knowak@tester.pl");
-		user2.setIdRole(1);
+		user2.setRole(user);
 		user2.setActive(true);
 	
 		userRepository.save(user2);

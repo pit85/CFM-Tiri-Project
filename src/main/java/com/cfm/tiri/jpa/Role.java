@@ -1,10 +1,14 @@
 package com.cfm.tiri.jpa;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -16,14 +20,15 @@ public class Role {
 
 	@Version
 	private Integer version;
-	private String role;
+	private String name;
+	private Set<User> users;
 	
 	public Role(){
 	}
 	
-	public Role(Integer version, String role){
+	public Role(Integer version, String name){
 		this.version = version;
-		this.setRole(role);
+		this.setName(name);
 	}
 
 	public Integer getVersion() {
@@ -44,13 +49,22 @@ public class Role {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public String getRole() {
-		return role;
+	
+	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+	public Set<User> getUsers() {
+		return users;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

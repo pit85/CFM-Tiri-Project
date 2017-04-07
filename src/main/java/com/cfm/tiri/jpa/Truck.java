@@ -16,14 +16,14 @@ public class Truck {
 	private String euroStandard;
 	private int productionYear;
 	private int horsePower;
-	private boolean Active;
+	private boolean active;
 	private LocalDate creationDate;
 
 	public Truck(){
 	}
 	
 	public Truck(Integer version, String registrationNumber, String producer, String model, 
-			String euroStandard, int productionYear, int horsePower, boolean Active, LocalDate creationDate){
+			String euroStandard, int productionYear, int horsePower, boolean active, LocalDate creationDate){
 		this.version = version;
 		this.registrationNumber = registrationNumber;
 		this.producer = producer;
@@ -31,7 +31,7 @@ public class Truck {
 		this.euroStandard = euroStandard;
 		this.productionYear = productionYear;
 		this.horsePower = horsePower;
-		this.Active =Active;
+		this.active = active;
 		this.creationDate = LocalDate.now();
 
 	}
@@ -104,11 +104,11 @@ public class Truck {
 	}
 
 	public boolean isActive() {
-		return Active;
+		return active;
 	}
 
-	public void setActive(boolean Active) {
-		this.Active = Active;
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	public LocalDate getCreationDate() {

@@ -47,7 +47,7 @@
 					<td th:text="${truck.productionYear}">rok produkcji</td>
 					<td th:text="${truck.euroStandard}">EURO Standard</td>
 					<td th:text="${truck.horsePower}">KM</td>
-					<td th:text="${truck.Active}">Aktywny</td>
+					<td th:text="${truck.active}">Aktywny</td>
 					<td th:text="${truck.creationDate}">Data utworzenia</td>
 					<td sec:authorize="hasAnyRole('USER','ADMIN')"><a
 						th:href="${ '/truck/' + truck.id}">Otwórz</a></td>
@@ -95,7 +95,7 @@
 					<td th:text="${trailer.model}">model</td>
 					<td th:text="${trailer.productionYear}">rok produkcji</td>
 					<td th:text="${trailer.trailerType.name}">Rodzaj naczepy</td>
-					<td th:text="${trailer.Active}">Aktywna</td>
+					<td th:text="${trailer.active}">Aktywna</td>
 					<td th:text="${trailer.creationDate}">Data utworzenia</td>
 					<td sec:authorize="hasAnyRole('USER','ADMIN')"><a
 						th:href="${ '/trailer/' + trailer.id}">Otwórz</a></td>

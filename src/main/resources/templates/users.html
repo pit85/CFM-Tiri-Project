@@ -42,8 +42,8 @@
 					<td th:text="${user.firstName}">imię</td>
 					<td th:text="${user.lastName}">nazwisko</td>
 					<td th:text="${user.mobilePhone}">telefon</td>
-					<td th:text="${user.idRole}">rola</td>
-					<td th:text="${user.Active}">Aktywny</td>
+					<td th:text="${user.role.name}">rola</td>
+					<td th:text="${user.active}">Aktywny</td>
 					<td th:text="${user.creationDate}">Data utworzenia</td>
 					<td sec:authorize="hasAnyRole('USER','ADMIN')"><a
 						th:href="${ '/user/' + user.id}">Otwórz</a></td>

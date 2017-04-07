@@ -1,10 +1,17 @@
 package com.cfm.tiri.controllers;
 
+import com.cfm.tiri.jpa.Role;
+import com.cfm.tiri.jpa.TrailerType;
 import com.cfm.tiri.jpa.User;
+import com.cfm.tiri.services.RoleService;
 import com.cfm.tiri.services.UserService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,10 +20,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class UserController {
 
     private UserService userService;
+    private RoleService roleService;
 
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+    
+    @Autowired
+    public void setRoleService(RoleService roleService) {
+        this.roleService = roleService;
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
@@ -52,5 +65,9 @@ public class UserController {
         return "redirect:/user/" + user.getId();
     }
     
+    @ModelAttribute("allRoles")
+    public List<Role> listAllRoles() {
+        return (List<Role>) this.roleService.listAllRoles();
+    }
 
 }

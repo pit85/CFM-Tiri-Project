@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -25,14 +27,15 @@ public class User {
 	private String mobilePhone;
 	private String email;
 	private int idRole;
-	private boolean Active;
+	private boolean active;
 	private LocalDate creationDate;
+	private Role role;
 	
 	public User(){
 	}
 	
-	public User(Integer version, String firstName, String lastName,
-			String password, String mobilePhone, String email, int idRole, boolean Active, LocalDate creationDate){
+	public User(Integer version, String firstName, String lastName, Role role,
+			String password, String mobilePhone, String email, int idRole, boolean active, LocalDate creationDate){
 		this.version = version;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -41,7 +44,8 @@ public class User {
 		this.mobilePhone = mobilePhone;
 		this.email = email;
 		this.idRole = idRole;
-		this.Active = Active;
+		this.active = active;
+		this.role = role;
 		this.creationDate = LocalDate.now();
 	}
 
@@ -121,11 +125,11 @@ public class User {
 	}
 
 	public boolean isActive() {
-		return Active;
+		return active;
 	}
 
 	public void setActive(boolean active) {
-		Active = active;
+		active = active;
 	}
 
 	public LocalDate getCreationDate() {
@@ -134,6 +138,16 @@ public class User {
 
 	public void setCreationDate(LocalDate creationDate) {
 		this.creationDate = LocalDate.now();
+	}
+
+	@ManyToOne
+    @JoinColumn(name = "ID_TRAILER_TYPE")
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 }
