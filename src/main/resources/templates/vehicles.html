@@ -17,7 +17,13 @@
 
 			<div class="col-sm-10" sec:authorize="hasRole('ADMIN')">
 				<h5>
-					<a href="#" th:href="@{/truck/new}">Dodaj Pojazd</a>
+					<a href="#" th:href="@{/vehicle/new}">Dodaj pojazd</a>
+				</h5>
+				<h5>
+					<a href="#" th:href="@{/vehicles/active/true}">Pokaż aktywne</a>
+				</h5>
+				<h5>
+					<a href="#" th:href="@{/vehicles/active/false}">Pokaż nieaktywne</a>
 				</h5>
 			</div>
 		</div>
@@ -55,7 +61,7 @@
 						th:href="${'/truck/edit/' + truck.id}">Edytuj</a></td>
 				</tr>
 			</table>
-			<br/>
+			<br />
 		</div>
 
 

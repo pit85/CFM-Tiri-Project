@@ -4,18 +4,16 @@ import com.cfm.tiri.jpa.Trailer;
 import com.cfm.tiri.jpa.TrailerType;
 import com.cfm.tiri.services.TrailerService;
 import com.cfm.tiri.services.TrailerTypeService;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class TrailerController {
 
     private TrailerService trailerService;
@@ -69,6 +67,11 @@ public class TrailerController {
         return (List<TrailerType>) this.trailerTypeService.listAllTrailerTypes();
     }
     
-
+    @RequestMapping(value = "trailers/active/{active}", method = RequestMethod.GET)
+    public String listActive(@PathVariable Boolean active, Model model){
+        System.out.println("Returning active trailers:");
+        model.addAttribute("trailers", trailerService.listActiveTrailers(active));
+        return "trailers";
+    }
 
 }

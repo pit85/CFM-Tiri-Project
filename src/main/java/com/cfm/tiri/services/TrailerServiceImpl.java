@@ -29,4 +29,9 @@ public class TrailerServiceImpl implements TrailerService{
 		return trailerRepository.save(trailer);
 	}
 
+	@Override
+	public Iterable<Trailer> listActiveTrailers(Boolean active) {
+		return trailerRepository.findByActive(active);
+	}
+
 }

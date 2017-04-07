@@ -1,7 +1,12 @@
 package com.cfm.tiri.repositories;
 
-import com.cfm.tiri.jpa.Truck;
 import org.springframework.data.repository.CrudRepository;
- 
-public interface TruckRepository extends CrudRepository<Truck, Integer>{
+import com.cfm.tiri.jpa.Truck;
+
+public interface TruckRepository extends CrudRepository<Truck, Integer> {
+
+	Iterable<Truck> findByActive(Boolean active);
+	// Zgodnie z
+	// https://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html
+
 }

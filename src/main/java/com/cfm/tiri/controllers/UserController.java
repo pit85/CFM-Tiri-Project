@@ -66,12 +66,10 @@ public class UserController {
     
     @RequestMapping(value = "users/active/{active}", method = RequestMethod.GET)
     public String listActive(@PathVariable Boolean active, Model model){
-        System.out.println("Test active users:");
+        System.out.println("Returning active users:");
         model.addAttribute("users", userService.listActiveUsers(active));
         return "users";
     }
-    
-    
     
     @ModelAttribute("allRoles")
     public List<Role> listAllRoles() {

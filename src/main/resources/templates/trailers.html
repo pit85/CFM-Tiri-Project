@@ -17,7 +17,13 @@
 
 			<div class="col-sm-10" sec:authorize="hasRole('ADMIN')">
 				<h5>
-					<a href="#" th:href="@{/trailer/new}">Dodaj Naczepę</a>
+					<a href="#" th:href="@{/trailer/new}">Dodaj naczepę</a>
+				</h5>
+				<h5>
+					<a href="#" th:href="@{/trailers/active/true}">Pokaż aktywne</a>
+				</h5>
+				<h5>
+					<a href="#" th:href="@{/trailers/active/false}">Pokaż nieaktywne</a>
 				</h5>
 			</div>
 		</div>
