@@ -27,7 +27,7 @@ public class User {
 	private String mobilePhone;
 	private String email;
 	private int idRole;
-	private boolean active;
+	private Boolean active;
 	private LocalDate creationDate;
 	private Role role;
 	
@@ -35,7 +35,7 @@ public class User {
 	}
 	
 	public User(Integer version, String firstName, String lastName, Role role,
-			String password, String mobilePhone, String email, int idRole, boolean active, LocalDate creationDate){
+			String password, String mobilePhone, String email, int idRole, Boolean active, LocalDate creationDate){
 		this.version = version;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -124,12 +124,12 @@ public class User {
 		this.idRole = idRole;
 	}
 
-	public boolean isActive() {
+	public Boolean getActive() {
 		return active;
 	}
 
 	public void setActive(boolean active) {
-		active = active;
+		this.active = active;
 	}
 
 	public LocalDate getCreationDate() {

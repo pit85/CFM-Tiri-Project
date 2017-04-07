@@ -20,7 +20,7 @@ public class Trailer {
 	
 	@Column(name="ID_TRAILER_TYPE")
 	private int idTrailerType;
-	private boolean active;
+	private Boolean active;
 	
 	private LocalDate creationDate;
 	private TrailerType trailerType;
@@ -28,7 +28,7 @@ public class Trailer {
 	public Trailer(){
 	}
 	
-	public Trailer(Integer version, String registrationNumber, String producer, String model, int productionYear, boolean active, TrailerType trailerType, int idTrailerType ,LocalDate creationDate){
+	public Trailer(Integer version, String registrationNumber, String producer, String model, int productionYear, Boolean active, TrailerType trailerType, int idTrailerType ,LocalDate creationDate){
 		this.version = version;
 		this.registrationNumber = registrationNumber;
 		this.producer = producer;
@@ -90,12 +90,12 @@ public class Trailer {
 		this.productionYear = productionYear;
 	}
 
-	public boolean isActive() {
+	public Boolean getActive() {
 		return active;
 	}
 
 	public void setActive(boolean active) {
-		active = active;
+		this.active = active;
 	}
 
 	public LocalDate getCreationDate() {

@@ -1,7 +1,6 @@
 package com.cfm.tiri.controllers;
 
 import com.cfm.tiri.jpa.Role;
-import com.cfm.tiri.jpa.TrailerType;
 import com.cfm.tiri.jpa.User;
 import com.cfm.tiri.services.RoleService;
 import com.cfm.tiri.services.UserService;
@@ -64,6 +63,15 @@ public class UserController {
 
         return "redirect:/user/" + user.getId();
     }
+    
+    @RequestMapping(value = "users/active/{active}", method = RequestMethod.GET)
+    public String listActive(@PathVariable Boolean active, Model model){
+        System.out.println("Test active users:");
+        model.addAttribute("users", userService.listActiveUsers(active));
+        return "users";
+    }
+    
+    
     
     @ModelAttribute("allRoles")
     public List<Role> listAllRoles() {

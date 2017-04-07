@@ -29,4 +29,10 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(user);
 	}
 
+	@Override
+	public Iterable<User> listActiveUsers(Boolean active) {
+		return userRepository.findByActive(active);
+	}
+	
+
 }

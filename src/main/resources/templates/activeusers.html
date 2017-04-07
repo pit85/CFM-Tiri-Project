@@ -23,17 +23,22 @@
 					<h5>
 						<a href="#" th:href="@{/user/new}">Dodaj użytkownika</a>
 					</h5>
-					<h5>
-						<a href="#" th:href="@{/users/active/true}">Pokaż aktywnych</a>
-					</h5>
-					<h5>
-						<a href="#" th:href="@{/users/active/false}">Pokaż
-							nieaktywnych</a>
-					</h5>
 				</div>
 			</div>
 
 
+			<div id="right-bottom-site">
+				Aktywny: 
+				<form th:action="@{/users/ }" method="get">
+				<select name="active">
+					<option selected="selected" value="">---------</option>
+					<option value="true">Tak</option>
+					<option value="false">Nie</option>
+				</select>
+				<button type="submit" class="btn btn-default">Wybierz</button>
+				</form>
+
+			</div>
 
 
 		</div>
@@ -57,7 +62,7 @@
 					<th sec:authorize="hasAnyRole('USER','ADMIN')">Otwórz</th>
 					<th sec:authorize="hasRole('ADMIN')">Edytuj</th>
 				</tr>
-				<tr th:each="user : ${users}">
+				<tr th:each="user : ${users.?[active == true]}">
 					<td th:text="${user.id}"><a href="/user/${user.id}">Id</a></td>
 					<td th:text="${user.firstName}">imię</td>
 					<td th:text="${user.lastName}">nazwisko</td>
@@ -73,7 +78,7 @@
 			</table>
 
 		</div>
-
 	</div>
+
 </body>
 </html>
