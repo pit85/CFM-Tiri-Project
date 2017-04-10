@@ -9,5 +9,7 @@ public interface TrailerService {
 	Trailer getTrailerById(Integer id);
 
 	Trailer saveTrailer(Trailer trailer);
+	
+	Iterable<Trailer> listActiveTrailers(Boolean active);
 
 }

@@ -19,6 +19,12 @@
 				<h5>
 					<a href="#" th:href="@{/truck/new}">Dodaj ciężarówkę</a>
 				</h5>
+				<h5>
+					<a href="#" th:href="@{/trucks/active/true}">Pokaż aktywne</a>
+				</h5>
+				<h5>
+					<a href="#" th:href="@{/trucks/active/false}">Pokaż nieaktywne</a>
+				</h5>
 			</div>
 		</div>
 		<div th:if="${not #lists.isEmpty(trucks)}">
@@ -47,7 +53,7 @@
 					<td th:text="${truck.productionYear}">rok produkcji</td>
 					<td th:text="${truck.euroStandard}">EURO Standard</td>
 					<td th:text="${truck.horsePower}">KM</td>
-					<td th:text="${truck.Active}">Aktywny</td>
+					<td th:text="${truck.active}">Aktywny</td>
 					<td th:text="${truck.creationDate}">Data utworzenia</td>
 					<td sec:authorize="hasAnyRole('USER','ADMIN')"><a
 						th:href="${ '/truck/' + truck.id}">Otwórz</a></td>

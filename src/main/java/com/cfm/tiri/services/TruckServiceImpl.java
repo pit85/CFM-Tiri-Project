@@ -29,4 +29,9 @@ public class TruckServiceImpl implements TruckService {
 		return truckRepository.save(truck);
 	}
 
+	@Override
+	public Iterable<Truck> listActiveTrucks(Boolean active) {
+		return truckRepository.findByActive(active);
+	}
+
 }

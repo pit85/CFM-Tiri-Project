@@ -17,7 +17,13 @@
 
 			<div class="col-sm-10" sec:authorize="hasRole('ADMIN')">
 				<h5>
-					<a href="#" th:href="@{/truck/new}">Dodaj Pojazd</a>
+					<a href="#" th:href="@{/vehicle/new}">Dodaj pojazd</a>
+				</h5>
+				<h5>
+					<a href="#" th:href="@{/vehicles/active/true}">Pokaż aktywne</a>
+				</h5>
+				<h5>
+					<a href="#" th:href="@{/vehicles/active/false}">Pokaż nieaktywne</a>
 				</h5>
 			</div>
 		</div>
@@ -47,7 +53,7 @@
 					<td th:text="${truck.productionYear}">rok produkcji</td>
 					<td th:text="${truck.euroStandard}">EURO Standard</td>
 					<td th:text="${truck.horsePower}">KM</td>
-					<td th:text="${truck.Active}">Aktywny</td>
+					<td th:text="${truck.active}">Aktywny</td>
 					<td th:text="${truck.creationDate}">Data utworzenia</td>
 					<td sec:authorize="hasAnyRole('USER','ADMIN')"><a
 						th:href="${ '/truck/' + truck.id}">Otwórz</a></td>
@@ -55,7 +61,7 @@
 						th:href="${'/truck/edit/' + truck.id}">Edytuj</a></td>
 				</tr>
 			</table>
-			<br/>
+			<br />
 		</div>
 
 
@@ -94,8 +100,8 @@
 					<td th:text="${trailer.producer}">producer</td>
 					<td th:text="${trailer.model}">model</td>
 					<td th:text="${trailer.productionYear}">rok produkcji</td>
-					<td th:text="${trailer.idTrailerType}">Rodzaj naczepy</td>
-					<td th:text="${trailer.Active}">Aktywna</td>
+					<td th:text="${trailer.trailerType.name}">Rodzaj naczepy</td>
+					<td th:text="${trailer.active}">Aktywna</td>
 					<td th:text="${trailer.creationDate}">Data utworzenia</td>
 					<td sec:authorize="hasAnyRole('USER','ADMIN')"><a
 						th:href="${ '/trailer/' + trailer.id}">Otwórz</a></td>

@@ -52,5 +52,12 @@ public class TruckController {
         return "redirect:/truck/" + truck.getId();
     }
     
+    @RequestMapping(value = "trucks/active/{active}", method = RequestMethod.GET)
+    public String listActive(@PathVariable Boolean active, Model model){
+        System.out.println("Returning active trucks:");
+        model.addAttribute("trucks", truckService.listActiveTrucks(active));
+        return "trucks";
+    }
+    
 
 }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head lang="pl-PL">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Lista ciężarówek</title>
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+	<div class="container">
+		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+
+		<div class="container">
+			<div id="left-bottom-site">
+				<div>
+					<img src="../../static/images/user-626x626.jpg" width="125"
+						height="125" th:src="@{/images/user-626x626.jpg}" />
+				</div>
+
+
+				<div class="col-sm-10" sec:authorize="hasRole('ADMIN')">
+					<h5>
+						<a href="#" th:href="@{/user/new}">Dodaj użytkownika</a>
+					</h5>
+					<h5>
+						<a href="#" th:href="@{/users/active/true}">Pokaż aktywnych</a>
+					</h5>
+					<h5>
+						<a href="#" th:href="@{/users/active/false}">Pokaż
+							nieaktywnych</a>
+					</h5>
+				</div>
+			</div>
+
+
+
+
+		</div>
+
+
+
+
+		<div th:if="${not #lists.isEmpty(users)}">
+			<div class="col-sm-10">
+				<h2>Lista użytkowników</h2>
+			</div>
+			<table class="table table-striped">
+				<tr>
+					<th>id</th>
+					<th>imię</th>
+					<th>nazwisko</th>
+					<th>telefon</th>
+					<th>rola</th>
+					<th>Aktywny</th>
+					<th>Data utworzenia</th>
+					<th sec:authorize="hasAnyRole('USER','ADMIN')">Otwórz</th>
+					<th sec:authorize="hasRole('ADMIN')">Edytuj</th>
+				</tr>
+				<tr th:each="user : ${users}">
+					<td th:text="${user.id}"><a href="/user/${user.id}">Id</a></td>
+					<td th:text="${user.firstName}">imię</td>
+					<td th:text="${user.lastName}">nazwisko</td>
+					<td th:text="${user.mobilePhone}">telefon</td>
+					<td th:text="${user.role.name}">rola</td>
+					<td th:text="${user.active}">Aktywny</td>
+					<td th:text="${user.creationDate}">Data utworzenia</td>
+					<td sec:authorize="hasAnyRole('USER','ADMIN')"><a
+						th:href="${ '/user/' + user.id}">Otwórz</a></td>
+					<td sec:authorize="hasRole('ADMIN')"><a
+						th:href="${'/user/edit/' + user.id}">Edytuj</a></td>
+				</tr>
+			</table>
+
+		</div>
+
+	</div>
+</body>
+</html>

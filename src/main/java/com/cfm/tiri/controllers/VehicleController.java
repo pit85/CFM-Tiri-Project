@@ -3,6 +3,7 @@ package com.cfm.tiri.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -34,7 +35,14 @@ public class VehicleController {
         return "vehicles";
     }
     
-
-
+    @RequestMapping(value = "/vehicles/active/{active}", method = RequestMethod.GET)
+    public String listActive(@PathVariable Boolean active, Model model){
+        model.addAttribute("trailers", trailerService.listActiveTrailers(active));
+        model.addAttribute("trucks", truckService.listActiveTrucks(active));
+        System.out.println("Returning active vehicles:");
+        return "vehicles";
+    }
+ 
     
+
 }
