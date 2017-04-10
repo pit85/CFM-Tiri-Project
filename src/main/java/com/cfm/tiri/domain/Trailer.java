@@ -1,41 +1,45 @@
-package com.cfm.tiri.jpa;
+package com.cfm.tiri.domain;
 
 import java.time.LocalDate;
+
 import javax.persistence.*;
 
-@Entity
-public class Truck {
-
+@Entity // klasa zarządzana przez JPA, odpowiednik w DB
+@Table( name="TRAILER" )
+public class Trailer {
+	
 	private Integer id;
-
-	@Version
+	
+	@Version //Specifies the version field or property of an entity class that serves as its optimistic lock value. The version is used to ensure integrity when performing the merge operation and for optimistic concurrency control.
 	private Integer version;
+	
 	private String registrationNumber;
 	private String producer;
 	private String model;
-	private String euroStandard;
 	private int productionYear;
-	private int horsePower;
-	private boolean active;
+	
+	@Column( name="ID_TRAILER_TYPE" )
+	private int idTrailerType;
+	private Boolean active;
+	
 	private LocalDate creationDate;
+	private TrailerType trailerType;
 
-	public Truck(){
+	public Trailer(){
 	}
 	
-	public Truck(Integer version, String registrationNumber, String producer, String model, 
-			String euroStandard, int productionYear, int horsePower, boolean active, LocalDate creationDate){
+	public Trailer(Integer version, String registrationNumber, String producer, String model, int productionYear, Boolean active, TrailerType trailerType, int idTrailerType ,LocalDate creationDate){
 		this.version = version;
 		this.registrationNumber = registrationNumber;
 		this.producer = producer;
 		this.model = model;
-		this.euroStandard = euroStandard;
 		this.productionYear = productionYear;
-		this.horsePower = horsePower;
 		this.active = active;
+		this.trailerType = trailerType;
+		this.idTrailerType = idTrailerType;
 		this.creationDate = LocalDate.now();
-
 	}
-
+	
 	public Integer getVersion() {
 		return version;
 	}
@@ -45,20 +49,19 @@ public class Truck {
 	}
 	
     @Id
-    @Column(name = "ID_TRUCK")
+    @Column(name = "ID_TRAILER")
     @GeneratedValue(strategy = GenerationType.AUTO)
 	public Integer getId() {
 		return id;
 	}
-
+    
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	
 	public String getRegistrationNumber() {
 		return registrationNumber;
 	}
-
 	public void setRegistrationNumber(String registrationNumber) {
 		this.registrationNumber = registrationNumber;
 	}
@@ -79,14 +82,6 @@ public class Truck {
 		this.model = model;
 	}
 
-	public String getEuroStandard() {
-		return euroStandard;
-	}
-
-	public void setEuroStandard(String euroStandard) {
-		this.euroStandard = euroStandard;
-	}
-
 	public int getProductionYear() {
 		return productionYear;
 	}
@@ -95,15 +90,7 @@ public class Truck {
 		this.productionYear = productionYear;
 	}
 
-	public int getHorsePower() {
-		return horsePower;
-	}
-
-	public void setHorsePower(int horsePower) {
-		this.horsePower = horsePower;
-	}
-
-	public boolean isActive() {
+	public Boolean getActive() {
 		return active;
 	}
 
@@ -118,5 +105,16 @@ public class Truck {
 	public void setCreationDate(LocalDate creationDate) {
 		this.creationDate = LocalDate.now();
 	}
+	
+	@ManyToOne
+    @JoinColumn(name = "ID_TRAILER_TYPE")
+    public TrailerType getTrailerType() {
+        return trailerType;
+    }
+	
+	public void setTrailerType(TrailerType trailerType){
+		this.trailerType = trailerType;
+	}
+	
 
 }

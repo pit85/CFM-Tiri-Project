@@ -1,4 +1,4 @@
-package com.cfm.tiri.jpa;
+package com.cfm.tiri.domain;
 
 import java.time.LocalDate;
 
@@ -12,8 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Entity
-@Table(name="TIRI_USER")
+@Table( name="TIRI_USER" )
 public class User {
 	
 	private Integer id;

@@ -1,4 +1,4 @@
-package com.cfm.tiri.jpa;
+package com.cfm.tiri.domain;
 
 import java.util.Set;
 

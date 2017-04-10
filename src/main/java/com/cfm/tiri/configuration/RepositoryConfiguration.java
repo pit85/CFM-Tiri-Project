@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  
 @Configuration
 @EnableAutoConfiguration
-@EntityScan(basePackages = {"com.cfm.tiri.jpa"})
+@EntityScan(basePackages = {"com.cfm.tiri.domain"})
 @EnableJpaRepositories(basePackages = {"com.cfm.tiri.repositories"})
 @EnableTransactionManagement
 public class RepositoryConfiguration {

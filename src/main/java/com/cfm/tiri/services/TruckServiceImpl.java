@@ -1,6 +1,6 @@
 package com.cfm.tiri.services;
 
-import com.cfm.tiri.jpa.Truck;
+import com.cfm.tiri.domain.Truck;
 import com.cfm.tiri.repositories.TruckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
