@@ -3,6 +3,10 @@ package com.cfm.tiri.domain;
 import java.time.LocalDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity // klasa zarządzana przez JPA, odpowiednik w DB
 @Table( name="TRAILER" )
@@ -12,10 +16,13 @@ public class Trailer {
 	
 	@Version //Specifies the version field or property of an entity class that serves as its optimistic lock value. The version is used to ensure integrity when performing the merge operation and for optimistic concurrency control.
 	private Integer version;
-	
+	@NotNull
+    @Size(min=6, max=15)
 	private String registrationNumber;
 	private String producer;
 	private String model;
+	@Min(1985)
+	@Max(2100)
 	private int productionYear;
 	
 	@Column( name="ID_TRAILER_TYPE" )

@@ -11,44 +11,47 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table( name="TIRI_USER" )
+@Table(name = "TIRI_USER")
 public class User {
-	
+
 	private Integer id;
 
 	@Version
 	private Integer version;
+	@NotNull
+	@Size(min = 1, max = 50)
 	private String firstName;
+	@NotNull
+	@Size(min = 1, max = 100)
 	private String lastName;
 	private String login;
 	private String password;
+	@NotNull
+	@Size(min = 8, max = 20)
 	private String mobilePhone;
 	private String email;
-	private int idRole;
 	private Boolean active;
 	private LocalDate creationDate;
 	private Role role;
-	
-	public User(){
+
+
+	public User() {
 	}
-	
-	public User(Integer version, String firstName, String lastName, Role role,
-			String password, String mobilePhone, String email, int idRole, Boolean active, LocalDate creationDate){
+
+	public User(Integer version, String firstName, String lastName, Role role, String password, String mobilePhone,
+			String email, Boolean active) {
 		this.version = version;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.login = firstName.toLowerCase().charAt(0) + lastName.toLowerCase();
 		this.password = password;
 		this.mobilePhone = mobilePhone;
 		this.email = email;
-		this.idRole = idRole;
 		this.active = active;
 		this.role = role;
-		this.creationDate = LocalDate.now();
 	}
 
 	public Integer getVersion() {
@@ -58,10 +61,10 @@ public class User {
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
-	
-    @Id
-    @Column(name = "ID_USER")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
+	@Id
+	@Column(name = "ID_USER")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Integer getId() {
 		return id;
 	}
@@ -91,7 +94,7 @@ public class User {
 	}
 
 	public void setLogin(String login) {
-		this.login = login;
+		this.login = firstName.toLowerCase().charAt(0) + lastName.toLowerCase();
 	}
 
 	public String getPassword() {
@@ -131,11 +134,11 @@ public class User {
 	}
 
 	public void setCreationDate(LocalDate creationDate) {
-		this.creationDate = LocalDate.now();
+		this.creationDate = creationDate;
 	}
 
 	@ManyToOne
-    @JoinColumn(name = "ID_ROLE")
+	@JoinColumn(name = "ID_ROLE")
 	public Role getRole() {
 		return role;
 	}
