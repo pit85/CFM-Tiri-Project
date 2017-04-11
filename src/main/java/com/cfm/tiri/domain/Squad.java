@@ -1,6 +1,7 @@
 package com.cfm.tiri.domain;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -16,7 +17,9 @@ public class Squad {
 	private Integer idTrailer;
 	private Integer idDriver;
 	private Boolean active;
-	private LocalDate creationDate;
+	@Column(name = "CREATION_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date  creationDate = new Date();
 	
 	public Squad(){
 		
@@ -65,12 +68,12 @@ public class Squad {
 		this.active = active;
 	}
 
-	public LocalDate getCreationDate() {
+	public Date getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(LocalDate creationDate) {
-		this.creationDate = LocalDate.now();
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
 }

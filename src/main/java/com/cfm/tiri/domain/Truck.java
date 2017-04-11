@@ -1,6 +1,8 @@
 package com.cfm.tiri.domain;
 
 import java.time.LocalDate;
+import java.util.Date;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -27,13 +29,15 @@ public class Truck {
 	private int productionYear;
 	private int horsePower;
 	private boolean active;
-	private LocalDate creationDate;
+	@Column(name = "CREATION_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date  creationDate = new Date();
 
 	public Truck(){
 	}
 	
 	public Truck(Integer version, String registrationNumber, String producer, String model, 
-			String euroStandard, int productionYear, int horsePower, boolean active, LocalDate creationDate){
+			String euroStandard, int productionYear, int horsePower, boolean active){
 		this.version = version;
 		this.registrationNumber = registrationNumber;
 		this.producer = producer;
@@ -42,7 +46,6 @@ public class Truck {
 		this.productionYear = productionYear;
 		this.horsePower = horsePower;
 		this.active = active;
-		this.creationDate = LocalDate.now();
 
 	}
 
@@ -121,12 +124,12 @@ public class Truck {
 		this.active = active;
 	}
 
-	public LocalDate getCreationDate() {
+	public Date getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(LocalDate creationDate) {
-		this.creationDate = LocalDate.now();
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
 }
