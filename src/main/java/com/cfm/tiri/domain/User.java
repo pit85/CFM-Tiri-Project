@@ -11,8 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 @Table( name="TIRI_USER" )
@@ -22,13 +23,18 @@ public class User {
 
 	@Version
 	private Integer version;
+	@NotNull
+	@Size(min=1 , max=50)
 	private String firstName;
+	@NotNull
+	@Size(min=1 , max=100)
 	private String lastName;
 	private String login;
 	private String password;
+	@NotNull
+	@Size(min=8 , max=20)
 	private String mobilePhone;
 	private String email;
-	private int idRole;
 	private Boolean active;
 	private LocalDate creationDate;
 	private Role role;
@@ -38,19 +44,18 @@ public class User {
 	
 	public User(Integer version, String firstName, String lastName, Role role,
 			String password, String mobilePhone, String email, int idRole, Boolean active, LocalDate creationDate){
+		
 		this.version = version;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.login = firstName.toLowerCase().charAt(0) + lastName.toLowerCase();
 		this.password = password;
 		this.mobilePhone = mobilePhone;
 		this.email = email;
-		this.idRole = idRole;
 		this.active = active;
 		this.role = role;
-		this.creationDate = LocalDate.now();
+		this.creationDate = creationDate;
 	}
-
+	
 	public Integer getVersion() {
 		return version;
 	}
@@ -90,8 +95,8 @@ public class User {
 		return login;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setLogin(String login){
+		this.login = firstName.toLowerCase().charAt(0) + lastName.toLowerCase();
 	}
 
 	public String getPassword() {

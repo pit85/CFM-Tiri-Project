@@ -2,12 +2,17 @@ package com.cfm.tiri.controllers;
 
 import com.cfm.tiri.domain.Trailer;
 import com.cfm.tiri.domain.TrailerType;
+import com.cfm.tiri.domain.Truck;
 import com.cfm.tiri.services.TrailerService;
 import com.cfm.tiri.services.TrailerTypeService;
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,12 +59,22 @@ public class TrailerController {
         return "trailerform";
     }
 
-    @RequestMapping(value = "trailer", method = RequestMethod.POST)
-    public String saveTrailer(Trailer trailer){
+    //Validation of form
+    @RequestMapping(value="trailer", method=RequestMethod.GET)
+    public String backToForm() {
+        return "trailerform";
+    }
 
-    	trailerService.saveTrailer(trailer);
-
-        return "redirect:/trailer/" + trailer.getId();
+    @RequestMapping(value="trailer", method=RequestMethod.POST)
+    public String saveTrailer(@ModelAttribute("trailer") @Valid Trailer trailer, BindingResult result) {
+        if (result.hasErrors()) {
+            //form is not filled properly
+            return "trailerform";
+        } else {
+            //form is filled properly
+        	trailerService.saveTrailer(trailer);
+            return "redirect:/trailer/" + trailer.getId();
+        }
     }
     
     @ModelAttribute("allTrailerTypes")

@@ -25,6 +25,7 @@ public class Truck {
 	@Min(1985)
 	@Max(2100)
 	private int productionYear;
+	@Min(1)
 	private int horsePower;
 	private boolean active;
 	private LocalDate creationDate;
@@ -42,7 +43,7 @@ public class Truck {
 		this.productionYear = productionYear;
 		this.horsePower = horsePower;
 		this.active = active;
-		this.creationDate = LocalDate.now();
+		this.creationDate = creationDate;
 
 	}
 
@@ -113,7 +114,7 @@ public class Truck {
 		this.horsePower = horsePower;
 	}
 
-	public boolean isActive() {
+	public boolean getActive() {
 		return active;
 	}
 

@@ -3,6 +3,7 @@ package com.cfm.tiri.domain;
 import java.time.LocalDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "SQUAD")
@@ -12,14 +13,19 @@ public class Squad {
 
 	@Version
 	private Integer version;
-	private Integer idTruck;
-	private Integer idTrailer;
-	private Integer idDriver;
+	private Truck truck;
+	private Trailer trailer;
+	private User user;
 	private Boolean active;
 	private LocalDate creationDate;
 	
 	public Squad(){
-		
+	}
+	
+	public Squad(Truck truck, Trailer trailer, User user, LocalDate creationDate, Boolean active){
+
+		this.creationDate = creationDate;
+		this.active = active;
 	}
 
     @Id
@@ -32,30 +38,6 @@ public class Squad {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public Integer getIdTruck() {
-		return idTruck;
-	}
-
-	public void setIdTruck(Integer idTruck) {
-		this.idTruck = idTruck;
-	}
-
-	public Integer getIdTrailer() {
-		return idTrailer;
-	}
-
-	public void setIdTrailer(Integer idTrailer) {
-		this.idTrailer = idTrailer;
-	}
-
-	public Integer getIdDriver() {
-		return idDriver;
-	}
-
-	public void setIdDriver(Integer idDriver) {
-		this.idDriver = idDriver;
-	}
 	
 	public Boolean getActive() {
 		return active;
@@ -63,6 +45,7 @@ public class Squad {
 
 	public void setActive(Boolean active) {
 		this.active = active;
+		
 	}
 
 	public LocalDate getCreationDate() {
@@ -71,6 +54,36 @@ public class Squad {
 
 	public void setCreationDate(LocalDate creationDate) {
 		this.creationDate = LocalDate.now();
+	}
+	
+	@OneToOne
+    @JoinColumn(name = "ID_TRUCK")
+	public Truck getTruck() {
+		return truck;
+	}
+
+	public void setTruck(Truck truck) {
+		this.truck = truck;
+	}
+
+	@OneToOne
+    @JoinColumn(name = "ID_TRAILER")
+	public Trailer getTrailer() {
+		return trailer;
+	}
+
+	public void setTrailer(Trailer trailer) {
+		this.trailer = trailer;
+	}
+
+	@OneToOne
+    @JoinColumn(name = "ID_USER")
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

@@ -50,7 +50,7 @@ public class TruckController extends WebMvcConfigurerAdapter {
         return "truckform";
     }
     
-    //Validation of input values
+    //Validation of form
     @RequestMapping(value="truck", method=RequestMethod.GET)
     public String backToForm() {
         return "truckform";
