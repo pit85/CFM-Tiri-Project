@@ -7,12 +7,9 @@ import com.cfm.tiri.services.UserService;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,22 +56,12 @@ public class UserController {
         return "userform";
     }
 
-    //Validation of form
-    @RequestMapping(value="user", method=RequestMethod.GET)
-    public String backToForm() {
-        return "userform";
-    }
+    @RequestMapping(value = "user", method = RequestMethod.POST)
+    public String saveUser(User user){
 
-    @RequestMapping(value="user", method=RequestMethod.POST)
-    public String saveUser(@ModelAttribute("user") @Valid User user, BindingResult result) {
-        if (result.hasErrors()) {
-            //form is not filled properly
-            return "userform";
-        } else {
-            //form is filled properly
-        	userService.saveUser(user);
-            return "redirect:/user/" + user.getId();
-        }
+    	userService.saveUser(user);
+
+        return "redirect:/user/" + user.getId();
     }
     
     @RequestMapping(value = "users/active/{active}", method = RequestMethod.GET)
