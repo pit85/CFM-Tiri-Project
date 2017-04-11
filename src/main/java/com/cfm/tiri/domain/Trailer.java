@@ -1,6 +1,7 @@
 package com.cfm.tiri.domain;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -26,13 +27,19 @@ public class Trailer {
 	private int productionYear;
 	@Column( name="ID_TRAILER_TYPE" )
 	private Boolean active;
-	private LocalDate creationDate;
+	@Column(name = "CREATED_ON")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdOn = new Date();
 	private TrailerType trailerType;
+    @OneToOne
+    @JoinColumn(name = "ID_TRUCK")
+    @MapsId
+	private Squad squad;
 
 	public Trailer(){
 	}
 	
-	public Trailer(Integer version, String registrationNumber, String producer, String model, int productionYear, Boolean active, TrailerType trailerType, int idTrailerType ,LocalDate creationDate){
+	public Trailer(Integer version, String registrationNumber, String producer, String model, int productionYear, Boolean active, TrailerType trailerType, int idTrailerType , Squad squad){
 		this.version = version;
 		this.registrationNumber = registrationNumber;
 		this.producer = producer;
@@ -40,7 +47,7 @@ public class Trailer {
 		this.productionYear = productionYear;
 		this.active = active;
 		this.trailerType = trailerType;
-		this.creationDate = creationDate;
+		this.squad = squad;
 	}
 	
 	public Integer getVersion() {
@@ -100,13 +107,13 @@ public class Trailer {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-
-	public LocalDate getCreationDate() {
-		return creationDate;
+	
+	public Date getCreatedOn() {
+		return createdOn;
 	}
 
-	public void setCreationDate(LocalDate creationDate) {
-		this.creationDate = LocalDate.now();
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
 	}
 	
 	@ManyToOne
@@ -118,6 +125,10 @@ public class Trailer {
 	public void setTrailerType(TrailerType trailerType){
 		this.trailerType = trailerType;
 	}
+	
+    public void setSquad(Squad squad) {
+        this.squad = squad;
+    }
 	
 
 }

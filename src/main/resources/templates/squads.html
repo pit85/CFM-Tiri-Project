@@ -17,17 +17,17 @@
 
 			<div class="col-sm-10" sec:authorize="hasRole('ADMIN')">
 				<h5>
-					<a href="#" th:href="@{/truck/new}">Dodaj ciężarówkę</a>
+					<a href="#" th:href="@{/squad/new}">Dodaj ciężarówkę</a>
 				</h5>
 				<h5>
-					<a href="#" th:href="@{/trucks/active/true}">Pokaż aktywne</a>
+					<a href="#" th:href="@{/squads/active/true}">Pokaż aktywne</a>
 				</h5>
 				<h5>
-					<a href="#" th:href="@{/trucks/active/false}">Pokaż nieaktywne</a>
+					<a href="#" th:href="@{/squads/active/false}">Pokaż nieaktywne</a>
 				</h5>
 			</div>
 		</div>
-		<div th:if="${not #lists.isEmpty(trucks)}">
+		<div th:if="${not #lists.isEmpty(squads)}">
 			<div class="col-sm-10">
 				<h2>Lista ciężarówek</h2>
 			</div>
@@ -45,20 +45,20 @@
 					<th sec:authorize="hasAnyRole('USER','ADMIN')">Otwórz</th>
 					<th sec:authorize="hasRole('ADMIN')">Edytuj</th>
 				</tr>
-				<tr th:each="truck : ${trucks}">
-					<td th:text="${truck.id}"><a href="/truck/${truck.id}">Id</a></td>
-					<td th:text="${truck.registrationNumber}">nr rejestracyjny</td>
-					<td th:text="${truck.producer}">producer</td>
-					<td th:text="${truck.model}">model</td>
-					<td th:text="${truck.productionYear}">rok produkcji</td>
-					<td th:text="${truck.euroStandard}">EURO Standard</td>
-					<td th:text="${truck.horsePower}">KM</td>
-					<td th:text="${truck.active}">Aktywny</td>
-					<td th:text="${truck.createdOn}">Data utworzenia</td>
+				<tr th:each="squad : ${squads}">
+					<td th:text="${squad.id}"><a href="/squad/${squad.id}">Id</a></td>
+					<td th:text="${squad.registrationNumber}">nr rejestracyjny</td>
+					<td th:text="${squad.producer}">producer</td>
+					<td th:text="${squad.model}">model</td>
+					<td th:text="${squad.productionYear}">rok produkcji</td>
+					<td th:text="${squad.euroStandard}">EURO Standard</td>
+					<td th:text="${squad.horsePower}">KM</td>
+					<td th:text="${squad.active}">Aktywny</td>
+					<td th:text="${squad.createdOn}">Data utworzenia</td>
 					<td sec:authorize="hasAnyRole('USER','ADMIN')"><a
-						th:href="${ '/truck/' + truck.id}">Otwórz</a></td>
+						th:href="${ '/squad/' + squad.id}">Otwórz</a></td>
 					<td sec:authorize="hasRole('ADMIN')"><a
-						th:href="${'/truck/edit/' + truck.id}">Edytuj</a></td>
+						th:href="${'/squad/edit/' + squad.id}">Edytuj</a></td>
 				</tr>
 			</table>
 

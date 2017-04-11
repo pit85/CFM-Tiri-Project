@@ -1,6 +1,7 @@
 package com.cfm.tiri.domain;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,17 +15,19 @@ public class Squad {
 	@Version
 	private Integer version;
 	private Truck truck;
+	@OneToOne(mappedBy = "squad", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Trailer trailer;
 	private User user;
 	private Boolean active;
-	private LocalDate creationDate;
+	@Column(name = "CREATED_ON")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdOn = new Date();
 	
 	public Squad(){
 	}
 	
-	public Squad(Truck truck, Trailer trailer, User user, LocalDate creationDate, Boolean active){
+	public Squad(Truck truck, Trailer trailer, User user, Boolean active){
 
-		this.creationDate = creationDate;
 		this.active = active;
 	}
 
@@ -48,36 +51,38 @@ public class Squad {
 		
 	}
 
-	public LocalDate getCreationDate() {
-		return creationDate;
+	public Date getCreatedOn() {
+		return createdOn;
 	}
 
-	public void setCreationDate(LocalDate creationDate) {
-		this.creationDate = LocalDate.now();
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
 	}
 	
-	@OneToOne
-    @JoinColumn(name = "ID_TRUCK")
+
 	public Truck getTruck() {
 		return truck;
 	}
 
-	public void setTruck(Truck truck) {
-		this.truck = truck;
-	}
 
-	@OneToOne
-    @JoinColumn(name = "ID_TRAILER")
+
+
 	public Trailer getTrailer() {
 		return trailer;
 	}
 
-	public void setTrailer(Trailer trailer) {
-		this.trailer = trailer;
-	}
+    public void addTrailer(Trailer trailer) {
+        this.trailer = trailer;
+        trailer.setSquad(this);
+    }
+ 
+    public void removeTrailer() {
+        if (trailer != null) {
+        	trailer.setSquad(null);
+        }
+        this.trailer = null;
+    }
 
-	@OneToOne
-    @JoinColumn(name = "ID_USER")
 	public User getUser() {
 		return user;
 	}

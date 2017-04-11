@@ -55,7 +55,7 @@
 					<td th:text="${user.mobilePhone}">telefon</td>
 					<td th:text="${user.role.name}">rola</td>
 					<td th:text="${user.active}">Aktywny</td>
-					<td th:text="${user.creationDate}">Data utworzenia</td>
+					<td th:text="${user.createdOn}">Data utworzenia</td>
 					<td sec:authorize="hasAnyRole('USER','ADMIN')"><a
 						th:href="${ '/user/' + user.id}">Otwórz</a></td>
 					<td sec:authorize="hasRole('ADMIN')"><a
