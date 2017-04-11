@@ -1,6 +1,6 @@
 package com.cfm.tiri.services;
 
-import com.cfm.tiri.jpa.Truck;;
+import com.cfm.tiri.domain.Truck;;
 
 public interface TruckService {
 

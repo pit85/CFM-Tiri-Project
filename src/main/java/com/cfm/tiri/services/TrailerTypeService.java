@@ -1,7 +1,7 @@
 
 package com.cfm.tiri.services;
 
-import com.cfm.tiri.jpa.TrailerType;
+import com.cfm.tiri.domain.TrailerType;
 
 public interface TrailerTypeService {
 

@@ -1,10 +1,10 @@
 package com.cfm.tiri.bootstrap;
 
-import com.cfm.tiri.jpa.Role;
-import com.cfm.tiri.jpa.Trailer;
-import com.cfm.tiri.jpa.TrailerType;
-import com.cfm.tiri.jpa.Truck;
-import com.cfm.tiri.jpa.User;
+import com.cfm.tiri.domain.Role;
+import com.cfm.tiri.domain.Trailer;
+import com.cfm.tiri.domain.TrailerType;
+import com.cfm.tiri.domain.Truck;
+import com.cfm.tiri.domain.User;
 import com.cfm.tiri.repositories.RoleRepository;
 import com.cfm.tiri.repositories.TrailerRepository;
 import com.cfm.tiri.repositories.TrailerTypeRepository;

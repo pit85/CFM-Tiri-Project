@@ -1,6 +1,6 @@
 package com.cfm.tiri.services;
 
-import com.cfm.tiri.jpa.User;
+import com.cfm.tiri.domain.User;
 import com.cfm.tiri.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

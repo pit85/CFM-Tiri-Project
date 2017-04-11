@@ -1,6 +1,6 @@
 package com.cfm.tiri.services;
 
-import com.cfm.tiri.jpa.User;
+import com.cfm.tiri.domain.User;
 
 public interface UserService {
 

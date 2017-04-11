@@ -1,7 +1,7 @@
 package com.cfm.tiri.controllers;
 
-import com.cfm.tiri.jpa.Role;
-import com.cfm.tiri.jpa.User;
+import com.cfm.tiri.domain.Role;
+import com.cfm.tiri.domain.User;
 import com.cfm.tiri.services.RoleService;
 import com.cfm.tiri.services.UserService;
 

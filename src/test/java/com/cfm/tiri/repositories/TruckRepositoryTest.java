@@ -1,7 +1,8 @@
 package com.cfm.tiri.repositories;
 
 import com.cfm.tiri.configuration.RepositoryConfiguration;
-import com.cfm.tiri.jpa.Truck;
+import com.cfm.tiri.domain.Truck;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

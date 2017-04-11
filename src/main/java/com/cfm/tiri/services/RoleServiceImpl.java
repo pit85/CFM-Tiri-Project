@@ -3,7 +3,8 @@ package com.cfm.tiri.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.cfm.tiri.jpa.Role;
+
+import com.cfm.tiri.domain.Role;
 import com.cfm.tiri.repositories.RoleRepository;
 
 @Service
