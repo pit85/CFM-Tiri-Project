@@ -54,7 +54,7 @@
 					<td th:text="${truck.euroStandard}">EURO Standard</td>
 					<td th:text="${truck.horsePower}">KM</td>
 					<td th:text="${truck.active}">Aktywny</td>
-					<td th:text="${truck.createdOn}">Data utworzenia</td>
+					<td th:text="${truck.creationDate}">Data utworzenia</td>
 					<td sec:authorize="hasAnyRole('USER','ADMIN')"><a
 						th:href="${ '/truck/' + truck.id}">Otwórz</a></td>
 					<td sec:authorize="hasRole('ADMIN')"><a
