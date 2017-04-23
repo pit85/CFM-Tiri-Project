@@ -8,8 +8,9 @@ public interface SquadService {
 
 	Squad getSquadById(Integer id);
 
-	Squad saveSquad(Squad trailer);
+	Squad saveSquad(Squad squad);
 	
 	Iterable<Squad> listActiveSquads(Boolean active);
+	
 
 }

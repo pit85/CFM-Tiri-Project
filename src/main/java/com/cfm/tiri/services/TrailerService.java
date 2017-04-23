@@ -12,4 +12,6 @@ public interface TrailerService {
 	
 	Iterable<Trailer> listActiveTrailers(Boolean active);
 
+	Iterable<Trailer> listActiveAndFreeTrailers(int squadId);
+
 }

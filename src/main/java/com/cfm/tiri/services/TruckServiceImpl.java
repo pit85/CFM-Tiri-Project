@@ -34,4 +34,9 @@ public class TruckServiceImpl implements TruckService {
 		return truckRepository.findByActive(active);
 	}
 
+	@Override
+	public Iterable<Truck> listActiveAndFreeTrucks(int squadId) {
+		return truckRepository.findActiveAndFree(squadId);
+	}
+
 }

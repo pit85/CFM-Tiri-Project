@@ -33,6 +33,11 @@ public class UserServiceImpl implements UserService {
 	public Iterable<User> listActiveUsers(Boolean active) {
 		return userRepository.findByActive(active);
 	}
+
+	@Override
+	public Iterable<User> listActiveAndFreeDrivers(int squadId) {
+		return userRepository.findActiveAndFreeDrivers(squadId);
+	}
 	
 
 }

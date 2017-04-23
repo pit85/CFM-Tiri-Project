@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Dodaj squad</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+	<div class="container">
+		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+		<div class="container">
+			<img src="../../static/images/squad-1450x400.png" width="435"
+				height="120" th:src="@{/images/squad-1450x400.png}" />
+		</div>
+
+		<h2>Utwórz skład:</h2>
+		<div>
+			<form class="form-horizontal" th:object="${squad}"
+				th:action="@{/squad}" method="post">
+				<input type="hidden" th:field="*{id}" /> <input type="hidden"
+					th:field="*{version}" value="1" />
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Nr rejestracyjny
+						ciężarówki:</label>
+					<div class="col-md-10">
+						<select class="form-control" th:field="*{truck.id}">
+							<option th:each="truck : ${allActiveAndFreeTrucks}"
+								th:value="${truck.id}" th:text="${truck.registrationNumber}">Nr
+								rejestracyjny ciężarówki</option>
+						</select>
+						<div th:if="${#fields.hasErrors('truck.id')}">
+							<label style="color: red">Skład musi posiadać aktywną
+								ciężarówkę!</label>
+						</div>
+						<div th:if="${allActiveAndFreeTrucks.isEmpty()}">
+							<label style="color: red">Brak aktywnych oraz wolnych
+								ciężarówek!</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Nr rejestracyjny
+						naczepy:</label>
+					<div class="col-md-10">
+						<select class="form-control" th:field="*{trailer.id}">
+							<option th:each="trailer : ${allActiveAndFreeTrailers}"
+								th:value="${trailer.id}" th:text="${trailer.registrationNumber}">Nr
+								rejestracyjny naczepy</option>
+						</select>
+						<div th:if="${#fields.hasErrors('trailer.id')}">
+							<label style="color: red">Skład musi posiadać aktywną
+								naczepę!</label>
+						</div>
+						<div th:if="${allActiveAndFreeTrailers.isEmpty()}">
+							<label style="color: red">Brak aktywnych oraz wolnych
+								naczep!</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Kierowca:</label>
+					<div class="col-md-10">
+						<select class="form-control" th:field="*{user.id}">
+							<option th:each="user : ${allActiveAndFreeDrivers}"
+								th:value="${user.id}" th:text="${user.lastName}">Kierowca</option>
+						</select>
+						<div th:if="${#fields.hasErrors('user.id')}">
+							<label style="color: red">Skład musi posiadać aktywnego
+								kierowcę!</label>
+						</div>
+						<div th:if="${allActiveAndFreeDrivers.isEmpty()}">
+							<label style="color: red">Brak aktywnych oraz wolnych
+								kierowców!</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Aktywny:</label>
+					<div class="col-sm-10">
+						<input type="checkbox" class="form-control" th:field="*{active}" />
+					</div>
+				</div>
+				<div
+					th:unless="${allActiveAndFreeTrucks.isEmpty() or allActiveAndFreeTrailers.isEmpty() or allActiveAndFreeDrivers.isEmpty()}"
+					class="row">
+					<button type="submit" class="btn btn-default">Zapisz</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

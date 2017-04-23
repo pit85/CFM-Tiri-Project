@@ -17,15 +17,19 @@ input[type=submit] {
 
 #right-bottom-site {
 	width: 200px;
- 	height: 200px;
- 	text-align: right;
- 	vertical-align: bottom;
+	height: 200px;
+	text-align: right;
+	vertical-align: bottom;
 }
 
-#left-bottom-site
-{
+#left-bottom-site {
 	width: 200px;
- 	height: 200px;
- 	text-align: left;
- 	vertical-align: bottom;
+	height: 200px;
+	text-align: left;
+	vertical-align: bottom;
+}
+
+.message {
+	width: 940px;
+	padding-top: 15px !important;
 }

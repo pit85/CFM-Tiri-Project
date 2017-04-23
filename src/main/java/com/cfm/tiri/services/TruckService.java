@@ -11,4 +11,8 @@ public interface TruckService {
 	Truck saveTruck(Truck truck);
 
 	Iterable<Truck> listActiveTrucks(Boolean active);
+	
+	Iterable<Truck> listActiveAndFreeTrucks(int squadId);
+	
+	
 }

@@ -35,4 +35,9 @@ public class TrailerServiceImpl implements TrailerService{
 		return trailerRepository.findByActive(active);
 	}
 
+	@Override
+	public Iterable<Trailer> listActiveAndFreeTrailers(int squadId) {
+		return trailerRepository.findActiveAndFree(squadId);
+	}
+
 }

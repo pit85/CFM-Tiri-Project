@@ -1,7 +1,7 @@
 package com.cfm.tiri.domain;
 
-import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
+@Table(name="TRUCK")
 public class Truck {
 
 	private Integer id;
@@ -32,6 +33,7 @@ public class Truck {
 	@Column(name = "CREATION_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date  creationDate = new Date();
+	private List <Squad> squads;
 
 	public Truck(){
 	}
@@ -59,7 +61,8 @@ public class Truck {
 	
     @Id
     @Column(name = "ID_TRUCK")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ" )
 	public Integer getId() {
 		return id;
 	}
@@ -116,7 +119,7 @@ public class Truck {
 		this.horsePower = horsePower;
 	}
 
-	public boolean isActive() {
+	public boolean getActive() {
 		return active;
 	}
 
@@ -131,5 +134,16 @@ public class Truck {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
+
+	@OneToMany(mappedBy = "truck", cascade = CascadeType.ALL)
+	public List<Squad> getSquads() {
+		return squads;
+	}
+	
+	public void setSquads(List<Squad> squads){
+		this.squads = squads;
+	}
+
+
 
 }

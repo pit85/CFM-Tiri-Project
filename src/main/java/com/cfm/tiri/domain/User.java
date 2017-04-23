@@ -1,7 +1,9 @@
 package com.cfm.tiri.domain;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,12 +41,14 @@ public class User {
 	@Size(min = 8, max = 20)
 	private String mobilePhone;
 	private String email;
-	private Boolean active;
+	@NotNull
+	private boolean active;
 	
 	@Column(name = "CREATION_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date  creationDate = new Date();
 	private Role role;
+	private List<Squad> squads;
 
 
 	public User() {
@@ -70,7 +76,8 @@ public class User {
 
 	@Id
 	@Column(name = "ID_USER")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ" )
 	public Integer getId() {
 		return id;
 	}
@@ -127,7 +134,7 @@ public class User {
 		this.email = email;
 	}
 
-	public Boolean getActive() {
+	public boolean getActive() {
 		return active;
 	}
 
@@ -151,6 +158,15 @@ public class User {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<Squad> getSquads() {
+		return squads;
+	}
+
+	public void setSquads(List<Squad> squads) {
+		this.squads = squads;
 	}
 
 }

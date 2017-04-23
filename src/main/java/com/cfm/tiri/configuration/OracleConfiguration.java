@@ -14,7 +14,7 @@ import java.sql.SQLException;
  
 @Configuration
 @ConfigurationProperties("oracle")
-//@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 public class OracleConfiguration {
     @NotNull
     private String username;

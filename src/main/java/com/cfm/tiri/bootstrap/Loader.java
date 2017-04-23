@@ -1,11 +1,13 @@
-package com.cfm.tiri.bootstrap;
+/*package com.cfm.tiri.bootstrap;
 
 import com.cfm.tiri.domain.Role;
+import com.cfm.tiri.domain.Squad;
 import com.cfm.tiri.domain.Trailer;
 import com.cfm.tiri.domain.TrailerType;
 import com.cfm.tiri.domain.Truck;
 import com.cfm.tiri.domain.User;
 import com.cfm.tiri.repositories.RoleRepository;
+import com.cfm.tiri.repositories.SquadRepository;
 import com.cfm.tiri.repositories.TrailerRepository;
 import com.cfm.tiri.repositories.TrailerTypeRepository;
 import com.cfm.tiri.repositories.TruckRepository;
@@ -26,37 +28,43 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
 	private RoleRepository roleRepository;
 	private UserRepository userRepository;
 	private Logger log = Logger.getLogger(Loader.class);
+	private SquadRepository squadRepository;
 
 	@Autowired
 	public void setTruckRepository(TruckRepository truckRepository) {
 		this.truckRepository = truckRepository;
 	}
-	
+
 	@Autowired
 	public void setTrailerRepository(TrailerRepository trailerRepository) {
 		this.trailerRepository = trailerRepository;
 	}
-	
+
 	@Autowired
 	public void setTrailerTypeRepository(TrailerTypeRepository trailerTypeRepository) {
 		this.trailerTypeRepository = trailerTypeRepository;
 	}
-	
+
 	@Autowired
 	public void setRoleRepository(RoleRepository roleRepository) {
 		this.roleRepository = roleRepository;
 	}
-	
+
 	@Autowired
 	public void setUserRepository(UserRepository userRepository) {
 		this.userRepository = userRepository;
+	}
+	
+	@Autowired
+	public void setSquadRepository(SquadRepository squadRepository) {
+		this.squadRepository = squadRepository;
 	}
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 
-//TRUCK
-		
+		// TRUCK
+
 		Truck wSC98NH = new Truck();
 		wSC98NH.setRegistrationNumber("WSC98NH");
 		wSC98NH.setProducer("Renault");
@@ -80,29 +88,27 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
 		wSC01LU.setActive(true);
 		wSC01LU.setVersion(0);
 		truckRepository.save(wSC01LU);
-		
+
 		log.info("Zapisano ciągnik - id: " + wSC01LU.getId());
 
-//TRAILER_TYPE
+		// TRAILER_TYPE
 
-
-		
 		TrailerType kontenerowa = new TrailerType();
 		kontenerowa.setName("kontenerowa");
 		kontenerowa.setVersion(0);
 		trailerTypeRepository.save(kontenerowa);
 
 		log.info("Zapisano katetorię naczepy: " + kontenerowa.getId());
-		
+
 		TrailerType chlodnia = new TrailerType();
 		chlodnia.setName("chłodnia");
 		chlodnia.setVersion(0);
 		trailerTypeRepository.save(chlodnia);
 
 		log.info("Zapisano katetorię naczepy: " + chlodnia.getId());
-		
-//TRAILER
-		
+
+		// TRAILER
+
 		Trailer wSC223D = new Trailer();
 		wSC223D.setRegistrationNumber("WSC223D");
 		wSC223D.setProducer("Wielton");
@@ -114,7 +120,7 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
 		trailerRepository.save(wSC223D);
 
 		log.info("Zapisano naczepę - id: " + wSC223D.getId());
-		
+
 		Trailer wSC0001 = new Trailer();
 		wSC0001.setRegistrationNumber("WSC0001");
 		wSC0001.setProducer("Wielton");
@@ -124,23 +130,27 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
 		wSC0001.setActive(false);
 		wSC0001.setVersion(0);
 		trailerRepository.save(wSC0001);
-		
+
 		log.info("Zapisano naczepę - id: " + wSC0001.getId());
-		
+
+		// ROLE
+
 		Role admin = new Role();
 		admin.setName("ADMIN");
 		admin.setVersion(0);
 		roleRepository.save(admin);
-		
+
 		log.info("Zapisano rolę - id: " + admin.getId());
-		
+
 		Role user = new Role();
 		user.setName("USER");
 		user.setVersion(0);
 		roleRepository.save(user);
-		
+
 		log.info("Zapisano rolę - id: " + user.getId());
-		
+
+		// USER
+
 		User user1 = new User();
 		user1.setFirstName("Adam");
 		user1.setLastName("Kowalski");
@@ -150,11 +160,11 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
 		user1.setEmail("akowalski@tester.pl");
 		user1.setRole(admin);
 		user1.setActive(true);
-	
+
 		userRepository.save(user1);
-		
+
 		log.info("Zapisano użytkownika - id: " + user1.getId());
-		
+
 		User user2 = new User();
 		user2.setFirstName("Katarzyna");
 		user2.setLastName("Nowak");
@@ -164,9 +174,17 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
 		user2.setEmail("knowak@tester.pl");
 		user2.setRole(user);
 		user2.setActive(true);
-	
+
 		userRepository.save(user2);
-		
+
 		log.info("Zapisano użytkownika - id: " + user2.getId());
+
+		// ROLE
+
+		Squad squad1 = new Squad();
+		squad1.setTruck(wSC01LU);
+		squadRepository.save(squad1);
+
+		log.info("Zapisano rolę - id: " + squad1.getId());
 	}
-}
+}*/

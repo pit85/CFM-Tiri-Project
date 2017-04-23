@@ -69,7 +69,7 @@ public class TruckController extends WebMvcConfigurerAdapter {
     }
     
     @RequestMapping(value = "trucks/active/{active}", method = RequestMethod.GET)
-    public String listActive(@PathVariable Boolean active, Model model){
+    public String listActive(@PathVariable boolean active, Model model){
         System.out.println("Returning active trucks:");
         model.addAttribute("trucks", truckService.listActiveTrucks(active));
         return "trucks";

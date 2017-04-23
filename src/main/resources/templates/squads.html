@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head lang="pl-PL">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Lista naczep</title>
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+	<div class="container">
+		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+		<div>
+			<div class="container">
+				<img src="../../static/images/squad-1450x400.png" width="435"
+					height="120" th:src="@{/images/squad-1450x400.png}" /> 
+					
+			</div>
+
+			<div
+				th:unless="${allActiveAndFreeTrucks.isEmpty() or allActiveAndFreeTrailers.isEmpty() or allActiveAndFreeDrivers.isEmpty()}"
+				class="col-sm-10" sec:authorize="hasRole('ADMIN')">
+				<h5>
+					<a href="#" th:href="@{/squad/new}">Utwórz skład</a>
+				</h5>
+			</div>
+
+			<div class="message" th:if="${allActiveAndFreeTrucks.isEmpty()}">
+				Brak aktywnych oraz wolnych ciężarówek. Brak
+					możliwości utworzenia nowego składu. Utwórz nową ciężarówkę lub
+					rozwiąż aktywny skład aby zwolnić pojazd.
+			</div>
+			<div class="message" th:if="${allActiveAndFreeTrailers.isEmpty()}">
+				Brak aktywnych oraz wolnych naczep. Brak możliwości
+					utworzenia nowego składu. Utwórz nową naczepę lub rozwiąż aktywny
+					skład aby zwolnić pojazd.
+			</div>
+			<div class="message" th:if="${allActiveAndFreeDrivers.isEmpty()}">
+				Brak aktywnych oraz wolnych kierowców. Brak
+					możliwości utworzenia nowego składu. Utwórz nowego kierowcę lub
+					rozwiąż aktywny skład.
+			</div>
+
+
+
+		</div>
+		<div th:if="${not #lists.isEmpty(squads)}">
+
+			<div class="col-sm-10">
+				<h2>Aktywne składy</h2>
+			</div>
+			<table class="table table-striped">
+				<tr>
+					<th>id</th>
+					<th>nr rejestracyjny ciężarówki</th>
+					<th>nr rejestracyjny naczepy</th>
+					<th>kierowca</th>
+					<th>Aktywny</th>
+					<th>Data utworzenia</th>
+					<th sec:authorize="hasAnyRole('USER','ADMIN')">Otwórz</th>
+					<th sec:authorize="hasRole('ADMIN')">Edytuj</th>
+				</tr>
+				<tr th:each="squad : ${activeSquads}">
+					<td th:text="${squad.id}"><a href="/squad/${squad.id}">Id</a></td>
+					<td th:text="${squad.truck.registrationNumber}">Nr
+						rejestracyjny ciężarówki</td>
+					<td th:text="${squad.trailer.registrationNumber}">Nr
+						rejestracyjny naczepy</td>
+					<td th:text="${squad.user.lastName}">Kierowca</td>
+					<td th:text="${squad.active}">Aktywny</td>
+					<td th:text="${squad.creationDate}">Data utworzenia</td>
+					<td sec:authorize="hasAnyRole('USER','ADMIN')"><a
+						th:href="${ '/squad/' + squad.id}">Otwórz</a></td>
+					<td sec:authorize="hasRole('ADMIN')"><a
+						th:href="${'/squad/edit/' + squad.id}">Edytuj</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

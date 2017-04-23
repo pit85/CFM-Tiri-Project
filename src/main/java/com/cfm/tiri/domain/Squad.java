@@ -1,9 +1,9 @@
 package com.cfm.tiri.domain;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "SQUAD")
@@ -13,21 +13,27 @@ public class Squad {
 
 	@Version
 	private Integer version;
-	private Integer idTruck;
-	private Integer idTrailer;
-	private Integer idDriver;
+	private Truck truck;
+	private Trailer trailer;
+	private User user;
 	private Boolean active;
 	@Column(name = "CREATION_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date  creationDate = new Date();
 	
 	public Squad(){
-		
+	}
+	
+	public Squad(Truck truck, Trailer trailer, User user){
+		this.truck = truck;
+		this.trailer = trailer;
+		this.user = user;
 	}
 
     @Id
     @Column(name = "ID_SQUAD")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ" )
 	public Integer getId() {
 		return id;
 	}
@@ -35,31 +41,15 @@ public class Squad {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public Integer getIdTruck() {
-		return idTruck;
-	}
-
-	public void setIdTruck(Integer idTruck) {
-		this.idTruck = idTruck;
-	}
-
-	public Integer getIdTrailer() {
-		return idTrailer;
-	}
-
-	public void setIdTrailer(Integer idTrailer) {
-		this.idTrailer = idTrailer;
-	}
-
-	public Integer getIdDriver() {
-		return idDriver;
-	}
-
-	public void setIdDriver(Integer idDriver) {
-		this.idDriver = idDriver;
-	}
 	
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
 	public Boolean getActive() {
 		return active;
 	}
@@ -75,5 +65,38 @@ public class Squad {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
+
+	@ManyToOne
+	@NotNull
+	@JoinColumn(name = "ID_TRUCK")
+	public Truck getTruck() {
+		return truck;
+	}
+	
+	public void setTruck(Truck truck) {
+		this.truck = truck;
+	}
+
+	@ManyToOne
+	@NotNull
+	@JoinColumn(name = "ID_TRAILER")
+	public Trailer getTrailer() {
+		return trailer;
+	}
+
+	public void setTrailer(Trailer trailer) {
+		this.trailer = trailer;
+	}
+
+	@ManyToOne
+	@NotNull
+	@JoinColumn(name = "ID_USER")
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}			
 
 }

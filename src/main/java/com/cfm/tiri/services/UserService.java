@@ -11,5 +11,7 @@ public interface UserService {
 	User saveUser(User trailer);
 
 	Iterable<User> listActiveUsers(Boolean active);
+	
+	Iterable<User> listActiveAndFreeDrivers(int squadId);
 
 }

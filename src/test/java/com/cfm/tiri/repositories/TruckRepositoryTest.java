@@ -26,7 +26,7 @@ public class TruckRepositoryTest {
     public void testSaveTruck(){
         //setup truck
     	Truck truck = new Truck();
-    	truck.setRegistrationNumber("WW1234");
+    	truck.setRegistrationNumber("TEST1234");
     	truck.setProducer("Mercedes");
     	truck.setModel("Actros");
     	truck.setEuroStandard("setEuroStandard");
@@ -48,7 +48,7 @@ public class TruckRepositoryTest {
         assertEquals(truck.getRegistrationNumber(), fetchedTruck.getRegistrationNumber());
 
         //update registration number and save
-        fetchedTruck.setRegistrationNumber("AA1234");
+        fetchedTruck.setRegistrationNumber("TEST1234");
         truckRepository.save(fetchedTruck);
 
         //get from DB, should be updated
@@ -59,7 +59,7 @@ public class TruckRepositoryTest {
         long truckCount = truckRepository.count();
         assertEquals(truckCount, 1);
 
-        //get all trucks, list should only have one
+        //get all trucks, list should have one
         Iterable<Truck> trucks = truckRepository.findAll();
 
         int count = 0;

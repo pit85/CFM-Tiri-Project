@@ -58,7 +58,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Rodzaj naczepy:</label>
 					<div class="col-md-10">
-						<select th:field="*{trailerType.id}">
+						<select class="form-control" th:field="*{trailerType.id}">
 							<option th:each="trailerType : ${allTrailerTypes}"
 								th:value="${trailerType.id}" th:text="${trailerType.name}">Rodzaj
 								naczepy</option>

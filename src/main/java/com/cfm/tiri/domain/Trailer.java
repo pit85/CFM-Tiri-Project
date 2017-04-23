@@ -1,7 +1,7 @@
 package com.cfm.tiri.domain;
 
-import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -9,13 +9,13 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity // klasa zarządzana przez JPA, odpowiednik w DB
+@Entity 
 @Table( name="TRAILER" )
 public class Trailer {
 	
 	private Integer id;
 	
-	@Version //Specifies the version field or property of an entity class that serves as its optimistic lock value. The version is used to ensure integrity when performing the merge operation and for optimistic concurrency control.
+	@Version 
 	private Integer version;
 	@NotNull
     @Size(min=6, max=15)
@@ -26,14 +26,13 @@ public class Trailer {
 	@Max(2100)
 	private int productionYear;
 	
-	@Column( name="ID_TRAILER_TYPE" )
-	private int idTrailerType;
-	private Boolean active;
+	private boolean active;
 	
 	@Column(name = "CREATION_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date  creationDate = new Date();
 	private TrailerType trailerType;
+	private List<Squad> squads;
 
 	public Trailer(){
 	}
@@ -46,7 +45,6 @@ public class Trailer {
 		this.productionYear = productionYear;
 		this.active = active;
 		this.trailerType = trailerType;
-		this.idTrailerType = idTrailerType;
 	}
 	
 	public Integer getVersion() {
@@ -59,7 +57,8 @@ public class Trailer {
 	
     @Id
     @Column(name = "ID_TRAILER")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ" )
 	public Integer getId() {
 		return id;
 	}
@@ -99,7 +98,7 @@ public class Trailer {
 		this.productionYear = productionYear;
 	}
 
-	public Boolean getActive() {
+	public boolean getActive() {
 		return active;
 	}
 
@@ -123,6 +122,15 @@ public class Trailer {
 	
 	public void setTrailerType(TrailerType trailerType){
 		this.trailerType = trailerType;
+	}
+	
+	@OneToMany(mappedBy = "trailer", cascade = CascadeType.ALL)
+	public List<Squad> getSquads() {
+		return squads;
+	}
+	
+	public void setSquads(List<Squad> squads){
+		this.squads = squads;
 	}
 	
 
