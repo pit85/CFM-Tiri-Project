@@ -22,7 +22,7 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-@Table(name = "TIRI_USER")
+@Table(name = "tiri_user")
 public class User {
 
 	private Integer id;
@@ -44,7 +44,7 @@ public class User {
 	@NotNull
 	private boolean active;
 	
-	@Column(name = "CREATION_DATE")
+	@Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date  creationDate = new Date();
 	private Role role;
@@ -75,8 +75,8 @@ public class User {
 	}
 
 	@Id
-	@Column(name = "ID_USER")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+	@Column(name = "id_user")
+	@GeneratedValue(strategy=GenerationType.AUTO, generator = "id_Sequence")
 	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ" )
 	public Integer getId() {
 		return id;
@@ -151,7 +151,7 @@ public class User {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "ID_ROLE")
+	@JoinColumn(name = "id_role")
 	public Role getRole() {
 		return role;
 	}

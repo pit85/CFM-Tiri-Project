@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity 
-@Table( name="TRAILER" )
+@Table( name="trailer" )
 public class Trailer {
 	
 	private Integer id;
@@ -28,7 +28,7 @@ public class Trailer {
 	
 	private boolean active;
 	
-	@Column(name = "CREATION_DATE")
+	@Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date  creationDate = new Date();
 	private TrailerType trailerType;
@@ -56,8 +56,8 @@ public class Trailer {
 	}
 	
     @Id
-    @Column(name = "ID_TRAILER")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+    @Column(name = "id_trailer")
+	@GeneratedValue(strategy=GenerationType.AUTO, generator = "id_Sequence")
 	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ" )
 	public Integer getId() {
 		return id;
@@ -115,7 +115,7 @@ public class Trailer {
 	}
 	
 	@ManyToOne
-    @JoinColumn(name = "ID_TRAILER_TYPE")
+    @JoinColumn(name = "id_trailer_type")
     public TrailerType getTrailerType() {
         return trailerType;
     }

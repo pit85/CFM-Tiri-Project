@@ -8,10 +8,10 @@ import com.cfm.tiri.domain.Trailer;
 
 public interface TrailerRepository extends CrudRepository<Trailer, Integer> {
 
-	Iterable<Trailer> findByActive(Boolean active);
+	Iterable<Trailer> findByActive(boolean active);
 	// Zgodnie z
 	// https://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html
 
-	@Query(value = "SELECT * FROM TRAILER t LEFT JOIN (SELECT * FROM SQUAD where active = 1 AND ID_SQUAD not in (:squadId)) s on s.id_trailer=t.id_trailer WHERE t.ACTIVE = 1 and s.id_trailer is null", nativeQuery = true)
+	@Query(value = "SELECT * FROM trailer t LEFT JOIN (SELECT * FROM squad where active = 1 AND id_squad not in (:squadId)) s on s.id_trailer=t.id_trailer WHERE t.active = 1 and s.id_trailer is null", nativeQuery = true)
 	Iterable<Trailer> findActiveAndFree(@Param("squadId") int squadId);
 }

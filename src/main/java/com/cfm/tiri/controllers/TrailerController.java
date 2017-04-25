@@ -2,7 +2,6 @@ package com.cfm.tiri.controllers;
 
 import com.cfm.tiri.domain.Trailer;
 import com.cfm.tiri.domain.TrailerType;
-import com.cfm.tiri.domain.Truck;
 import com.cfm.tiri.services.TrailerService;
 import com.cfm.tiri.services.TrailerTypeService;
 import java.util.List;

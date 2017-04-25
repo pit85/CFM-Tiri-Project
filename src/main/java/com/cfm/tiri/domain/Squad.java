@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "SQUAD")
+@Table(name = "squad")
 public class Squad {
 
 	private Integer id;
@@ -17,7 +17,7 @@ public class Squad {
 	private Trailer trailer;
 	private User user;
 	private Boolean active;
-	@Column(name = "CREATION_DATE")
+	@Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date  creationDate = new Date();
 	
@@ -31,8 +31,8 @@ public class Squad {
 	}
 
     @Id
-    @Column(name = "ID_SQUAD")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+    @Column(name = "id_squad")
+	@GeneratedValue(strategy=GenerationType.AUTO, generator = "id_Sequence")
 	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ" )
 	public Integer getId() {
 		return id;
@@ -68,7 +68,7 @@ public class Squad {
 
 	@ManyToOne
 	@NotNull
-	@JoinColumn(name = "ID_TRUCK")
+	@JoinColumn(name = "id_truck")
 	public Truck getTruck() {
 		return truck;
 	}
@@ -79,7 +79,7 @@ public class Squad {
 
 	@ManyToOne
 	@NotNull
-	@JoinColumn(name = "ID_TRAILER")
+	@JoinColumn(name = "id_trailer")
 	public Trailer getTrailer() {
 		return trailer;
 	}
@@ -90,7 +90,7 @@ public class Squad {
 
 	@ManyToOne
 	@NotNull
-	@JoinColumn(name = "ID_USER")
+	@JoinColumn(name = "id_user")
 	public User getUser() {
 		return user;
 	}

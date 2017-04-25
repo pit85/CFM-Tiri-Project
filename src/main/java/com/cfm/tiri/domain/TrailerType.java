@@ -5,7 +5,7 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TRAILER_TYPE")
+@Table(name = "trailer_type")
 public class TrailerType {
 	
 	private Integer id;
@@ -33,7 +33,7 @@ public class TrailerType {
 	}
 	
     @Id
-    @Column(name = "ID_TRAILER_TYPE")
+    @Column(name = "id_trailer_type")
     @GeneratedValue(strategy = GenerationType.AUTO) //Provides for the specification of generation strategies for the values of primary keys.
 	public Integer getId() {
 		return id;
