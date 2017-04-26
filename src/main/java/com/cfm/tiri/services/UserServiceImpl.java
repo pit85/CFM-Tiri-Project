@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUserById(Integer id) {
+	public User getUserById(long id) {
 		return userRepository.findOne(id);
 	}
 
@@ -30,12 +30,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Iterable<User> listActiveUsers(Boolean active) {
+	public Iterable<User> listActiveUsers(boolean active) {
 		return userRepository.findByActive(active);
 	}
 
 	@Override
-	public Iterable<User> listActiveAndFreeDrivers(int squadId) {
+	public Iterable<User> listActiveAndFreeDrivers(long squadId) {
 		return userRepository.findActiveAndFreeDrivers(squadId);
 	}
 	

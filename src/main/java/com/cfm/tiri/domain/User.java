@@ -25,10 +25,8 @@ import javax.validation.constraints.Size;
 @Table(name = "tiri_user")
 public class User {
 
-	private Integer id;
-
-	@Version
-	private Integer version;
+	private long id;
+	private long version;
 	@NotNull
 	@Size(min = 1, max = 50)
 	private String firstName;
@@ -54,9 +52,8 @@ public class User {
 	public User() {
 	}
 
-	public User(Integer version, String firstName, String lastName, Role role, String password, String mobilePhone,
+	public User(String firstName, String lastName, Role role, String password, String mobilePhone,
 			String email, Boolean active) {
-		this.version = version;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
@@ -66,11 +63,13 @@ public class User {
 		this.role = role;
 	}
 
-	public Integer getVersion() {
+	@Version
+	@Column(name = "version")
+	public long getVersion() {
 		return version;
 	}
 
-	public void setVersion(Integer version) {
+	public void setVersion(long version) {
 		this.version = version;
 	}
 
@@ -78,11 +77,11 @@ public class User {
 	@Column(name = "id_user")
 	@GeneratedValue(strategy=GenerationType.AUTO, generator = "id_Sequence")
 	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ" )
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -160,7 +159,7 @@ public class User {
 		this.role = role;
 	}
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	public List<Squad> getSquads() {
 		return squads;
 	}

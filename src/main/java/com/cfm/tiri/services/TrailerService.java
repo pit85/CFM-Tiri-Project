@@ -6,12 +6,12 @@ public interface TrailerService {
 
 	Iterable<Trailer> listAllTrailers();
 
-	Trailer getTrailerById(Integer id);
+	Trailer getTrailerById(long id);
 
 	Trailer saveTrailer(Trailer trailer);
 	
-	Iterable<Trailer> listActiveTrailers(Boolean active);
+	Iterable<Trailer> listActiveTrailers(boolean active);
 
-	Iterable<Trailer> listActiveAndFreeTrailers(int squadId);
+	Iterable<Trailer> listActiveAndFreeTrailers(long squadId);
 
 }

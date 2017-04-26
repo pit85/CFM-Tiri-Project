@@ -60,13 +60,13 @@ public class SquadController {
     }
 
     @RequestMapping("squad/{id}")
-    public String showSquad(@PathVariable Integer id, Model model){
+    public String showSquad(@PathVariable long id, Model model){
         model.addAttribute("squad", squadService.getSquadById(id));
         return "squadshow";
     }
 
     @RequestMapping("squad/edit/{id}")
-    public String edit(@PathVariable Integer id, Model model){
+    public String edit(@PathVariable long id, Model model){
         model.addAttribute("squad", squadService.getSquadById(id));
         model.addAttribute("allActiveAndFreeDrivers", userService.listActiveAndFreeDrivers(id));
         model.addAttribute("allActiveAndFreeTrucks", truckService.listActiveAndFreeTrucks(id));
@@ -102,7 +102,7 @@ public class SquadController {
     }
     
     @RequestMapping(value = "squads/active/{active}", method = RequestMethod.GET)
-    public String listActive(@PathVariable Boolean active, Model model){
+    public String listActive(@PathVariable boolean active, Model model){
         System.out.println("Returning active squads:");
         model.addAttribute("squads", squadService.listActiveSquads(active));
         return "squads";

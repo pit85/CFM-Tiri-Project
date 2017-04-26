@@ -20,7 +20,7 @@ public class TruckServiceImpl implements TruckService {
 	}
 
 	@Override
-	public Truck getTruckById(Integer id) {
+	public Truck getTruckById(long id) {
 		return truckRepository.findOne(id);
 	}
 
@@ -30,12 +30,12 @@ public class TruckServiceImpl implements TruckService {
 	}
 
 	@Override
-	public Iterable<Truck> listActiveTrucks(Boolean active) {
+	public Iterable<Truck> listActiveTrucks(boolean active) {
 		return truckRepository.findByActive(active);
 	}
 
 	@Override
-	public Iterable<Truck> listActiveAndFreeTrucks(int squadId) {
+	public Iterable<Truck> listActiveAndFreeTrucks(long squadId) {
 		return truckRepository.findActiveAndFree(squadId);
 	}
 

@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.cfm.tiri.domain.TrailerType;
 
 @Repository
-public interface TrailerTypeRepository extends CrudRepository<TrailerType, Integer>{
+public interface TrailerTypeRepository extends CrudRepository<TrailerType, Long>{
 }

@@ -42,13 +42,13 @@ public class UserController {
     }
 
     @RequestMapping("user/{id}")
-    public String showUser(@PathVariable Integer id, Model model){
+    public String showUser(@PathVariable long id, Model model){
         model.addAttribute("user", userService.getUserById(id));
         return "usershow";
     }
 
     @RequestMapping("user/edit/{id}")
-    public String edit(@PathVariable Integer id, Model model){
+    public String edit(@PathVariable long id, Model model){
         model.addAttribute("user", userService.getUserById(id));
         return "userform";
     }
@@ -78,7 +78,7 @@ public class UserController {
     }
     
     @RequestMapping(value = "users/active/{active}", method = RequestMethod.GET)
-    public String listActive(@PathVariable Boolean active, Model model){
+    public String listActive(@PathVariable boolean active, Model model){
         System.out.println("Returning active users:");
         model.addAttribute("users", userService.listActiveUsers(active));
         return "users";

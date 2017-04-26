@@ -41,13 +41,13 @@ public class TrailerController {
     }
 
     @RequestMapping("trailer/{id}")
-    public String showTrailer(@PathVariable Integer id, Model model){
+    public String showTrailer(@PathVariable long id, Model model){
         model.addAttribute("trailer", trailerService.getTrailerById(id));
         return "trailershow";
     }
 
     @RequestMapping("trailer/edit/{id}")
-    public String edit(@PathVariable Integer id, Model model){
+    public String edit(@PathVariable long id, Model model){
         model.addAttribute("trailer", trailerService.getTrailerById(id));
         return "trailerform";
     }
@@ -82,7 +82,7 @@ public class TrailerController {
     }
     
     @RequestMapping(value = "trailers/active/{active}", method = RequestMethod.GET)
-    public String listActive(@PathVariable Boolean active, Model model){
+    public String listActive(@PathVariable boolean active, Model model){
         System.out.println("Returning active trailers:");
         model.addAttribute("trailers", trailerService.listActiveTrailers(active));
         return "trailers";

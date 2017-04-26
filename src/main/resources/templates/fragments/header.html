@@ -1,44 +1,52 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head lang="pl-PL">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link
 	href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
 	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
 	rel="stylesheet" media="screen" />
 
 <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
-            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
- 
-    <link href="../../static/css/tiri.css"
-          th:href="@{css/tiri.css}" rel="stylesheet" media="screen"/>
+	th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+<link href="../../static/css/tiri.css" th:href="@{css/tiri.css}"
+	rel="stylesheet" media="screen" />
 </head>
 <body>
- 
-<div class="container">
-    <div th:fragment="header">
-    <div id="login">
-    <span sec:authorize="isAnonymous()"><a href="#" th:href="@{/login}" method="post">[Zaloguj]</a></span>
-	<span sec:authorize="isAuthenticated()">Zalogowano: <span sec:authentication="name"></span></span>
-	<span sec:authorize="isAuthenticated()"><a href="#" th:href="@{/logout}" method="post">[Wyloguj]</a></span>
-	
+
+	<div class="container">
+		<div th:fragment="header">
+			<div id="login">
+				<span sec:authorize="isAnonymous()"><a href="#"
+					th:href="@{/login}" method="post">[Zaloguj]</a></span> <span
+					sec:authorize="isAuthenticated()">Zalogowano: <span
+					sec:authentication="name"></span></span> <span
+					sec:authorize="isAuthenticated()"><a href="#"
+					th:href="@{/logout}" method="post">[Wyloguj]</a></span>
+
+			</div>
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="#" th:href="@{/}">Start</a>
+						<ul class="nav navbar-nav">
+							<li><a href="#" th:href="@{/trucks}"
+								sec:authorize="isAuthenticated()">Pojazdy</a></li>
+							<li><a href="#" th:href="@{/trailers}"
+								sec:authorize="isAuthenticated()">Naczepy</a></li>
+							<li><a href="#" th:href="@{/users}"
+								sec:authorize="hasRole('ADMIN')">Użytkownicy</a></li>
+							<li><a href="#" th:href="@{/squads}"
+								sec:authorize="isAuthenticated()">Składy</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+		</div>
 	</div>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#" th:href="@{/}">Start</a>
-                    <ul class="nav navbar-nav">
-                        <li><a href="#" th:href="@{/trucks}" sec:authorize="isAuthenticated()">Pojazdy</a></li>
-                        <li><a href="#" th:href="@{/trailers}" sec:authorize="isAuthenticated()">Naczepy</a></li>
-                        <li><a href="#" th:href="@{/squads}" sec:authorize="isAuthenticated()">Składy</a></li>
-                        <li><a href="#" th:href="@{/users}" sec:authorize="hasRole('ADMIN')">Użytkownicy</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
- 
-    </div>
-</div>
 
 </body>
 </html>

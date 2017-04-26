@@ -21,7 +21,7 @@ public class TrailerServiceImpl implements TrailerService{
 	}
 
 	@Override
-	public Trailer getTrailerById(Integer id) {
+	public Trailer getTrailerById(long id) {
 		return trailerRepository.findOne(id);
 	}
 
@@ -31,12 +31,12 @@ public class TrailerServiceImpl implements TrailerService{
 	}
 
 	@Override
-	public Iterable<Trailer> listActiveTrailers(Boolean active) {
+	public Iterable<Trailer> listActiveTrailers(boolean active) {
 		return trailerRepository.findByActive(active);
 	}
 
 	@Override
-	public Iterable<Trailer> listActiveAndFreeTrailers(int squadId) {
+	public Iterable<Trailer> listActiveAndFreeTrailers(long squadId) {
 		return trailerRepository.findActiveAndFree(squadId);
 	}
 

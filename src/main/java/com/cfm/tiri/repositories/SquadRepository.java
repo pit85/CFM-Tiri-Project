@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.cfm.tiri.domain.Squad;
 
-public interface SquadRepository extends CrudRepository<Squad, Integer>{
+public interface SquadRepository extends CrudRepository<Squad, Long>{
 
-	Iterable<Squad> findByActive(Boolean active);
+	Iterable<Squad> findByActive(boolean active);
 }

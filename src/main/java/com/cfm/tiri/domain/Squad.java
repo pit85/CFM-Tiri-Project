@@ -9,14 +9,12 @@ import javax.validation.constraints.NotNull;
 @Table(name = "squad")
 public class Squad {
 
-	private Integer id;
-
-	@Version
-	private Integer version;
+	private long id;
+	private long version;
 	private Truck truck;
 	private Trailer trailer;
 	private User user;
-	private Boolean active;
+	private boolean active;
 	@Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date  creationDate = new Date();
@@ -34,27 +32,29 @@ public class Squad {
     @Column(name = "id_squad")
 	@GeneratedValue(strategy=GenerationType.AUTO, generator = "id_Sequence")
 	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ" )
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	
-	public Integer getVersion() {
+	@Version
+	@Column(name = "version")
+	public long getVersion() {
 		return version;
 	}
 
-	public void setVersion(Integer version) {
+	public void setVersion(long version) {
 		this.version = version;
 	}
 
-	public Boolean getActive() {
+	public boolean getActive() {
 		return active;
 	}
 
-	public void setActive(Boolean active) {
+	public void setActive(boolean active) {
 		this.active = active;
 	}
 

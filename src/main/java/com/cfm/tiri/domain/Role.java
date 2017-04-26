@@ -16,37 +16,38 @@ import javax.persistence.Version;
 @Table(name="role")
 public class Role {
 	
-	private Integer id;
+	private long id;
 
-	@Version
-	private Integer version;
+
+	private long version;
 	private String name;
 	private Set<User> users;
 	
 	public Role(){
 	}
 	
-	public Role(Integer version, String name){
-		this.version = version;
+	public Role(String name){
 		this.setName(name);
 	}
 
-	public Integer getVersion() {
+	@Version
+	@Column(name = "version")
+	public long getVersion() {
 		return version;
 	}
 
-	public void setVersion(Integer version) {
+	public void setVersion(long version) {
 		this.version = version;
 	}
 	
     @Id
     @Column(name = "id_role")
     @GeneratedValue(strategy = GenerationType.AUTO)
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	

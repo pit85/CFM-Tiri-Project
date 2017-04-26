@@ -21,7 +21,7 @@ public class SquadServiceImpl implements SquadService{
 	}
 
 	@Override
-	public Squad getSquadById(Integer id) {
+	public Squad getSquadById(long id) {
 		return squadRepository.findOne(id);
 	}
 
@@ -31,7 +31,7 @@ public class SquadServiceImpl implements SquadService{
 	}
 
 	@Override
-	public Iterable<Squad> listActiveSquads(Boolean active) {
+	public Iterable<Squad> listActiveSquads(boolean active) {
 		return squadRepository.findByActive(active);
 	}
 

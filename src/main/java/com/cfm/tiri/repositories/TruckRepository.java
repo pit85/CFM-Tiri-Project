@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.cfm.tiri.domain.Truck;
 
-public interface TruckRepository extends CrudRepository<Truck, Integer> {
+public interface TruckRepository extends CrudRepository<Truck, Long> {
 
 	Iterable<Truck> findByActive(boolean active);
 	// Zgodnie z
@@ -14,7 +14,7 @@ public interface TruckRepository extends CrudRepository<Truck, Integer> {
 	
 	//aktywne oraz nie przynalezace do zadnego aktywnego skladu ciezarowki 
 	@Query(value = "SELECT * FROM truck t LEFT JOIN (SELECT * FROM squad where active = 1 AND id_squad not in (:squadId)) s on s.id_truck=t.id_truck WHERE t.active = 1 and s.id_truck is null", nativeQuery = true)
-	Iterable<Truck> findActiveAndFree(@Param("squadId") int squadId);
+	Iterable<Truck> findActiveAndFree(@Param("squadId") long squadId);
 	
 
 }
