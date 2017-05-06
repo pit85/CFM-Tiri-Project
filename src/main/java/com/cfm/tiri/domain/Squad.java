@@ -1,6 +1,7 @@
 package com.cfm.tiri.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,6 +19,7 @@ public class Squad {
 	@Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date  creationDate = new Date();
+	private List<Route> routes;
 	
 	public Squad(){
 	}
@@ -97,6 +99,16 @@ public class Squad {
 
 	public void setUser(User user) {
 		this.user = user;
-	}			
+	}
+	
+	@OneToMany(mappedBy = "squad", cascade = CascadeType.ALL)
+	public List<Route> getRoutes() {
+		return routes;
+	}
+
+	public void setRoutes(List<Route> routes) {
+		this.routes = routes;
+	}
+
 
 }

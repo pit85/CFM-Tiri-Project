@@ -42,7 +42,7 @@ public class Truck {
 	@Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date  creationDate = new Date();
-	private List <Squad> squads;
+	private List<Squad> squads;
 
 	public Truck(){
 	}
@@ -153,6 +153,7 @@ public class Truck {
 	public void setSquads(List<Squad> squads){
 		this.squads = squads;
 	}
+
 
 
 

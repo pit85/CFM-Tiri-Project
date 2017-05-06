@@ -32,10 +32,15 @@
 					<div class="navbar-header">
 						<a class="navbar-brand" href="#" th:href="@{/}">Start</a>
 						<ul class="nav navbar-nav">
+
+							<li><a href="#" th:href="@{/routes}"
+								sec:authorize="isAuthenticated()">Trasa</a></li>
+							<li><a href="#" th:href="@{/reports}"
+								sec:authorize="isAuthenticated()">Raporty</a></li>
 							<li><a href="#" th:href="@{/trucks}"
-								sec:authorize="isAuthenticated()">Pojazdy</a></li>
+								sec:authorize="hasRole('ADMIN')">Pojazdy</a></li>
 							<li><a href="#" th:href="@{/trailers}"
-								sec:authorize="isAuthenticated()">Naczepy</a></li>
+								sec:authorize="hasRole('ADMIN')">Naczepy</a></li>
 							<li><a href="#" th:href="@{/users}"
 								sec:authorize="hasRole('ADMIN')">Użytkownicy</a></li>
 							<li><a href="#" th:href="@{/squads}"

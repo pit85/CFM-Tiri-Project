@@ -97,7 +97,7 @@ public class SquadController {
         } else {
             //form is filled properly
         	squadService.saveSquad(squad);
-            return "redirect:/squad/" + squad.getId();
+            return "redirect:/squads";
         }
     }
     
@@ -112,6 +112,7 @@ public class SquadController {
     public List<Squad> listAllActiveSquads() {
         return (List<Squad>) this.squadService.listActiveSquads(true);
     }
+    
 
 
 }

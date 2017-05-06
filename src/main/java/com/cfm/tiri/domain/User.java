@@ -49,11 +49,12 @@ public class User {
 	private List<Squad> squads;
 
 
+
 	public User() {
 	}
 
 	public User(String firstName, String lastName, Role role, String password, String mobilePhone,
-			String email, Boolean active) {
+			String email, boolean active) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
@@ -167,5 +168,6 @@ public class User {
 	public void setSquads(List<Squad> squads) {
 		this.squads = squads;
 	}
+
 
 }
