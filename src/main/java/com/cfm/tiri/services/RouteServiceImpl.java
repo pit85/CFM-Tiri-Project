@@ -5,18 +5,27 @@ import org.springframework.stereotype.Service;
 
 
 import com.cfm.tiri.domain.Route;
+import com.cfm.tiri.domain.RouteReport;
+import com.cfm.tiri.repositories.RouteReportRepository;
 import com.cfm.tiri.repositories.RouteRepository;
 
 @Service
 public class RouteServiceImpl implements RouteService{
 	
 	private RouteRepository routeRepository;
+	private RouteReportRepository routeReportRepository;
 	
 	@Autowired
-	public void setRefuelingRepository(RouteRepository routeRepository) {
+	public void setRouteRepository(RouteRepository routeRepository) {
 		this.routeRepository = routeRepository;
 	}
+	
 
+	@Autowired
+	public void setRouteReportRepository(RouteReportRepository routeReportRepository) {
+		this.routeReportRepository = routeReportRepository;
+	}
+	
 	@Override
 	public Iterable<Route> listAllRoutes() {
 		return this.routeRepository.findAll();
@@ -47,6 +56,17 @@ public class RouteServiceImpl implements RouteService{
 	@Override
 	public Iterable<Route> listAllRefuelings() {
 		return routeRepository.findRefuelings();
+	}
+
+	@Override
+	public Iterable<Route> listAllRoutesOrderByRouteDateDesc(String registrationNumber) {
+		return routeRepository.findAllByOrderByRouteDateDesc(registrationNumber);
+	}
+
+	
+	@Override
+	public Iterable<RouteReport> listAverageFuelConsumption(String startDate, String endDate) {
+		return routeReportRepository.generateFuelConsuptionReport(startDate, endDate);
 	}
 
 }

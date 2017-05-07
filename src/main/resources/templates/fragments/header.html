@@ -35,8 +35,6 @@
 
 							<li><a href="#" th:href="@{/routes}"
 								sec:authorize="isAuthenticated()">Trasa</a></li>
-							<li><a href="#" th:href="@{/reports}"
-								sec:authorize="isAuthenticated()">Raporty</a></li>
 							<li><a href="#" th:href="@{/trucks}"
 								sec:authorize="hasRole('ADMIN')">Pojazdy</a></li>
 							<li><a href="#" th:href="@{/trailers}"

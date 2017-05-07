@@ -1,9 +1,7 @@
 package com.cfm.tiri.controllers;
 
-import java.util.List;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import com.cfm.tiri.domain.Route;
 import com.cfm.tiri.services.RouteService;
 import com.cfm.tiri.services.SquadService;
@@ -24,7 +22,6 @@ public class RouteController {
 	private SquadService squadService;
 
 
-    
     @Autowired
     public void setSquadService(SquadService squadService) {
         this.squadService = squadService;
@@ -36,18 +33,13 @@ public class RouteController {
     }
     
     
-    @RequestMapping(value = "/routes", method = RequestMethod.GET)
+    @RequestMapping(value = "routes", method = RequestMethod.GET)
     public String list(Model model){
         model.addAttribute("routes", routeService.listAllRoutesOrderByRouteDateDesc());
         model.addAttribute("activeSquads", squadService.listActiveSquads(true));
         model.addAttribute("squads", squadService.listAllSquads());
-        System.out.println("Returning refuelings:");
         return "routes";
     }
-
-    
-    
-    
 
     @RequestMapping("route/edit/{id}")
     public String edit(@PathVariable long id, Model model){
@@ -84,8 +76,6 @@ public class RouteController {
         }
     }
     
-    
-    
     //Adding loading
     @RequestMapping("load/new")
     public String newLoad(Model model){
@@ -114,8 +104,6 @@ public class RouteController {
         }
     }
     
-    
-
     //Adding unloading
     @RequestMapping("unload/new")
     public String newUnload(Model model){
@@ -144,13 +132,13 @@ public class RouteController {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
+    @RequestMapping(value = "routes/search", method = RequestMethod.GET)
+    public String ListRoutesByRegistrationNumber(@RequestParam (defaultValue = "*", value = "registrationnumber", required = false) String registrationNumber, Model model) {
+        model.addAttribute("routes", routeService.listAllRoutesOrderByRouteDateDesc(registrationNumber));
+        model.addAttribute("activeSquads", squadService.listActiveSquads(true));
+        model.addAttribute("squads", squadService.listAllSquads());
+        return "routes";
+    }
     
     //delete route
 	@RequestMapping("route/delete/{id}")
@@ -159,7 +147,17 @@ public class RouteController {
 	    return "redirect:/routes";
 	}
 	
-
-
+	//report mapping
+    @RequestMapping(value = "routes/report", method = RequestMethod.GET)
+    public String filterraport(){
+        return "routesreport";
+    }
+    
+    @RequestMapping(value = "routes/report/generate", method = RequestMethod.GET)
+    public String generateReport(
+    		@RequestParam (defaultValue = "2010-01-01", value = "startdate", required = false) String startDate, @RequestParam (defaultValue = "2050-01-01", value = "enddate", required = false) String endDate, Model model) {
+        model.addAttribute("reports", routeService.listAverageFuelConsumption(startDate, endDate));
+        return "routesreport";
+    }
 
 }
