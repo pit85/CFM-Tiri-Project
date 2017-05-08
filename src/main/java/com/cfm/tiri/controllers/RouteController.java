@@ -40,10 +40,29 @@ public class RouteController {
         model.addAttribute("squads", squadService.listAllSquads());
         return "routes";
     }
+    
+    //Validation of form
+    @RequestMapping(value="route", method=RequestMethod.GET)
+    public String backToForm() {
+        return "routeform";
+    }
+
+    @RequestMapping(value="route", method=RequestMethod.POST)
+    public String saveRoute(@ModelAttribute("route") @Valid Route route, BindingResult result) {
+        if (result.hasErrors()) {
+            //form is not filled properly
+            return "routeform";
+        } else {
+            //form is filled properly
+        	routeService.saveRoute(route);
+            return "redirect:/routes";
+        }
+    }
+    
 
     @RequestMapping("route/edit/{id}")
     public String edit(@PathVariable long id, Model model){
-        model.addAttribute("routes", routeService.getRouteById(id));
+        model.addAttribute("route", routeService.getRouteById(id));
         model.addAttribute("activeSquads", squadService.listActiveSquads(true));
         return "routeform";
     }

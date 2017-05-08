@@ -26,8 +26,7 @@
 						ciężarówki:</label>
 					<div class="col-md-10">
 						<select class="form-control" th:field="*{squad.id}">
-							<option th:each="squad : ${activeSquads}"
-								th:value="${squad.id}"
+							<option th:each="squad : ${activeSquads}" th:value="${squad.id}"
 								th:text="${squad.truck.registrationNumber}">Nr
 								rejestracyjny ciężarówki</option>
 						</select>
@@ -35,10 +34,29 @@
 							<label style="color: red">Podaj aktywny pojazd!</label>
 						</div>
 						<div th:if="${#lists.isEmpty(activeSquads)}">
-							<label style="color: red">Brak aktywnych składów. Utwórz najpierw skład.</label>
+							<label style="color: red">Brak aktywnych składów. Utwórz
+								najpierw skład.</label>
 						</div>
 					</div>
 				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">zadanie:</label>
+					<div class="col-md-10">
+						<select class="form-control" th:field="*{squad.id}">
+							<option th:each="squad : ${activeSquads}" th:value="${squad.id}"
+								th:text="${squad.truck.registrationNumber}">Nr
+								rejestracyjny ciężarówki</option>
+						</select>
+						<div th:if="${#fields.hasErrors('squad.id')}">
+							<label style="color: red">Podaj aktywny pojazd!</label>
+						</div>
+						<div th:if="${#lists.isEmpty(activeSquads)}">
+							<label style="color: red">Brak aktywnych składów. Utwórz
+								najpierw skład.</label>
+						</div>
+					</div>
+				</div>
+				
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Liczba litrów:</label>
 					<div class="col-sm-10">
@@ -46,6 +64,16 @@
 						<div th:if="${#fields.hasErrors('amountOfFuel')}">
 							<label style="color: red">Wprowadź liczbę mniejszą niż
 								2000</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Waga ładunku:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							th:field="*{weightOfCargo}" />
+						<div th:if="${#fields.hasErrors('amountOfFuel')}">
+							<label style="color: red">Wprowadź liczbę mniejszą niż 40</label>
 						</div>
 					</div>
 				</div>
@@ -59,11 +87,12 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">Data tankowania:</label>
+					<label class="col-sm-2 control-label">Data:</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" th:field="*{routeDate}" />
 						<div th:if="${#fields.hasErrors('routeDate')}">
-							<label style="color: red">Wprowadź datę w formacie YYYY-MM-DD</label>
+							<label style="color: red">Wprowadź datę w formacie
+								YYYY-MM-DD</label>
 						</div>
 					</div>
 				</div>

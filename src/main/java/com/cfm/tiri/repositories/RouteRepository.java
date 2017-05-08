@@ -18,7 +18,7 @@ public interface RouteRepository extends CrudRepository<Route, Long>{
 	Iterable<Route> findAllByOrderByRouteDateDesc();
 	
 	
-	@Query(value = "SELECT r.* FROM tiridb.route r LEFT JOIN tiridb.squad s ON s.id_squad = r.id_squad LEFT JOIN tiridb.truck t ON t.id_truck = s.id_truck WHERE t.registration_number = :registrationnumber ORDER BY route_date DESC", nativeQuery = true)
+	@Query(value = "SELECT r.* FROM route r LEFT JOIN squad s ON s.id_squad = r.id_squad LEFT JOIN truck t ON t.id_truck = s.id_truck WHERE t.registration_number = :registrationnumber ORDER BY route_date DESC", nativeQuery = true)
 	Iterable<Route> findAllByOrderByRouteDateDesc(@Param("registrationnumber") String registrationNumber);
 
 	

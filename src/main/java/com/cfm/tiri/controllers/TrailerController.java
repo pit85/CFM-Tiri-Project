@@ -72,7 +72,7 @@ public class TrailerController {
         } else {
             //form is filled properly
         	trailerService.saveTrailer(trailer);
-            return "redirect:/trailer/" + trailer.getId();
+            return "redirect:/trailers/" ;
         }
     }
     
