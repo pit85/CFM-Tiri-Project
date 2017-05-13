@@ -1,7 +1,10 @@
 package com.cfm.tiri.services;
 
+import java.util.List;
+
 import com.cfm.tiri.domain.Route;
-import com.cfm.tiri.domain.RouteReport;
+import com.cfm.tiri.mapping.RouteReport;
+import com.cfm.tiri.domain.RouteStatus;
 
 
 public interface RouteService {
@@ -14,10 +17,9 @@ public interface RouteService {
 	
 	Iterable<Route> listAllRoutesOrderByRouteDateDesc(String registrationNumber);
 	
+	List<RouteReport> listAverageFuelConsumption(String startDate, String endDate);
 	
-	Iterable<RouteReport> listAverageFuelConsumption(String startDate, String endDate);
-	
-	
+	Iterable<RouteStatus> listRouteStatuses();
 	
 	Route getRouteById(long id);
 

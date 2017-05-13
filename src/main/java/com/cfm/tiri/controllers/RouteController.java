@@ -1,6 +1,7 @@
 package com.cfm.tiri.controllers;
 
 
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.cfm.tiri.domain.Route;
+import com.cfm.tiri.domain.RouteStatus;
 import com.cfm.tiri.services.RouteService;
 import com.cfm.tiri.services.SquadService;
 
@@ -31,7 +33,6 @@ public class RouteController {
     public void setRouteService(RouteService routeService) {
         this.routeService = routeService;
     }
-    
     
     @RequestMapping(value = "routes", method = RequestMethod.GET)
     public String list(Model model){
@@ -177,6 +178,11 @@ public class RouteController {
     		@RequestParam (defaultValue = "2010-01-01", value = "startdate", required = false) String startDate, @RequestParam (defaultValue = "2050-01-01", value = "enddate", required = false) String endDate, Model model) {
         model.addAttribute("reports", routeService.listAverageFuelConsumption(startDate, endDate));
         return "routesreport";
+    }
+    
+    @ModelAttribute("routeStatuses")
+    public List<RouteStatus> listRouteStatuses() {
+        return (List<RouteStatus>) this.routeService.listRouteStatuses();
     }
 
 }

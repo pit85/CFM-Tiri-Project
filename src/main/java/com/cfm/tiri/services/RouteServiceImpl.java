@@ -1,29 +1,40 @@
 package com.cfm.tiri.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.cfm.tiri.domain.Route;
-import com.cfm.tiri.domain.RouteReport;
-import com.cfm.tiri.repositories.RouteReportRepository;
+import com.cfm.tiri.mapping.RouteReport;
+import com.cfm.tiri.domain.RouteStatus;
 import com.cfm.tiri.repositories.RouteRepository;
+import com.cfm.tiri.repositories.RouteStatusRepository;
 
 @Service
 public class RouteServiceImpl implements RouteService{
 	
+    @PersistenceContext
+    private EntityManager em;
+	
 	private RouteRepository routeRepository;
-	private RouteReportRepository routeReportRepository;
+
+	private RouteStatusRepository routeStatusRepository;
 	
 	@Autowired
 	public void setRouteRepository(RouteRepository routeRepository) {
 		this.routeRepository = routeRepository;
 	}
 	
-
+	
 	@Autowired
-	public void setRouteReportRepository(RouteReportRepository routeReportRepository) {
-		this.routeReportRepository = routeReportRepository;
+	public void setRouteStatusRepository(RouteStatusRepository routeStatusRepository) {
+		this.routeStatusRepository = routeStatusRepository;
 	}
 	
 	@Override
@@ -62,11 +73,27 @@ public class RouteServiceImpl implements RouteService{
 	public Iterable<Route> listAllRoutesOrderByRouteDateDesc(String registrationNumber) {
 		return routeRepository.findAllByOrderByRouteDateDesc(registrationNumber);
 	}
-
 	
+
+	@SuppressWarnings("unchecked")
 	@Override
-	public Iterable<RouteReport> listAverageFuelConsumption(String startDate, String endDate) {
-		return routeReportRepository.generateFuelConsuptionReport(startDate, endDate);
+	public List<RouteReport> listAverageFuelConsumption(String startDate, String endDate) {
+	
+//		Mapping named query to POJO object. Query is located in Route Entity
+		Query query = em.createNamedQuery("FuelConsumptionReport");
+		query.setParameter(1, startDate);
+		query.setParameter(2, endDate);
+		query.setParameter(3, startDate);
+		query.setParameter(4, endDate);
+		query.setParameter(5, startDate);
+		List<RouteReport> report = query.getResultList();
+		return report;
+		
+	}
+
+	@Override
+	public Iterable<RouteStatus> listRouteStatuses() {
+		return routeStatusRepository.findAll();
 	}
 
 }

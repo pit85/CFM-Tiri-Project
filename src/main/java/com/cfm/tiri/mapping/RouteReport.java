@@ -1,29 +1,30 @@
-package com.cfm.tiri.domain;
-
+package com.cfm.tiri.mapping;
 import java.util.Date;
 
-import javax.persistence.*;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
-@Entity
 public class RouteReport {
 	
 
 	private String registrationNumber;
-
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date startDate;
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
 	private int odometerStart;
 	private int odometerEnd;
 	private int fuelConsumption;
 	private double averageConsumption;
 	
-	@Id
+	public RouteReport(){
+	}
+	
+	public RouteReport(String registrationNumber, Date startDate, Date endDate, int odometerStart, int odometerEnd, int fuelConsumption, double averageConsumption){
+		this.registrationNumber = registrationNumber;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.odometerStart = odometerStart;
+		this.odometerEnd = odometerEnd;
+		this.fuelConsumption = fuelConsumption;
+		this.averageConsumption = averageConsumption;
+	}
+	
 	public String getRegistrationNumber() {
 		return registrationNumber;
 	}
@@ -79,11 +80,5 @@ public class RouteReport {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-
-	
-
-
-
-	
 
 }

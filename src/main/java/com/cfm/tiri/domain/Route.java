@@ -9,8 +9,31 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.cfm.tiri.mapping.RouteReport;
+
 
 @Entity
+@NamedNativeQuery(
+		  name="FuelConsumptionReport",
+		  query="SELECT a.registration_number, COALESCE(b.start_date, ?) as start_date, COALESCE(a.end_date, ?) as end_date, COALESCE(b.odometer_start, 0) as odometer_start, COALESCE(a.odometer_end, 0) as odometer_end, coalesce(a.fuel_consumption, 0) as fuel_consumption, COALESCE(a.fuel_consumption/(a.odometer_end - b.odometer_start)*100, 0) as average_consumption FROM ( SELECT registration_number, MAX(odometer) as odometer_end, MAX(route_date) as end_date, SUM(amount_of_fuel) as fuel_consumption FROM route r LEFT JOIN squad s ON s.id_squad=r.id_squad LEFT JOIN truck t ON t.id_truck=s.id_truck WHERE route_date>=? AND route_date<=? GROUP BY registration_number) a  LEFT JOIN (SELECT registration_number, max(odometer) as odometer_start, MAX(route_date) as start_date FROM route r LEFT JOIN squad s ON s.id_squad=r.id_squad LEFT JOIN truck t ON t.id_truck=s.id_truck WHERE route_date<? GROUP BY registration_number) b ON b.registration_number=a.registration_number",
+		  resultSetMapping="RouteReportMapping"
+		)
+@SqlResultSetMappings({
+	@SqlResultSetMapping(
+            name = "RouteReportMapping",
+            classes = @ConstructorResult(
+                   targetClass = RouteReport.class,
+                    columns = {
+                        @ColumnResult(name = "registration_number", type = String.class),
+                        @ColumnResult(name = "start_date", type = Date.class),
+                        @ColumnResult(name = "end_date", type = Date.class),
+                        @ColumnResult(name = "odometer_start", type = Integer.class),
+                        @ColumnResult(name = "odometer_end", type = Integer.class),
+                        @ColumnResult(name = "fuel_consumption", type = Integer.class),
+                        @ColumnResult(name = "average_consumption", type = Double.class),
+                   				}
+            )
+)})
 @Table(name = "route")
 public class Route {
 	
@@ -111,7 +134,5 @@ public class Route {
 	public void setRouteStatus(RouteStatus routeStatus) {
 		this.routeStatus = routeStatus;
 	}
-	
-	
 
 }
