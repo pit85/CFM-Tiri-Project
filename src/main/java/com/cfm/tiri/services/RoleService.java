@@ -6,7 +6,7 @@ public interface RoleService {
 
 	Iterable<Role> listAllRoles();
 
-	Role getRoleById(Integer id);
+	Role getRoleById(long id);
 
 	Role saveRole(Role role);
 

@@ -15,7 +15,7 @@
 				height="120" th:src="@{/images/trailer-1200x400.png}" />
 		</div>
 
-		<h2>Dodaj naczepę:</h2>
+		<h3>Dodaj naczepę:</h3>
 		<div>
 			<form class="form-horizontal" th:object="${trailer}"
 				th:action="@{/trailer}" method="post">
@@ -51,7 +51,7 @@
 							th:field="*{productionYear}" />
 						<div th:if="${#fields.hasErrors('productionYear')}">
 							<label style="color: red">Rok produkcji musi zawierać się
-								w przedziale od 1985 do 2100</label>
+								w przedziale od 1985 do 2050</label>
 						</div>
 					</div>
 				</div>
@@ -71,8 +71,10 @@
 						<input type="checkbox" class="form-control" th:field="*{active}" />
 					</div>
 				</div>
-				<div class="row">
-					<button type="submit" class="btn btn-default">Zapisz</button>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default">Zapisz</button>
+					</div>
 				</div>
 			</form>
 		</div>

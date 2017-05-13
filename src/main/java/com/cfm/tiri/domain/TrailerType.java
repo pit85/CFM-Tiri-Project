@@ -5,14 +5,11 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TRAILER_TYPE")
+@Table(name = "trailer_type")
 public class TrailerType {
 	
-	private Integer id;
-	
-	@Version //Specifies the version field or property of an entity class that serves as its optimistic lock value. The version is used to ensure integrity when performing the merge operation and for optimistic concurrency control.
-	private Integer version;
-	
+	private long id;
+	private long version;
 	private String name;
 	private Set<Trailer> trailers;
 	
@@ -24,22 +21,24 @@ public class TrailerType {
 		this.name = name;
 	}
 	
-	public Integer getVersion() {
+	@Version
+	@Column(name = "version")
+	public long getVersion() {
 		return version;
 	}
 	
-	public void setVersion(Integer version) {
+	public void setVersion(long version) {
 		this.version = version;
 	}
 	
     @Id
-    @Column(name = "ID_TRAILER_TYPE")
+    @Column(name = "id_trailer_type")
     @GeneratedValue(strategy = GenerationType.AUTO) //Provides for the specification of generation strategies for the values of primary keys.
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
     
-    public void setId(Integer id){
+    public void setId(long id){
     	this.id = id;
     }
 	

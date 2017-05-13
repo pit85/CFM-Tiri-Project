@@ -33,13 +33,13 @@ public class TruckController extends WebMvcConfigurerAdapter {
     }
 
     @RequestMapping("truck/{id}")
-    public String showTruck(@PathVariable Integer id, Model model){
+    public String showTruck(@PathVariable long id, Model model){
         model.addAttribute("truck", truckService.getTruckById(id));
         return "truckshow";
     }
 
     @RequestMapping("truck/edit/{id}")
-    public String edit(@PathVariable Integer id, Model model){
+    public String edit(@PathVariable long id, Model model){
         model.addAttribute("truck", truckService.getTruckById(id));
         return "truckform";
     }

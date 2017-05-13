@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head lang="pl-PL">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Raport z trasy</title>
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+
+</head>
+<body>
+	<div class="container">
+
+		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+		<h3>Raporty z trasy</h3>
+		<form class="form-horizontal" th:object="${route}"
+			th:action="@{/routes/report/generate}" method="get">
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label">data od:</label>
+				<div class="col-sm-10">
+					<input type="text" name="startdate" id="startdate"
+						th:value="${startdate}" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label">data do:</label>
+				<div class="col-sm-10">
+					<input type="text" name="enddate" id="enddate"
+						th:value="${enddate}" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">Utwórz</button>
+				</div>
+			</div>
+		</form>
+
+		<div th:if="${not #lists.isEmpty(reports)}">
+			<h3>Raporty spalania</h3>
+			<table class="table table-striped">
+				<tr>
+					<th>nr rejestracyjny</th>
+					<th>data początku</th>
+					<th>data końca</th>
+					<th>stan początkowy licznika</th>
+					<th>stan końcowy licznika</th>
+					<th>zużycie paliwa</th>
+					<th>średnie zużycie/100km</th>
+				</tr>
+				<tr th:each="report : ${reports}">
+					<td th:text="${report.registrationNumber}">nr rejestracyjny</td>
+					<td th:text="${#dates.format(report.startDate, 'yyyy-MM-dd')}">data
+						początku</td>
+					<td th:text="${#dates.format(report.endDate, 'yyyy-MM-dd')}">data
+						końca</td>
+					<td th:text="${report.odometerStart}">stan początkowy licznika</td>
+					<td th:text="${report.odometerEnd}">stan końcowy licznika</td>
+					<td th:text="${report.fuelConsumption}">zużycie paliwa</td>
+					<td th:text="${report.averageConsumption}">średnie
+						zużycie/100km</td>
+
+				</tr>
+			</table>
+		</div>
+
+
+
+	</div>
+</body>
+</html>

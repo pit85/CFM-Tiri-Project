@@ -1,4 +1,4 @@
-package com.cfm.tiri.configuration;
+/*package com.cfm.tiri.configuration;
 
 import oracle.jdbc.pool.OracleDataSource;
 
@@ -49,4 +49,4 @@ public class OracleConfiguration {
         return dataSource;
     }
 
-}
+}*/

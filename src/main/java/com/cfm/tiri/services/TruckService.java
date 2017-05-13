@@ -6,13 +6,13 @@ public interface TruckService {
 
 	Iterable<Truck> listAllTrucks();
 
-	Truck getTruckById(Integer id);
+	Truck getTruckById(long id);
 
 	Truck saveTruck(Truck truck);
 
-	Iterable<Truck> listActiveTrucks(Boolean active);
+	Iterable<Truck> listActiveTrucks(boolean active);
 	
-	Iterable<Truck> listActiveAndFreeTrucks(int squadId);
+	Iterable<Truck> listActiveAndFreeTrucks(long squadId);
 	
 	
 }

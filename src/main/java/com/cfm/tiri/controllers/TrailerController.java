@@ -2,7 +2,6 @@ package com.cfm.tiri.controllers;
 
 import com.cfm.tiri.domain.Trailer;
 import com.cfm.tiri.domain.TrailerType;
-import com.cfm.tiri.domain.Truck;
 import com.cfm.tiri.services.TrailerService;
 import com.cfm.tiri.services.TrailerTypeService;
 import java.util.List;
@@ -42,13 +41,13 @@ public class TrailerController {
     }
 
     @RequestMapping("trailer/{id}")
-    public String showTrailer(@PathVariable Integer id, Model model){
+    public String showTrailer(@PathVariable long id, Model model){
         model.addAttribute("trailer", trailerService.getTrailerById(id));
         return "trailershow";
     }
 
     @RequestMapping("trailer/edit/{id}")
-    public String edit(@PathVariable Integer id, Model model){
+    public String edit(@PathVariable long id, Model model){
         model.addAttribute("trailer", trailerService.getTrailerById(id));
         return "trailerform";
     }
@@ -73,7 +72,7 @@ public class TrailerController {
         } else {
             //form is filled properly
         	trailerService.saveTrailer(trailer);
-            return "redirect:/trailer/" + trailer.getId();
+            return "redirect:/trailers/" ;
         }
     }
     
@@ -83,7 +82,7 @@ public class TrailerController {
     }
     
     @RequestMapping(value = "trailers/active/{active}", method = RequestMethod.GET)
-    public String listActive(@PathVariable Boolean active, Model model){
+    public String listActive(@PathVariable boolean active, Model model){
         System.out.println("Returning active trailers:");
         model.addAttribute("trailers", trailerService.listActiveTrailers(active));
         return "trailers";

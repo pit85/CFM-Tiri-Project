@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head lang="pl-PL">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Lista zadań na trasie</title>
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+
+</head>
+<body>
+	<div class="container">
+		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+		<div class="container">
+			<div th:if="${not #lists.isEmpty(activeSquads)}">
+				<div class="col-md-3">
+					<div>
+						<img src="../../static/images/refueling-150x150.jpg" width="120"
+							height="120" th:src="@{/images/refueling-150x150.jpg}" />
+					</div>
+
+					<div sec:authorize="hasAnyRole('USER','ADMIN')">
+						<h5>
+							<a href="#" th:href="@{/refueling/new}">Dodaj tankowanie</a>
+						</h5>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div>
+						<img src="../../static/images/load-512x512.png" width="120"
+							height="120" th:src="@{/images/load-512x512.png}" />
+					</div>
+
+					<div sec:authorize="hasAnyRole('USER','ADMIN')">
+						<h5>
+							<a href="#" th:href="@{/load/new}">Dodaj załadunek</a>
+						</h5>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div>
+						<img src="../../static/images/unload-512x512.png" width="120"
+							height="120" th:src="@{/images/unload-512x512.png}" />
+					</div>
+
+					<div sec:authorize="hasAnyRole('USER','ADMIN')">
+						<h5>
+							<a href="#" th:href="@{/unload/new}">Dodaj rozładunek</a>
+						</h5>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div>
+						<img src="../../static/images/report-200x200.png" width="120"
+							height="120" th:src="@{/images/report-200x200.png}" />
+					</div>
+
+					<div sec:authorize="hasAnyRole('USER','ADMIN')">
+						<h5>
+							<a href="#" th:href="@{/routes/report/}">Utwórz raport spalania</a>
+						</h5>
+					</div>
+				</div>
+
+
+			</div>
+
+			<div class="col-md-6" th:if="${#lists.isEmpty(activeSquads)}"
+				sec:authorize="hasAnyRole('USER','ADMIN')">Brak możliwości
+				dodawania tankowań. Utwórz skład zanim dodasz tankowanie.</div>
+		</div>
+
+
+		<div th:if="${not #lists.isEmpty(routes)}">
+			<div class="container">
+				<h3>Lista zadań na trasie</h3>
+			</div>
+
+			<div class="container">
+				<form class="form-horizontal" th:object="${route}"
+					th:action="@{/routes/search}" method="get">
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">nr rejestracyjny:</label>
+						<div class="col-sm-10">
+							<input type="text" name="registrationnumber"
+								id="registrationnumber" th:value="${registrationnumber}" />
+						</div>
+					</div>
+<!-- 					<div class="form-group">
+						<label class="col-sm-2 control-label">data od:</label>
+						<div class="col-sm-10">
+							<input type="text" name="startdate" id="startdate"
+								th:value="${startdate}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">data do:</label>
+						<div class="col-sm-10">
+							<input type="text" name="enddate" id="enddate" th:value="enddate" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">status:</label>
+						<div class="col-md-10">
+							<select class="form-control">
+								<option th:each="routeStatus : ${allRouteStatuses}"
+									th:value="${routeStatus.id}" th:text="${routeStatus.name}">Rodzaj
+									naczepy</option>
+							</select>
+						</div>
+					</div> -->
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-default">Wyszukaj</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+
+			<table class="table table-striped">
+				<tr>
+					<th>id</th>
+					<th>zadanie</th>
+					<th>nr rejestracyjny</th>
+					<th>imię kierowcy</th>
+					<th>nazwisko kierowcy</th>
+					<th>liczba litrów</th>
+					<th>waga ładunku</th>
+					<th>licznik km</th>
+					<th>data</th>
+					<th th:if="${not #lists.isEmpty(activeSquads)}"
+						sec:authorize="hasAnyRole('USER','ADMIN')">Edytuj</th>
+					<th sec:authorize="hasRole('ADMIN')">Usuń</th>
+
+				</tr>
+				<tr th:each="route : ${routes}">
+					<td th:text="${route.id}"><a href="/route/${route.id}">Id</a></td>
+					<td th:text="${route.routeStatus.name}">zadanie</td>
+					<td th:text="${route.squad.truck.registrationNumber}">nr
+						rejestracyjny</td>
+					<td th:text="${route.squad.user.firstName}">imię kierowcy</td>
+					<td th:text="${route.squad.user.lastName}">nazwisko kierowcy</td>
+					<td th:text="${route.amountOfFuel}">liczba litrów</td>
+					<td th:text="${route.weightOfCargo}">waga ładunku</td>
+					<td th:text="${route.odometer}">licznik km</td>
+					<td th:text="${#dates.format(route.routeDate, 'yyyy-MM-dd')}">data</td>
+					<td th:if="${not #lists.isEmpty(activeSquads)}"
+						sec:authorize="hasAnyRole('USER','ADMIN')"><a
+						th:href="${'/route/edit/' + route.id}"> <img
+							src="../../static/images/edit-256x256.png" width="20" height="20"
+							th:src="@{/images/edit-256x256.png}" />
+					</a></td>
+					<td sec:authorize="hasRole('ADMIN')"><a
+						th:href="${'/route/delete/' + route.id}"> <img
+							src="../../static/images/delete-256x256.png" width="20"
+							height="20" th:src="@{/images/delete-256x256.png}" />
+					</a></td>
+				</tr>
+			</table>
+		</div>
+
+
+	</div>
+</body>
+</html>

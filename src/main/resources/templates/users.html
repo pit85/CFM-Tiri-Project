@@ -3,7 +3,7 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head lang="pl-PL">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Lista ciężarówek</title>
+<title>Użytkownicy</title>
 <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
 <body>
@@ -27,14 +27,15 @@
 						<a href="#" th:href="@{/users/active/true}">Pokaż aktywnych</a>
 					</h5>
 					<h5>
-						<a href="#" th:href="@{/users/active/false}">Pokaż nieaktywnych</a>
+						<a href="#" th:href="@{/users/active/false}">Pokaż
+							nieaktywnych</a>
 					</h5>
 				</div>
 			</div>
 		</div>
 		<div th:if="${not #lists.isEmpty(users)}">
 			<div class="col-sm-10">
-				<h2>Lista użytkowników</h2>
+				<h3>Lista użytkowników</h3>
 			</div>
 			<table class="table table-striped">
 				<tr>
@@ -42,8 +43,10 @@
 					<th>imię</th>
 					<th>nazwisko</th>
 					<th>telefon</th>
+					<th>email</th>
 					<th>rola</th>
 					<th>Aktywny</th>
+
 					<th>Data utworzenia</th>
 					<th sec:authorize="hasAnyRole('USER','ADMIN')">Otwórz</th>
 					<th sec:authorize="hasRole('ADMIN')">Edytuj</th>
@@ -53,13 +56,18 @@
 					<td th:text="${user.firstName}">imię</td>
 					<td th:text="${user.lastName}">nazwisko</td>
 					<td th:text="${user.mobilePhone}">telefon</td>
+					<td th:text="${user.email}">telefon</td>
 					<td th:text="${user.role.name}">rola</td>
 					<td th:text="${user.active}">Aktywny</td>
-					<td th:text="${user.creationDate}">Data utworzenia</td>
+					<td th:text="${#dates.format(user.creationDate, 'yyyy-MM-dd')}">Data utworzenia</td>
 					<td sec:authorize="hasAnyRole('USER','ADMIN')"><a
-						th:href="${ '/user/' + user.id}">Otwórz</a></td>
+						th:href="${ '/user/' + user.id}"><img
+							src="../../static/images/open-256x256.png" width="20" height="20"
+							th:src="@{/images/open-256x256.png}" /></a></td>
 					<td sec:authorize="hasRole('ADMIN')"><a
-						th:href="${'/user/edit/' + user.id}">Edytuj</a></td>
+						th:href="${'/user/edit/' + user.id}"><img
+							src="../../static/images/edit-256x256.png" width="20" height="20"
+							th:src="@{/images/edit-256x256.png}" /></a></td>
 				</tr>
 			</table>
 

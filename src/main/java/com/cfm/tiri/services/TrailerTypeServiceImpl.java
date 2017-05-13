@@ -22,7 +22,7 @@ public class TrailerTypeServiceImpl implements TrailerTypeService{
 	}
 
 	@Override
-	public TrailerType getTrailerTypeById(Integer id) {
+	public TrailerType getTrailerTypeById(long id) {
 		return trailerTypeRepository.findOne(id);
 	}
 

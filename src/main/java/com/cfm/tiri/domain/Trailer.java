@@ -10,25 +10,21 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity 
-@Table( name="TRAILER" )
+@Table( name="trailer" )
 public class Trailer {
 	
-	private Integer id;
-	
-	@Version 
-	private Integer version;
+	private long id;
+	private long version;
 	@NotNull
     @Size(min=6, max=15)
 	private String registrationNumber;
 	private String producer;
 	private String model;
 	@Min(1985)
-	@Max(2100)
+	@Max(2050)
 	private int productionYear;
-	
 	private boolean active;
-	
-	@Column(name = "CREATION_DATE")
+	@Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date  creationDate = new Date();
 	private TrailerType trailerType;
@@ -37,8 +33,7 @@ public class Trailer {
 	public Trailer(){
 	}
 	
-	public Trailer(Integer version, String registrationNumber, String producer, String model, int productionYear, Boolean active, TrailerType trailerType, int idTrailerType ){
-		this.version = version;
+	public Trailer( String registrationNumber, String producer, String model, int productionYear, Boolean active, TrailerType trailerType, int idTrailerType ){
 		this.registrationNumber = registrationNumber;
 		this.producer = producer;
 		this.model = model;
@@ -47,23 +42,25 @@ public class Trailer {
 		this.trailerType = trailerType;
 	}
 	
-	public Integer getVersion() {
+	@Version
+	@Column(name = "version")
+	public long getVersion() {
 		return version;
 	}
 
-	public void setVersion(Integer version) {
+	public void setVersion(long version) {
 		this.version = version;
 	}
 	
     @Id
-    @Column(name = "ID_TRAILER")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+    @Column(name = "id_trailer")
+	@GeneratedValue(strategy=GenerationType.AUTO, generator = "id_Sequence")
 	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ" )
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
     
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	
@@ -115,7 +112,7 @@ public class Trailer {
 	}
 	
 	@ManyToOne
-    @JoinColumn(name = "ID_TRAILER_TYPE")
+    @JoinColumn(name = "id_trailer_type")
     public TrailerType getTrailerType() {
         return trailerType;
     }

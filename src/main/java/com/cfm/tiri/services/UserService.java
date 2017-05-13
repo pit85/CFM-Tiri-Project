@@ -6,12 +6,12 @@ public interface UserService {
 
 	Iterable<User> listAllUsers();
 
-	User getUserById(Integer id);
+	User getUserById(long id);
 
 	User saveUser(User trailer);
 
-	Iterable<User> listActiveUsers(Boolean active);
+	Iterable<User> listActiveUsers(boolean active);
 	
-	Iterable<User> listActiveAndFreeDrivers(int squadId);
+	Iterable<User> listActiveAndFreeDrivers(long squadId);
 
 }

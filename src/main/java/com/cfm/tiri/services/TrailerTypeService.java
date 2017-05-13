@@ -7,7 +7,7 @@ public interface TrailerTypeService {
 
 	Iterable<TrailerType> listAllTrailerTypes();
 
-	TrailerType getTrailerTypeById(Integer id);
+	TrailerType getTrailerTypeById(long id);
 
 	TrailerType saveTrailerType(TrailerType trailerType);
 

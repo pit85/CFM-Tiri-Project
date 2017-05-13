@@ -3,20 +3,29 @@ package com.cfm.tiri.domain;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="TRUCK")
+@Table(name="truck")
 public class Truck {
 
-	private Integer id;
-
-	@Version
-	private Integer version;
+	private long id;
+	private long version;
 	@NotNull
     @Size(min=6, max=15)
 	private String registrationNumber;
@@ -26,21 +35,20 @@ public class Truck {
 	@Size(min=1, max=10)
 	private String euroStandard;
 	@Min(1985)
-	@Max(2100)
+	@Max(2050)
 	private int productionYear;
 	private int horsePower;
 	private boolean active;
-	@Column(name = "CREATION_DATE")
+	@Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date  creationDate = new Date();
-	private List <Squad> squads;
+	private List<Squad> squads;
 
 	public Truck(){
 	}
 	
-	public Truck(Integer version, String registrationNumber, String producer, String model, 
+	public Truck( String registrationNumber, String producer, String model, 
 			String euroStandard, int productionYear, int horsePower, boolean active){
-		this.version = version;
 		this.registrationNumber = registrationNumber;
 		this.producer = producer;
 		this.model = model;
@@ -51,23 +59,25 @@ public class Truck {
 
 	}
 
-	public Integer getVersion() {
+	@Version
+	@Column(name = "version")
+	public long getVersion() {
 		return version;
 	}
 
-	public void setVersion(Integer version) {
+	public void setVersion(long version) {
 		this.version = version;
 	}
 	
     @Id
-    @Column(name = "ID_TRUCK")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+    @Column(name = "id_truck")
+	@GeneratedValue(strategy=GenerationType.AUTO, generator = "id_Sequence")
 	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ" )
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -143,6 +153,7 @@ public class Truck {
 	public void setSquads(List<Squad> squads){
 		this.squads = squads;
 	}
+
 
 
 

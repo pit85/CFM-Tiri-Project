@@ -6,11 +6,11 @@ public interface SquadService {
 
 	Iterable<Squad> listAllSquads();
 
-	Squad getSquadById(Integer id);
+	Squad getSquadById(long id);
 
 	Squad saveSquad(Squad squad);
 	
-	Iterable<Squad> listActiveSquads(Boolean active);
+	Iterable<Squad> listActiveSquads(boolean active);
 	
 
 }
