@@ -175,8 +175,9 @@ public class RouteController {
     
     @RequestMapping(value = "routes/report/generate", method = RequestMethod.GET)
     public String generateReport(
-    		@RequestParam (defaultValue = "2010-01-01", value = "startdate", required = false) String startDate, @RequestParam (defaultValue = "2050-01-01", value = "enddate", required = false) String endDate, Model model) {
-        model.addAttribute("reports", routeService.listAverageFuelConsumption(startDate, endDate));
+    	@RequestParam (defaultValue = "2000-01-01", value = "startdate", required = false) String startDate, @RequestParam (defaultValue = "2050-01-01", value = "enddate", required = false) String endDate, Model model) {
+        model.addAttribute("reports", routeService.listFuelConsumption(startDate, endDate));
+        model.addAttribute("detailedReports", routeService.listDetailedFuelConsumption(startDate, endDate));
         return "routesreport";
     }
     

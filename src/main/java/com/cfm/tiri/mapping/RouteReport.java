@@ -5,24 +5,28 @@ public class RouteReport {
 	
 
 	private String registrationNumber;
-	private Date startDate;
-	private Date endDate;
+	private Date routeStartDate;
+	private Date routeEndDate;
 	private int odometerStart;
 	private int odometerEnd;
-	private int fuelConsumption;
+	private int distance;
 	private double averageConsumption;
+	private double averageModelConsumption;
+	private int fuelSaved;
 	
 	public RouteReport(){
 	}
 	
-	public RouteReport(String registrationNumber, Date startDate, Date endDate, int odometerStart, int odometerEnd, int fuelConsumption, double averageConsumption){
+	public RouteReport(String registrationNumber, Date routeStartDate, Date routeEndDate, int odometerStart, int odometerEnd, int distance, double averageConsumption, double averageModelConsumption, int fuelSaved){
 		this.registrationNumber = registrationNumber;
-		this.startDate = startDate;
-		this.endDate = endDate;
+		this.routeStartDate = routeStartDate;
+		this.routeEndDate = routeEndDate;
 		this.odometerStart = odometerStart;
 		this.odometerEnd = odometerEnd;
-		this.fuelConsumption = fuelConsumption;
+		this.distance = distance;
 		this.averageConsumption = averageConsumption;
+		this.averageModelConsumption = averageModelConsumption;
+		this.setFuelSaved(fuelSaved);
 	}
 	
 	public String getRegistrationNumber() {
@@ -41,12 +45,12 @@ public class RouteReport {
 		this.odometerStart = odometerStart;
 	}
 
-	public int getFuelConsumption() {
-		return fuelConsumption;
+	public int getDistance() {
+		return distance;
 	}
 
-	public void setFuelConsumption(int fuelConsumption) {
-		this.fuelConsumption = fuelConsumption;
+	public void setDistance(int distance) {
+		this.distance = distance;
 	}
 
 	public int getOdometerEnd() {
@@ -65,20 +69,36 @@ public class RouteReport {
 		this.averageConsumption = averageConsumption;
 	}
 
-	public Date getStartDate() {
-		return startDate;
+	public Date getRouteStartDate() {
+		return routeStartDate;
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setRouteStartDate(Date routeStartDate) {
+		this.routeStartDate = routeStartDate;
 	}
 
-	public Date getEndDate() {
-		return endDate;
+	public Date getRouteEndDate() {
+		return routeEndDate;
 	}
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setRouteEndDate(Date routeEndDate) {
+		this.routeEndDate = routeEndDate;
+	}
+
+	public double getAverageModelConsumption() {
+		return averageModelConsumption;
+	}
+
+	public void setAverageModelConsumption(double averageModelConsumption) {
+		this.averageModelConsumption = averageModelConsumption;
+	}
+
+	public int getFuelSaved() {
+		return fuelSaved;
+	}
+
+	public void setFuelSaved(int fuelSaved) {
+		this.fuelSaved = fuelSaved;
 	}
 
 }

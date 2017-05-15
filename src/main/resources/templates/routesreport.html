@@ -44,24 +44,64 @@
 			<table class="table table-striped">
 				<tr>
 					<th>nr rejestracyjny</th>
-					<th>data początku</th>
-					<th>data końca</th>
-					<th>stan początkowy licznika</th>
-					<th>stan końcowy licznika</th>
-					<th>zużycie paliwa</th>
-					<th>średnie zużycie/100km</th>
+					<th>data start</th>
+					<th>data koniec</th>
+					<th>licznik start</th>
+					<th>licznik koniec</th>
+					<th>przebieg</th>
+					<th>zużycie na 100km</th>
+					<th>zużycie na 100 km wg modelu</th>
+					<th>zaoszczędzone paliwo</th>
+
 				</tr>
 				<tr th:each="report : ${reports}">
 					<td th:text="${report.registrationNumber}">nr rejestracyjny</td>
-					<td th:text="${#dates.format(report.startDate, 'yyyy-MM-dd')}">data
+					<td th:text="${#dates.format(report.routeStartDate, 'yyyy-MM-dd')}">data
 						początku</td>
-					<td th:text="${#dates.format(report.endDate, 'yyyy-MM-dd')}">data
+					<td th:text="${#dates.format(report.routeEndDate, 'yyyy-MM-dd')}">data
 						końca</td>
 					<td th:text="${report.odometerStart}">stan początkowy licznika</td>
 					<td th:text="${report.odometerEnd}">stan końcowy licznika</td>
-					<td th:text="${report.fuelConsumption}">zużycie paliwa</td>
-					<td th:text="${report.averageConsumption}">średnie
-						zużycie/100km</td>
+					<td th:text="${report.distance}">przebieg</td>
+					<td th:text="${report.averageConsumption}">średnie zużycie na
+						100 km</td>
+					<td th:text="${report.averageModelConsumption}">zużycie na 100
+						km wg modelu</td>
+					<td th:text="${report.fuelSaved}">zaoszczędzone paliwo</td>
+
+				</tr>
+			</table>
+		</div>
+
+		<div th:if="${not #lists.isEmpty(detailedReports)}">
+			<h3>Szczegółowe zestawienie</h3>
+			<table class="table table-striped">
+				<tr>
+					<th>nr rejestracyjny</th>
+					<th>data start</th>
+					<th>data koniec</th>
+					<th>licznik start</th>
+					<th>licznik koniec</th>
+					<th>waga ładunku</th>
+					<th>przebieg</th>
+					<th>zużycie na 100 km wg modelu</th>
+					<th>zużycie paliwa wg modelu</th>
+
+				</tr>
+				<tr th:each="report : ${detailedReports}">
+					<td th:text="${report.registrationNumber}">nr rejestracyjny</td>
+					<td th:text="${#dates.format(report.routeDateStart, 'yyyy-MM-dd')}">data
+						początku</td>
+					<td th:text="${#dates.format(report.routeDateEnd, 'yyyy-MM-dd')}">data
+						końca</td>
+					<td th:text="${report.odometerStart}">stan początkowy licznika</td>
+					<td th:text="${report.odometerEnd}">stan końcowy licznika</td>
+					<td th:text="${report.weightOfCargo}">waga ładunku</td>
+					<td th:text="${report.distance}">przebieg</td>
+					<td th:text="${report.modelAverageConsumption}">średnie
+						zużycie na 100 km wg modelu</td>
+					<td th:text="${report.modelFuelConsumption}">zużycie paliwa wg
+						modelu</td>
 
 				</tr>
 			</table>

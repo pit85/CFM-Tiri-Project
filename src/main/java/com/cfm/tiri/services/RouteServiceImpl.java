@@ -1,16 +1,13 @@
 package com.cfm.tiri.services;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 import com.cfm.tiri.domain.Route;
+import com.cfm.tiri.mapping.RouteDetailedReport;
 import com.cfm.tiri.mapping.RouteReport;
 import com.cfm.tiri.domain.RouteStatus;
 import com.cfm.tiri.repositories.RouteRepository;
@@ -77,23 +74,34 @@ public class RouteServiceImpl implements RouteService{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<RouteReport> listAverageFuelConsumption(String startDate, String endDate) {
+	public List<RouteReport> listFuelConsumption(String startDate, String endDate) {
 	
 //		Mapping named query to POJO object. Query is located in Route Entity
 		Query query = em.createNamedQuery("FuelConsumptionReport");
-		query.setParameter(1, startDate);
-		query.setParameter(2, endDate);
-		query.setParameter(3, startDate);
-		query.setParameter(4, endDate);
-		query.setParameter(5, startDate);
+		query.setParameter(1, endDate);
+		query.setParameter(2, startDate);
 		List<RouteReport> report = query.getResultList();
 		return report;
-		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RouteDetailedReport> listDetailedFuelConsumption(String startDate, String endDate) {
+
+//		Mapping named query to POJO object. Query is located in Route Entity
+		Query query = em.createNamedQuery("DetailedFuelConsumptionReport");
+		query.setParameter(1, startDate);
+		query.setParameter(2, endDate);
+		List<RouteDetailedReport> detailedReport = query.getResultList();
+		return detailedReport;
 	}
 
 	@Override
 	public Iterable<RouteStatus> listRouteStatuses() {
 		return routeStatusRepository.findAll();
 	}
+
+
+
 
 }
