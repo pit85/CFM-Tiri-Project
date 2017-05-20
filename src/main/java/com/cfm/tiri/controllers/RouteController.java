@@ -2,6 +2,10 @@ package com.cfm.tiri.controllers;
 
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,12 +20,14 @@ import com.cfm.tiri.domain.Route;
 import com.cfm.tiri.domain.RouteStatus;
 import com.cfm.tiri.services.RouteService;
 import com.cfm.tiri.services.SquadService;
+import com.cfm.tiri.utils.PdfGeneratorUtil;
 
 @Controller
 public class RouteController {
 	
 	private RouteService routeService;
 	private SquadService squadService;
+    private PdfGeneratorUtil pdfGeneratorUtil;
 
 
     @Autowired
@@ -33,6 +39,12 @@ public class RouteController {
     public void setRouteService(RouteService routeService) {
         this.routeService = routeService;
     }
+    
+    @Autowired
+    public void setPdfGeneratorUtil(PdfGeneratorUtil pdfGeneratorUtil) {
+        this.pdfGeneratorUtil = pdfGeneratorUtil;
+    }
+    
     
     @RequestMapping(value = "routes", method = RequestMethod.GET)
     public String list(Model model){
@@ -183,6 +195,20 @@ public class RouteController {
     @ModelAttribute("routeStatuses")
     public List<RouteStatus> listRouteStatuses() {
         return (List<RouteStatus>) this.routeService.listRouteStatuses();
+    }
+    
+    @RequestMapping(value = "routes/report/generate/pdf", method = RequestMethod.GET)
+    public String generatePdfReport(HttpServletResponse response, HttpServletRequest request, 
+    		@RequestParam (defaultValue = "2010-01-01", value = "startdate", required = false) String startDate, @RequestParam (defaultValue = "2050-01-01", value = "enddate", required = false) String endDate, Model model) {
+        model.addAttribute("reports", routeService.listAverageFuelConsumption("2010-01-01", "2019-01-01"));
+        Map<String, Object> modelMap=model.asMap();
+        try {
+			pdfGeneratorUtil.createPdf("fuelreport", modelMap, response, request);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+        return "fuelreport";
     }
 
 }
