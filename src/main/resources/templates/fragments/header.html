@@ -20,11 +20,11 @@
 		<div th:fragment="header">
 			<div id="login">
 				<span sec:authorize="isAnonymous()"><a href="#"
-					th:href="@{/login}" method="post">[Zaloguj]</a></span> <span
+					th:href="@{/login}" >[Zaloguj]</a></span> <span
 					sec:authorize="isAuthenticated()">Zalogowano: <span
 					sec:authentication="name"></span></span> <span
 					sec:authorize="isAuthenticated()"><a href="#"
-					th:href="@{/logout}" method="post">[Wyloguj]</a></span>
+					th:href="@{/logout}" >[Wyloguj]</a></span>
 
 			</div>
 			<nav class="navbar navbar-default">

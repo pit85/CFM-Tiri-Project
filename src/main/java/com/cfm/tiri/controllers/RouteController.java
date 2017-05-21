@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.cfm.tiri.domain.Route;
 import com.cfm.tiri.domain.RouteStatus;
+import com.cfm.tiri.domain.Squad;
 import com.cfm.tiri.services.RouteService;
 import com.cfm.tiri.services.SquadService;
 
@@ -183,6 +186,15 @@ public class RouteController {
     @ModelAttribute("routeStatuses")
     public List<RouteStatus> listRouteStatuses() {
         return (List<RouteStatus>) this.routeService.listRouteStatuses();
+    }
+    
+    @RequestMapping(value = "/routes/report/downloadPDF", method = RequestMethod.GET)
+    public ModelAndView downloadPdf() {
+        // create some sample data
+
+    	List<Route> routes = (List<Route>) routeService.listAllRoutes();
+        // return a view which will be resolved by an excel view resolver
+        return new ModelAndView("pdfView", "routes", routes);
     }
 
 }
