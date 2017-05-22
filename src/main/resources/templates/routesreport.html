@@ -49,8 +49,10 @@
 					<th>data końca</th>
 					<th>stan początkowy licznika</th>
 					<th>stan końcowy licznika</th>
-					<th>zużycie paliwa</th>
-					<th>średnie zużycie/100km</th>
+					<th>dystans</th>
+					<th>średnie zużycie na 100km</th>
+					<th>średnie zużycie na 100km wg modelu</th>
+					<th>zaoszczędzone paliwo</th>
 				</tr>
 				<tr th:each="report : ${reports}">
 					<td th:text="${report.registrationNumber}">nr rejestracyjny</td>
@@ -60,10 +62,10 @@
 						końca</td>
 					<td th:text="${report.odometerStart}">stan początkowy licznika</td>
 					<td th:text="${report.odometerEnd}">stan końcowy licznika</td>
-					<td th:text="${report.fuelConsumption}">zużycie paliwa</td>
-					<td th:text="${report.averageConsumption}">średnie
-						zużycie/100km</td>
-
+					<td th:text="${report.distance}">zużycie paliwa</td>
+					<td th:text="${#numbers.formatDecimal(report.averageConsumption, 0, 'COMMA', 2, 'POINT')}">średnie</td>
+					<td th:text="${#numbers.formatDecimal(report.averageModelConsumption, 0, 'COMMA', 2, 'POINT')}">zużycie paliwa</td>
+					<td th:text="${report.fuelSaved}">zużycie paliwa</td>
 				</tr>
 			</table>
 		</div>

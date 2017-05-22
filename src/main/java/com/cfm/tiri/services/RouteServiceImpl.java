@@ -81,11 +81,8 @@ public class RouteServiceImpl implements RouteService{
 	
 //		Mapping named query to POJO object. Query is located in Route Entity
 		Query query = em.createNamedQuery("FuelConsumptionReport");
-		query.setParameter(1, startDate);
-		query.setParameter(2, endDate);
-		query.setParameter(3, startDate);
-		query.setParameter(4, endDate);
-		query.setParameter(5, startDate);
+		query.setParameter(1, endDate);
+		query.setParameter(2, startDate);
 		List<RouteReport> report = query.getResultList();
 		return report;
 		

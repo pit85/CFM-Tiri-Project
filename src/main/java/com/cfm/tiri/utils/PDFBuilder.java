@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cfm.tiri.domain.Route;
-
+import com.cfm.tiri.mapping.RouteReport;
 import com.cfm.tiri.view.AbstractITextPdfView;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -32,7 +32,7 @@ public class PDFBuilder extends AbstractITextPdfView {
             PdfWriter writer, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         // get data model which is passed by the Spring container
-        List<Route> routes = (List<Route>) model.get("routes");
+        List<Route> fuelConsumptionReport =  (List<Route>) model.get("fuelconsumptionreport");
          
         doc.add(new Paragraph("Recommended books for Spring framework"));
          
@@ -40,28 +40,44 @@ public class PDFBuilder extends AbstractITextPdfView {
         table.setWidthPercentage(100.0f);
         table.setWidths(new float[] {3.0f, 2.0f, 2.0f, 2.0f, 1.0f});
         table.setSpacingBefore(10);
-         
-        // define font for table header row
-        Font font = FontFactory.getFont(FontFactory.HELVETICA);
-        font.setColor(BaseColor.WHITE);
+        
+        // fonts
+        Font smallfont = FontFactory.getFont("Arial", 7);
+        Font arial = FontFactory.getFont("Arial", 11);
+        smallfont.setColor(BaseColor.WHITE);
+        arial.setColor(BaseColor.WHITE);
+        
+
          
         // define table header cell
         PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(BaseColor.BLUE);
+        cell.setBackgroundColor(BaseColor.GRAY);
         cell.setPadding(5);
          
         // write table header
-        cell.setPhrase(new Phrase("Book Title", font));
+        cell.setPhrase(new Phrase("Nr rejestracyjny", arial));
         table.addCell(cell);
          
-        cell.setPhrase(new Phrase("Author", font));
+        cell.setPhrase(new Phrase("Data początku", arial));
+        table.addCell(cell);
+        
+        cell.setPhrase(new Phrase("Data końca", arial));
+        table.addCell(cell);
+        
+        cell.setPhrase(new Phrase("Stan początkowy licznika", arial));
+        table.addCell(cell);
+        
+        cell.setPhrase(new Phrase("Stan końcowy licznika", arial));
         table.addCell(cell);
  
          
         // write table row data
-        for (Route route : routes) {
-            table.addCell(String.valueOf(route.getOdometer()));
-            table.addCell(String.valueOf(route.getAmountOfFuel()));
+        for (Route report : fuelConsumptionReport) {
+            table.addCell(String.valueOf(report.getOdometer()));
+//            table.addCell(String.valueOf(report.getStartDate()));
+//            table.addCell(String.valueOf(report.getEndDate()));
+//            table.addCell(String.valueOf(report.getOdometerStart()));
+//            table.addCell(String.valueOf(report.getOdometerEnd()));
 
         }
          

@@ -9,20 +9,24 @@ public class RouteReport {
 	private Date endDate;
 	private int odometerStart;
 	private int odometerEnd;
-	private int fuelConsumption;
+	private int distance;
 	private double averageConsumption;
+	private double averageModelConsumption;
+	private int fuelSaved;
 	
 	public RouteReport(){
 	}
 	
-	public RouteReport(String registrationNumber, Date startDate, Date endDate, int odometerStart, int odometerEnd, int fuelConsumption, double averageConsumption){
+	public RouteReport(String registrationNumber, Date startDate, Date endDate, int odometerStart, int odometerEnd, int distance, double averageModelConsumption, double averageConsumption, int fuelSaved){
 		this.registrationNumber = registrationNumber;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.odometerStart = odometerStart;
 		this.odometerEnd = odometerEnd;
-		this.fuelConsumption = fuelConsumption;
+		this.distance = distance;
+		this.averageModelConsumption = averageModelConsumption;
 		this.averageConsumption = averageConsumption;
+		this.fuelSaved = fuelSaved;
 	}
 	
 	public String getRegistrationNumber() {
@@ -39,14 +43,6 @@ public class RouteReport {
 
 	public void setOdometerStart(int odometerStart) {
 		this.odometerStart = odometerStart;
-	}
-
-	public int getFuelConsumption() {
-		return fuelConsumption;
-	}
-
-	public void setFuelConsumption(int fuelConsumption) {
-		this.fuelConsumption = fuelConsumption;
 	}
 
 	public int getOdometerEnd() {
@@ -79,6 +75,30 @@ public class RouteReport {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public int getDistance() {
+		return distance;
+	}
+
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+
+	public int getFuelSaved() {
+		return fuelSaved;
+	}
+
+	public void setFuelSaved(int fuelSaved) {
+		this.fuelSaved = fuelSaved;
+	}
+
+	public double getAverageModelConsumption() {
+		return averageModelConsumption;
+	}
+
+	public void setAverageModelConsumption(double averageModelConsumption) {
+		this.averageModelConsumption = averageModelConsumption;
 	}
 
 }
