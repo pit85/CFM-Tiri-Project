@@ -200,7 +200,7 @@ public class RouteController {
     	String startDate = request.getParameter("startdate");
     	String endDate = request.getParameter("enddate");
     	
-    	model.addAttribute("fuelconsumptionreport", routeService.listAllRoutes());
+    	model.addAttribute("fuelconsumptionreport", routeService.listAverageFuelConsumption("2015-01-01", "2019-01-01"));
     	//List<RouteReport> fuelConsumptionReport = (List<RouteReport>) routeService.listAverageFuelConsumption(startDate, endDate);
     	//List<Route> fuelConsumptionReport = (List<Route>) routeService.listAllRoutes();
     	

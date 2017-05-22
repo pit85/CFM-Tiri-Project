@@ -5,8 +5,6 @@ import java.util.Map;
  
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.cfm.tiri.domain.Route;
 import com.cfm.tiri.mapping.RouteReport;
 import com.cfm.tiri.view.AbstractITextPdfView;
 import com.itextpdf.text.BaseColor;
@@ -32,7 +30,7 @@ public class PDFBuilder extends AbstractITextPdfView {
             PdfWriter writer, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         // get data model which is passed by the Spring container
-        List<Route> fuelConsumptionReport =  (List<Route>) model.get("fuelconsumptionreport");
+        List<RouteReport> fuelConsumptionReport =  (List<RouteReport>) model.get("fuelconsumptionreport");
          
         doc.add(new Paragraph("Recommended books for Spring framework"));
          
@@ -72,8 +70,8 @@ public class PDFBuilder extends AbstractITextPdfView {
  
          
         // write table row data
-        for (Route report : fuelConsumptionReport) {
-            table.addCell(String.valueOf(report.getOdometer()));
+        for (RouteReport report : fuelConsumptionReport) {
+            table.addCell(String.valueOf(report.getRegistrationNumber()));
 //            table.addCell(String.valueOf(report.getStartDate()));
 //            table.addCell(String.valueOf(report.getEndDate()));
 //            table.addCell(String.valueOf(report.getOdometerStart()));
