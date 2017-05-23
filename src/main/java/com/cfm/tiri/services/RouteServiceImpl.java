@@ -77,7 +77,7 @@ public class RouteServiceImpl implements RouteService{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<RouteReport> listAverageFuelConsumption(String startDate, String endDate) {
+	public Iterable<RouteReport> listAverageFuelConsumption(String startDate, String endDate) {
 	
 //		Mapping named query to POJO object. Query is located in Route Entity
 		Query query = em.createNamedQuery("FuelConsumptionReport");

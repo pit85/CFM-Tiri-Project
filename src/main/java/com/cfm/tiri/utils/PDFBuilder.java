@@ -1,5 +1,7 @@
 package com.cfm.tiri.utils;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
  
@@ -13,6 +15,7 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -30,23 +33,31 @@ public class PDFBuilder extends AbstractITextPdfView {
             PdfWriter writer, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         // get data model which is passed by the Spring container
-        List<RouteReport> fuelConsumptionReport =  (List<RouteReport>) model.get("fuelconsumptionreport");
-         
-        doc.add(new Paragraph("Recommended books for Spring framework"));
-         
-        PdfPTable table = new PdfPTable(5);
-        table.setWidthPercentage(100.0f);
-        table.setWidths(new float[] {3.0f, 2.0f, 2.0f, 2.0f, 1.0f});
-        table.setSpacingBefore(10);
+    	List<RouteReport> fuelConsumptionReport =   (List<RouteReport>) model.get("fuelconsumptionreport");
+ //      	if (fuelConsumptionReport.isEmpty()) {    	System.out.println("empty");}else{System.out.println("not empty");}
         
         // fonts
-        Font smallfont = FontFactory.getFont("Arial", 7);
-        Font arial = FontFactory.getFont("Arial", 11);
+        Font smallfont = FontFactory.getFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED,7);
+        Font arial = FontFactory.getFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED,11);
+        Font arialblack = FontFactory.getFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED,11);
         smallfont.setColor(BaseColor.WHITE);
         arial.setColor(BaseColor.WHITE);
+        arialblack.setColor(BaseColor.BLACK);
+        
+        //formats
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        DecimalFormat df2 = new DecimalFormat(".##"); 
+    	
+    	
+        doc.add(new Paragraph("Raport podsumowujący", arialblack));
+         
+        PdfPTable table = new PdfPTable(9);
+        table.setWidthPercentage(100.0f);
+        table.setWidths(new float[] {0.9f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.1f});
+        table.setSpacingBefore(10);
         
 
-         
+        
         // define table header cell
         PdfPCell cell = new PdfPCell();
         cell.setBackgroundColor(BaseColor.GRAY);
@@ -67,19 +78,38 @@ public class PDFBuilder extends AbstractITextPdfView {
         
         cell.setPhrase(new Phrase("Stan końcowy licznika", arial));
         table.addCell(cell);
- 
+        
+        cell.setPhrase(new Phrase("Dystans", arial));
+        table.addCell(cell);
+        
+        cell.setPhrase(new Phrase("Średnie zyżycie na 100 km", arial));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Średnie zyżycie na 100 km według normy", arial));
+        table.addCell(cell);
+        
+        cell.setPhrase(new Phrase("Zaoszczędzone paliwo", arial));
+        table.addCell(cell);
          
         // write table row data
-        for (RouteReport report : fuelConsumptionReport) {
-            table.addCell(String.valueOf(report.getRegistrationNumber()));
-//            table.addCell(String.valueOf(report.getStartDate()));
-//            table.addCell(String.valueOf(report.getEndDate()));
-//            table.addCell(String.valueOf(report.getOdometerStart()));
-//            table.addCell(String.valueOf(report.getOdometerEnd()));
+        
 
+        for (RouteReport report : fuelConsumptionReport) {
+
+            table.addCell(String.valueOf(report.getRegistrationNumber()));
+            table.addCell(String.valueOf(formatter.format(report.getStartDate())));
+            table.addCell(String.valueOf(formatter.format(report.getEndDate())));
+            table.addCell(String.valueOf(report.getOdometerStart()));
+            table.addCell(String.valueOf(report.getOdometerEnd()));
+            table.addCell(String.valueOf(report.getDistance()));
+            table.addCell(String.valueOf(df2.format(report.getAverageConsumption())));
+            table.addCell(String.valueOf(df2.format(report.getAverageModelConsumption())));
+            table.addCell(String.valueOf(report.getFuelSaved()));
+            table.completeRow();
         }
          
         doc.add(table);
+        
          
     }
  

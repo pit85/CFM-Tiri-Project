@@ -40,7 +40,7 @@
 		</form>
 
 		<div th:if="${not #lists.isEmpty(reports)}">
-		<a href="/routes/report/downloadPDF">Pobierz raport PDF</a>
+		<a href="/routes/fuelreport">Pobierz raport PDF</a>
 			<h3>Raporty spalania</h3>
 			<table class="table table-striped">
 				<tr>
@@ -51,7 +51,7 @@
 					<th>stan końcowy licznika</th>
 					<th>dystans</th>
 					<th>średnie zużycie na 100km</th>
-					<th>średnie zużycie na 100km wg modelu</th>
+					<th>średnie zużycie na 100km według normy</th>
 					<th>zaoszczędzone paliwo</th>
 				</tr>
 				<tr th:each="report : ${reports}">

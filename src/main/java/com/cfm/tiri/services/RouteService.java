@@ -17,7 +17,7 @@ public interface RouteService {
 	
 	Iterable<Route> listAllRoutesOrderByRouteDateDesc(String registrationNumber);
 	
-	List<RouteReport> listAverageFuelConsumption(String startDate, String endDate);
+	Iterable<RouteReport> listAverageFuelConsumption(String startDate, String endDate);
 	
 	Iterable<RouteStatus> listRouteStatuses();
 	

@@ -185,7 +185,7 @@ public class RouteController {
     public String generateReport(
     		@RequestParam (defaultValue = "2010-01-01 00:00:00", value = "startdate", required = false) String startDate, @RequestParam (defaultValue = "2050-01-01 00:00:00", value = "enddate", required = false) String endDate, Model model) {
         model.addAttribute("reports", routeService.listAverageFuelConsumption(startDate, endDate));
-        return "routesreport";
+        return "forward:/routes/fuelreport";
     }
     
     @ModelAttribute("routeStatuses")
@@ -193,15 +193,20 @@ public class RouteController {
         return (List<RouteStatus>) this.routeService.listRouteStatuses();
     }
     
-    @RequestMapping(value = "/routes/report/downloadPDF", method = RequestMethod.GET)
+    @RequestMapping(value = "/routes/fuelreport", method = RequestMethod.GET)
     public ModelAndView downloadPdf(HttpServletRequest request, HttpServletResponse response , ModelMap model) {
         // create some sample data
     	
     	String startDate = request.getParameter("startdate");
     	String endDate = request.getParameter("enddate");
     	
-    	model.addAttribute("fuelconsumptionreport", routeService.listAverageFuelConsumption("2015-01-01", "2019-01-01"));
-    	//List<RouteReport> fuelConsumptionReport = (List<RouteReport>) routeService.listAverageFuelConsumption(startDate, endDate);
+    	model.addAttribute("fuelconsumptionreport", routeService.listAverageFuelConsumption(startDate, endDate));
+   // 	List<RouteReport> fuelConsumptionReport = routeService.listAverageFuelConsumption("2015-01-01", "2019-01-01");
+//    	System.out.println(fuelConsumptionReport.toString());
+//    	System.out.println(fuelConsumptionReport);
+//    	System.out.println("test");
+//    	if (fuelConsumptionReport.isEmpty()) {    	System.out.println("empty");}else{System.out.println("not empty");}
+//    	//List<RouteReport> fuelConsumptionReport = (List<RouteReport>) routeService.listAverageFuelConsumption(startDate, endDate);
     	//List<Route> fuelConsumptionReport = (List<Route>) routeService.listAllRoutes();
     	
     	// return a view which will be resolved by an excel view resolver
