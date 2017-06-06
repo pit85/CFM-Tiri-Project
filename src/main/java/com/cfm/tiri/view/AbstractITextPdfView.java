@@ -45,7 +45,7 @@ public abstract class AbstractITextPdfView extends AbstractView {
         // Build PDF document.
         document.open();
         buildPdfDocument(model, document, writer, request, response);
-        response.setHeader("Content-Disposition", "attachment");
+
         document.close();
  
         // Flush to HTTP response.

@@ -9,11 +9,14 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.cfm.tiri.mapping.RouteReport;
+import com.cfm.tiri.pojo.RouteDetailedReport;
+import com.cfm.tiri.pojo.RouteReport;
 
 
 @Entity
-@NamedNativeQuery(
+@NamedNativeQueries({
+
+	@NamedNativeQuery(
 		  name="FuelConsumptionReport",
 		  query="SELECT a.registration_number, "
 		  		+ "min(a.route_date_start) as start_date, "
@@ -85,7 +88,69 @@ import com.cfm.tiri.mapping.RouteReport;
 		  		+ "b.odometer IS NOT NULL "
 		  		+ "GROUP BY a.registration_number ",
 		  resultSetMapping="RouteReportMapping"
-		)
+		),
+	@NamedNativeQuery(
+		name="FuelDetailedConsumptionReport",
+		query="SELECT "
+				+ "a.id_route, "
+				+ "a.name, "
+				+ "a.registration_number, "
+				+ "COALESCE(a.route_date_start, '2000-01-01 00:00:00') AS route_date_start, "
+				+ "a.route_date_end AS route_date_end, "
+				+ "COALESCE(b.weight_of_cargo, 0) AS weight_of_cargo, "
+				+ "amount_of_fuel, "
+				+ "COALESCE(a.odometer_start, 0) AS odometer_start, "
+				+ "a.odometer_end, "
+				+ "a.odometer_end - COALESCE(a.odometer_start, 0) AS distance, "
+				+ "COALESCE((28 + 0.9 * b.weight_of_cargo), 0) AS model_average_consumption, "
+				+ "ROUND(COALESCE((a.odometer_end - a.odometer_start) * (28 + 0.3 * b.weight_of_cargo) / 100,0),0) AS model_fuel_consumption "
+				+ "FROM "
+				+ "(SELECT r.id_route, "
+				+ "r.amount_of_fuel, "
+				+ "rs.name, "
+				+ "registration_number, "
+				+ "r.route_date as route_date_end, "
+				+ "(SELECT "
+				+ "MAX(rr.route_Date) "
+				+ "FROM "
+				+ "route rr "
+				+ "LEFT JOIN squad ss ON ss.id_squad = rr.id_squad "
+				+ "LEFT JOIN truck tt ON tt.id_truck = ss.id_truck "
+				+ "WHERE "
+				+ "tt.registration_number = t.registration_number "
+				+ "AND rr.odometer < r.odometer) as route_date_start, "
+				+ "weight_of_cargo, "
+				+ "odometer AS odometer_end, "
+				+ "(SELECT "
+				+ "MAX(odometer) "
+				+ "FROM "
+				+ "route rr "
+				+ "LEFT JOIN squad ss ON ss.id_squad = rr.id_squad "
+				+ "LEFT JOIN truck tt ON tt.id_truck = ss.id_truck "
+				+ "WHERE "
+				+ "tt.registration_number = t.registration_number "
+				+ "AND rr.odometer < r.odometer) AS odometer_start "
+				+ "FROM "
+				+ "route r "
+				+ "LEFT JOIN squad s ON s.id_squad = r.id_squad "
+				+ "LEFT JOIN truck t ON t.id_truck = s.id_truck "
+				+ "LEFT JOIN route_status rs ON rs.id_route_status = r.id_route_status) a "
+				+ "LEFT JOIN "
+				+ "(SELECT "
+				+ "odometer, "
+				+ "registration_number, "
+				+ "weight_of_cargo "
+				+ "FROM "
+				+ "route r "
+				+ "LEFT JOIN squad s ON s.id_squad = r.id_squad "
+				+ "LEFT JOIN truck t ON t.id_truck = s.id_truck) b ON b.odometer = a.odometer_start "
+				+ "AND b.registration_number = a.registration_number "
+				+ "WHERE "
+				+ "route_date_start> ? "
+				+ "AND "
+				+ "route_date_end <= ? ",
+				resultSetMapping="RouteDetailedReportMapping")})
+
 @SqlResultSetMappings({
 	@SqlResultSetMapping(
             name = "RouteReportMapping",
@@ -102,7 +167,29 @@ import com.cfm.tiri.mapping.RouteReport;
                         @ColumnResult(name = "average_model_consumption", type = Double.class),
                         @ColumnResult(name = "fuel_saved", type = Integer.class)
                    				}
+            		)
+			),
+	@SqlResultSetMapping(
+            name = "RouteDetailedReportMapping",
+            classes = @ConstructorResult(
+                   targetClass = RouteDetailedReport.class,
+                    columns = {
+                        @ColumnResult(name = "id_route", type = Integer.class),
+                        @ColumnResult(name = "name", type = String.class),
+                        @ColumnResult(name = "registration_number", type = String.class),
+                        @ColumnResult(name = "route_date_start", type = Date.class),
+                        @ColumnResult(name = "route_date_end", type = Date.class),
+                        @ColumnResult(name = "weight_of_cargo", type = Double.class),
+                        @ColumnResult(name = "amount_of_fuel", type = Integer.class),
+                        @ColumnResult(name = "odometer_start", type = Integer.class),
+                        @ColumnResult(name = "odometer_end", type = Integer.class),
+                        @ColumnResult(name = "distance", type = Integer.class),
+                        @ColumnResult(name = "model_average_consumption", type = Double.class),
+                        @ColumnResult(name = "model_fuel_consumption", type = Double.class)
+                        
+                   				}
             )
+	
 )})
 @Table(name = "route")
 public class Route {

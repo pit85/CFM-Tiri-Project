@@ -11,8 +11,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.cfm.tiri.domain.Route;
-import com.cfm.tiri.mapping.RouteReport;
 import com.cfm.tiri.domain.RouteStatus;
+import com.cfm.tiri.pojo.RouteDetailedReport;
+import com.cfm.tiri.pojo.RouteReport;
 import com.cfm.tiri.repositories.RouteRepository;
 import com.cfm.tiri.repositories.RouteStatusRepository;
 
@@ -77,7 +78,7 @@ public class RouteServiceImpl implements RouteService{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Iterable<RouteReport> listAverageFuelConsumption(String startDate, String endDate) {
+	public Iterable<RouteReport> listFuelConsumption(String startDate, String endDate) {
 	
 //		Mapping named query to POJO object. Query is located in Route Entity
 		Query query = em.createNamedQuery("FuelConsumptionReport");
@@ -91,6 +92,18 @@ public class RouteServiceImpl implements RouteService{
 	@Override
 	public Iterable<RouteStatus> listRouteStatuses() {
 		return routeStatusRepository.findAll();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Iterable<RouteDetailedReport> listDetailedFuelConsumption(String startDate, String endDate) {
+
+		//		Mapping named query to POJO object. Query is located in Route Entity
+		Query query = em.createNamedQuery("FuelDetailedConsumptionReport");
+		query.setParameter(1, startDate);
+		query.setParameter(2, endDate);
+		List<RouteDetailedReport> report = query.getResultList();
+		return report;
 	}
 
 }

@@ -40,8 +40,17 @@
 		</form>
 
 		<div th:if="${not #lists.isEmpty(reports)}">
-		<a href="/routes/fuelreport">Pobierz raport PDF</a>
-			<h3>Raporty spalania</h3>
+			<div class="form-group">
+				<div>
+					<a href="/routes/fuelreport/pdf">Pobierz raport PDF</a>
+				</div>
+				<div>
+					<a href="/routes/fuelreport/csv">Pobierz raport CSV</a>
+				</div>
+			</div>
+		</div>
+		<div>
+			<h4>Raport spalania</h4>
 			<table class="table table-striped">
 				<tr>
 					<th>nr rejestracyjny</th>
@@ -62,16 +71,60 @@
 						końca</td>
 					<td th:text="${report.odometerStart}">stan początkowy licznika</td>
 					<td th:text="${report.odometerEnd}">stan końcowy licznika</td>
-					<td th:text="${report.distance}">zużycie paliwa</td>
-					<td th:text="${#numbers.formatDecimal(report.averageConsumption, 0, 'COMMA', 2, 'POINT')}">średnie</td>
-					<td th:text="${#numbers.formatDecimal(report.averageModelConsumption, 0, 'COMMA', 2, 'POINT')}">zużycie paliwa</td>
+					<td th:text="${report.distance}">dystans</td>
+					<td
+						th:text="${#numbers.formatDecimal(report.averageConsumption, 0, 'COMMA', 2, 'POINT')}">średnie
+						zużycie</td>
+					<td
+						th:text="${#numbers.formatDecimal(report.averageModelConsumption, 0, 'COMMA', 2, 'POINT')}">średnie
+						zużycie według modelu</td>
 					<td th:text="${report.fuelSaved}">zużycie paliwa</td>
 				</tr>
 			</table>
+
+			<h4>Szczegóły</h4>
+			<table class="table table-striped">
+				<tr>
+					<th>id</th>
+					<th>typ</th>
+					<th>nr rejestracyjny</th>
+					<th>data początkowa</th>
+					<th>data końca</th>
+					<th>waga ładunku</th>
+					<th>liczba litrów</th>
+					<th>stan początkowy licznika</th>
+					<th>stan końcowy licznika</th>
+					<th>dystans</th>
+					<th>średnie zużycie na 100km według normy</th>
+					<th>zużycie według normy</th>
+				</tr>
+				<tr th:each="detailedreport : ${detailedreports}">
+					<td th:text="${detailedreport.idRoute}">id</td>
+					<td th:text="${detailedreport.name}">typ</td>
+					<td th:text="${detailedreport.registrationNumber}">nr
+						rejestracyjny</td>
+					<td
+						th:text="${#dates.format(detailedreport.routeDateStart, 'yyyy-MM-dd')}">data
+						początku</td>
+					<td
+						th:text="${#dates.format(detailedreport.routeDateEnd, 'yyyy-MM-dd')}">data
+						końca</td>
+					<td th:text="${detailedreport.weightOfCargo}">waga ładunku</td>
+
+					<td th:text="${detailedreport.amountOfFuel}">liczba litrów</td>
+					<td th:text="${detailedreport.odometerStart}">stan początkowy
+						licznika</td>
+					<td th:text="${detailedreport.odometerEnd}">stan końcowy
+						licznika</td>
+					<td th:text="${detailedreport.distance}">dystans</td>
+					<td
+						th:text="${#numbers.formatDecimal(detailedreport.modelAverageConsumption, 0, 'COMMA', 2, 'POINT')}">średnie
+						zużycie na 100km według normy</td>
+					<td
+						th:text="${#numbers.formatDecimal(detailedreport.modelFuelConsumption, 0, 'COMMA', 2, 'POINT')}">zużycie według normy</td>
+				</tr>
+			</table>
 		</div>
-
-
-
 	</div>
 </body>
 </html>

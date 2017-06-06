@@ -6,6 +6,13 @@ public class Search {
 	private String startDate;
 	private String endDate;
 	
+	public Search(){}
+	
+	public Search(String startDate, String endDate){
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
+	
 	public String getStartDate() {
 		return startDate;
 	}

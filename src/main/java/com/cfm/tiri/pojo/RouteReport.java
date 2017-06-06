@@ -1,4 +1,4 @@
-package com.cfm.tiri.mapping;
+package com.cfm.tiri.pojo;
 import java.util.Date;
 
 public class RouteReport {
@@ -17,15 +17,15 @@ public class RouteReport {
 	public RouteReport(){
 	}
 	
-	public RouteReport(String registrationNumber, Date startDate, Date endDate, int odometerStart, int odometerEnd, int distance, double averageModelConsumption, double averageConsumption, int fuelSaved){
+	public RouteReport(String registrationNumber, Date startDate, Date endDate, int odometerStart, int odometerEnd, int distance, double averageConsumption, double averageModelConsumption, int fuelSaved){
 		this.registrationNumber = registrationNumber;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.odometerStart = odometerStart;
 		this.odometerEnd = odometerEnd;
 		this.distance = distance;
-		this.averageModelConsumption = averageModelConsumption;
 		this.averageConsumption = averageConsumption;
+		this.averageModelConsumption = averageModelConsumption;
 		this.fuelSaved = fuelSaved;
 	}
 	
@@ -53,14 +53,6 @@ public class RouteReport {
 		this.odometerEnd = odometerEnd;
 	}
 
-	public double getAverageConsumption() {
-		return averageConsumption;
-	}
-
-	public void setAverageConsumption(double averageConsumption) {
-		this.averageConsumption = averageConsumption;
-	}
-
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -85,12 +77,12 @@ public class RouteReport {
 		this.distance = distance;
 	}
 
-	public int getFuelSaved() {
-		return fuelSaved;
+	public double getAverageConsumption() {
+		return averageConsumption;
 	}
 
-	public void setFuelSaved(int fuelSaved) {
-		this.fuelSaved = fuelSaved;
+	public void setAverageConsumption(double averageConsumption) {
+		this.averageConsumption = averageConsumption;
 	}
 
 	public double getAverageModelConsumption() {
@@ -99,6 +91,14 @@ public class RouteReport {
 
 	public void setAverageModelConsumption(double averageModelConsumption) {
 		this.averageModelConsumption = averageModelConsumption;
+	}
+	
+	public int getFuelSaved() {
+		return fuelSaved;
+	}
+
+	public void setFuelSaved(int fuelSaved) {
+		this.fuelSaved = fuelSaved;
 	}
 
 }

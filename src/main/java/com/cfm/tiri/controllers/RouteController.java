@@ -1,10 +1,8 @@
 package com.cfm.tiri.controllers;
 
-
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,21 +14,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.cfm.tiri.domain.Route;
 import com.cfm.tiri.domain.RouteStatus;
-import com.cfm.tiri.mapping.RouteReport;
 import com.cfm.tiri.services.RouteService;
 import com.cfm.tiri.services.SquadService;
 import com.cfm.tiri.utils.Search;
 
+@SessionAttributes("searchParam")
 @Controller
 public class RouteController {
 	
 	private RouteService routeService;
 	private SquadService squadService;
-	private Search searchDate = new Search();;
+	
 
     @Autowired
     public void setSquadService(SquadService squadService) {
@@ -183,34 +181,38 @@ public class RouteController {
     
     @RequestMapping(value = "routes/report/generate", method = RequestMethod.GET)
     public String generateReport(
-    		@RequestParam (defaultValue = "2010-01-01 00:00:00", value = "startdate", required = false) String startDate, @RequestParam (defaultValue = "2050-01-01 00:00:00", value = "enddate", required = false) String endDate, Model model) {
-        model.addAttribute("reports", routeService.listAverageFuelConsumption(startDate, endDate));
-        return "forward:/routes/fuelreport";
+    	@RequestParam (defaultValue = "2010-01-01 00:00:00", value = "startdate", required = false) String startDate, @RequestParam (defaultValue = "2050-01-01 00:00:00", value = "enddate", required = false) String endDate, Model model) {
+        model.addAttribute("reports", routeService.listFuelConsumption(startDate, endDate));
+        model.addAttribute("detailedreports", routeService.listDetailedFuelConsumption(startDate, endDate));
+        Search searchParam = new Search(startDate, endDate);
+        model.addAttribute("searchParam", searchParam);
+        
+        return "routesreport";
     }
+
+    @RequestMapping(value = "/routes/fuelreport/pdf", method = RequestMethod.GET)
+    public ModelAndView downloadPdf( ModelMap model, @ModelAttribute("searchParam") Search searchParam) {
+    	     	
+    	model.addAttribute("fuelconsumptionreport", routeService.listFuelConsumption(searchParam.getStartDate(), searchParam.getEndDate()));
+        model.addAttribute("fueldetailedconsumptionreport", routeService.listDetailedFuelConsumption(searchParam.getStartDate(), searchParam.getEndDate()));
+    	
+    	return new ModelAndView("pdfView", model);
+    }
+    
+    @RequestMapping(value = "/routes/fuelreport/csv", method = RequestMethod.GET)
+    public ModelAndView downloadCsv( ModelMap model, @ModelAttribute("searchParam") Search searchParam) {
+    	     
+    	model.addAttribute("fuelconsumptionreport", routeService.listFuelConsumption(searchParam.getStartDate(), searchParam.getEndDate()));
+        model.addAttribute("fueldetailedconsumptionreport", routeService.listDetailedFuelConsumption(searchParam.getStartDate(), searchParam.getEndDate()));
+
+    	return new ModelAndView("csvView", model);
+    }
+    
     
     @ModelAttribute("routeStatuses")
     public List<RouteStatus> listRouteStatuses() {
         return (List<RouteStatus>) this.routeService.listRouteStatuses();
     }
-    
-    @RequestMapping(value = "/routes/fuelreport", method = RequestMethod.GET)
-    public ModelAndView downloadPdf(HttpServletRequest request, HttpServletResponse response , ModelMap model) {
-        // create some sample data
-    	
-    	String startDate = request.getParameter("startdate");
-    	String endDate = request.getParameter("enddate");
-    	
-    	model.addAttribute("fuelconsumptionreport", routeService.listAverageFuelConsumption(startDate, endDate));
-   // 	List<RouteReport> fuelConsumptionReport = routeService.listAverageFuelConsumption("2015-01-01", "2019-01-01");
-//    	System.out.println(fuelConsumptionReport.toString());
-//    	System.out.println(fuelConsumptionReport);
-//    	System.out.println("test");
-//    	if (fuelConsumptionReport.isEmpty()) {    	System.out.println("empty");}else{System.out.println("not empty");}
-//    	//List<RouteReport> fuelConsumptionReport = (List<RouteReport>) routeService.listAverageFuelConsumption(startDate, endDate);
-    	//List<Route> fuelConsumptionReport = (List<Route>) routeService.listAllRoutes();
-    	
-    	// return a view which will be resolved by an excel view resolver
-        return new ModelAndView("pdfView", model);
-    }
+
 
 }

@@ -1,10 +1,9 @@
 package com.cfm.tiri.services;
 
-import java.util.List;
-
 import com.cfm.tiri.domain.Route;
-import com.cfm.tiri.mapping.RouteReport;
 import com.cfm.tiri.domain.RouteStatus;
+import com.cfm.tiri.pojo.RouteDetailedReport;
+import com.cfm.tiri.pojo.RouteReport;
 
 
 public interface RouteService {
@@ -17,7 +16,9 @@ public interface RouteService {
 	
 	Iterable<Route> listAllRoutesOrderByRouteDateDesc(String registrationNumber);
 	
-	Iterable<RouteReport> listAverageFuelConsumption(String startDate, String endDate);
+	Iterable<RouteReport> listFuelConsumption(String startDate, String endDate);
+	
+	Iterable<RouteDetailedReport> listDetailedFuelConsumption(String startDate, String endDate);
 	
 	Iterable<RouteStatus> listRouteStatuses();
 	
