@@ -141,7 +141,7 @@ public class PDFBuilder extends AbstractITextPdfView {
         
         PdfPTable detailedTable = new PdfPTable(12);
         detailedTable.setWidthPercentage(100.0f);
-        detailedTable.setWidths(new float[] {0.6f, 1.0f, 0.9f, 1.0f, 1.0f, 0.6f, 0.6f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f});
+        detailedTable.setWidths(new float[] {0.6f, 1.0f, 1.0f, 1.0f, 1.0f, 0.6f, 0.6f, 0.7f, 0.7f, 1.0f, 1.0f, 1.0f});
         detailedTable.setSpacingBefore(10);
         
         // define table header cell
