@@ -1,37 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<title>Zaloguj</title>
-    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Zaloguj</title>
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
 <body>
-<div class="container">
-    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-<div th:if="${param.error}">
-    <label style="color:red">Niepoprawne hasło lub login</label>
-</div>
-<div th:if="${param.logout}">
-    <label>
-        Wylogowano
-    </label>
-</div>
- 
-<form th:action="@{/login}" method="post">
- 
-    <table class="table table-striped">
-        <tr>
-            <td><label> Login : <input type="text" name="username"/> </label></td>
-        </tr>
-        <tr>
-            <td><label> Hasło : <input type="password" name="password"/> </label></td>
-        </tr>
-        <tr>
-            <td> <button type="submit" class="btn btn-default">Zaloguj</button></td>
-        </tr>
-    </table>
- 
-</form>
-</div>
+	<div class="container">
+		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+		<div th:if="${param.error}">
+			<label style="color: red">Niepoprawne hasło lub login</label>
+		</div>
+		<div th:if="${param.logout}">
+			<label> Wylogowano </label>
+		</div>
+		<div class="col-md-4">
+			<form th:action="@{/login}" method="post">
+				<div class="form-inline">
+					<label for="Login">Login: </label> <input type="text"
+						class="form-control" id="Login" name="username"
+						placeholder="login" />
+				</div>
+				<br />
+				<div class="form-inline">
+					<label for="password">Hasło: </label> <input type="password"
+						class="form-control" id="password" name="password"
+						placeholder="hasło" />
+				</div>
+				<br />
+				<button type="submit" class="btn btn-default">Zaloguj</button>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

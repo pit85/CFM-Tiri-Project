@@ -12,7 +12,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.formLogin().loginPage("/login").failureUrl("/login").and().logout()
-				.logoutSuccessUrl("/index.html");
+				.logoutSuccessUrl("/login");
 
 		httpSecurity.csrf().disable();
 		httpSecurity.headers().frameOptions().disable();

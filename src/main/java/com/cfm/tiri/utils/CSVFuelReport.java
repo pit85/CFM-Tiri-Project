@@ -13,7 +13,7 @@ import org.supercsv.prefs.CsvPreference;
 import com.cfm.tiri.pojo.RouteReport;
 import com.cfm.tiri.view.AbstractCsvView;
 
-public class CSVBuilder extends AbstractCsvView {
+public class CSVFuelReport extends AbstractCsvView {
 @Override
 protected void buildCsvDocument(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 

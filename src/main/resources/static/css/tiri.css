@@ -9,6 +9,10 @@ input[type=submit] {
 	cursor: pointer;
 }
 
+.table-striped{
+  font-size: 9px;
+}
+
 #login {
 	padding: 5px 0;
 	border: none;
