@@ -9,28 +9,49 @@
 <body>
 	<div class="container">
 		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-		<div>
-			<div class="container">
-				<img src="../../static/images/tir-550x400.png" width="165"
-					height="120" th:src="@{/images/tir-550x400.png}" />
+
+		<div class="container">
+
+			<img src="../../static/images/tir-550x400.png" width="165"
+				height="120" th:src="@{/images/tir-550x400.png}" />
+
+			<div sec:authorize="hasRole('ADMIN')">
+
+				<div>
+				<br/>
+					<img src="../../static/images/add-512x512.png" width="30"
+						height="30" th:src="@{/images/add-512x512.png}" />
+						<a href="#" th:href="@{/truck/new}">Dodaj ciężarówkę</a>
+				</div>
+			
 			</div>
 
-			<div class="col-sm-10" sec:authorize="hasRole('ADMIN')">
-				<h5>
-					<a href="#" th:href="@{/truck/new}">Dodaj ciężarówkę</a>
-				</h5>
-				<h5>
-					<a href="#" th:href="@{/trucks/active/true}">Pokaż aktywne</a>
-				</h5>
-				<h5>
-					<a href="#" th:href="@{/trucks/active/false}">Pokaż nieaktywne</a>
-				</h5>
-			</div>
 		</div>
-		<div th:if="${not #lists.isEmpty(trucks)}">
-			<div class="col-sm-10">
+
+		<div class="container">
+
+			<div class="col-md-3">
 				<h3>Lista ciężarówek</h3>
 			</div>
+
+			<div class="col-md-9 text-right">
+
+				<form class="form-inline" 
+					th:action="@{/trucks/search}" method="get">
+
+					<input type="radio"  name="option" id="option" th:value="1" /> aktywne
+					<input type="radio"  name="option" id="option" th:value="2" />nieaktywne				
+					
+
+					<button type="submit" class="btn btn-primary btn-md">Filtruj</button>
+
+				</form>
+			</div>
+
+		</div>
+
+		<div class="container" th:if="${not #lists.isEmpty(trucks)}">
+
 			<table class="table table-striped">
 				<tr>
 					<th>id</th>
@@ -54,7 +75,8 @@
 					<td th:text="${truck.euroStandard}">EURO Standard</td>
 					<td th:text="${truck.horsePower}">KM</td>
 					<td th:text="${truck.active}">Aktywny</td>
-					<td th:text="${#dates.format(truck.creationDate, 'yyyy-MM-dd')}">Data utworzenia</td>
+					<td th:text="${#dates.format(truck.creationDate, 'yyyy-MM-dd')}">Data
+						utworzenia</td>
 					<td sec:authorize="hasAnyRole('USER','ADMIN')"><a
 						th:href="${ '/truck/' + truck.id}"><img
 							src="../../static/images/open-256x256.png" width="20" height="20"
@@ -64,10 +86,10 @@
 							src="../../static/images/edit-256x256.png" width="20" height="20"
 							th:src="@{/images/edit-256x256.png}" /></a></td>
 				</tr>
+
 			</table>
 
 		</div>
 	</div>
-
 </body>
 </html>
