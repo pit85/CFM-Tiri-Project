@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class TrailerController {
@@ -81,11 +82,24 @@ public class TrailerController {
         return (List<TrailerType>) this.trailerTypeService.listAllTrailerTypes();
     }
     
-    @RequestMapping(value = "trailers/active/{active}", method = RequestMethod.GET)
-    public String listActive(@PathVariable boolean active, Model model){
-        System.out.println("Returning active trailers:");
-        model.addAttribute("trailers", trailerService.listActiveTrailers(active));
-        return "trailers";
-    }
+	@RequestMapping(value = "trailers/search", method = RequestMethod.GET)
+	public String listActive(
+			@RequestParam(defaultValue="0", value = "option", required = false) int option,
+			Model model) {
+		
+		switch (option){
+		case 1:
+			model.addAttribute("trailers", trailerService.listActiveTrailers(true));
+			break;
+		case 2:
+			model.addAttribute("trailers", trailerService.listActiveTrailers(false));
+			break;
+		case 0:
+			model.addAttribute("trailers", trailerService.listAllTrailers());
+			break;
+		}
+		
+		return "trailers";
+	}
 
 }

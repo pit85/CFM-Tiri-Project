@@ -18,14 +18,15 @@
 
 	<div class="container">
 		<div th:fragment="header">
-			<div id="login">
-				<span sec:authorize="isAnonymous()"><a href="#"
-					th:href="@{/login}" >[Zaloguj]</a></span> <span
-					sec:authorize="isAuthenticated()">Zalogowano: <span
-					sec:authentication="name"></span></span> <span
-					sec:authorize="isAuthenticated()"><a href="#"
-					th:href="@{/logout}" >[Wyloguj]</a></span>
-
+			<div>
+				<p class="text-right">
+					<span sec:authorize="isAnonymous()"><a href="#"
+						th:href="@{/login}">[Zaloguj]</a></span> <span
+						sec:authorize="isAuthenticated()">Zalogowano: <span
+						sec:authentication="name"></span></span> <span
+						sec:authorize="isAuthenticated()"><a href="#"
+						th:href="@{/logout}">[Wyloguj]</a></span>
+				</p>
 			</div>
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">

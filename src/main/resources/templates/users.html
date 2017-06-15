@@ -10,33 +10,47 @@
 	<div class="container">
 		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
+		<div class="container">
+
+			<img src="../../static/images/user-626x626.png" width="120"
+				height="120" th:src="@{/images/user-626x626.jpg}" />
+
+			<div sec:authorize="hasRole('ADMIN')">
+
+				<div>
+					<br /> <img src="../../static/images/add-512x512.png" width="30"
+						height="30" th:src="@{/images/add-512x512.png}" /> <a href="#"
+						th:href="@{/user/new}">Dodaj użytkownika</a>
+				</div>
+
+			</div>
+
+		</div>
 
 		<div class="container">
-			<div id="left-bottom-site">
-				<div>
-					<img src="../../static/images/user-626x626.jpg" width="125"
-						height="125" th:src="@{/images/user-626x626.jpg}" />
-				</div>
 
-
-				<div class="col-sm-10" sec:authorize="hasRole('ADMIN')">
-					<h5>
-						<a href="#" th:href="@{/user/new}">Dodaj użytkownika</a>
-					</h5>
-					<h5>
-						<a href="#" th:href="@{/users/active/true}">Pokaż aktywnych</a>
-					</h5>
-					<h5>
-						<a href="#" th:href="@{/users/active/false}">Pokaż
-							nieaktywnych</a>
-					</h5>
-				</div>
-			</div>
-		</div>
-		<div th:if="${not #lists.isEmpty(users)}">
-			<div class="col-sm-10">
+			<div class="col-md-3">
 				<h3>Lista użytkowników</h3>
 			</div>
+
+			<div class="col-md-9 text-right">
+
+				<form class="form-inline" 
+					th:action="@{/users/search}" method="get">
+
+					<input type="radio" name="option" id="option" th:value="1" />
+					aktywni <input type="radio" name="option" id="option" th:value="2" />nieaktywni
+
+
+					<button type="submit" class="btn btn-primary btn-md">Filtruj</button>
+
+				</form>
+			</div>
+
+		</div>
+
+		<div class="container" th:if="${not #lists.isEmpty(users)}">
+
 			<table class="table table-striped">
 				<tr>
 					<th>id</th>
@@ -59,7 +73,8 @@
 					<td th:text="${user.email}">telefon</td>
 					<td th:text="${user.role.name}">rola</td>
 					<td th:text="${user.active}">Aktywny</td>
-					<td th:text="${#dates.format(user.creationDate, 'yyyy-MM-dd')}">Data utworzenia</td>
+					<td th:text="${#dates.format(user.creationDate, 'yyyy-MM-dd')}">Data
+						utworzenia</td>
 					<td sec:authorize="hasAnyRole('USER','ADMIN')"><a
 						th:href="${ '/user/' + user.id}"><img
 							src="../../static/images/open-256x256.png" width="20" height="20"

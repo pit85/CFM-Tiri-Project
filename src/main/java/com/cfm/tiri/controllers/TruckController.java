@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Controller
@@ -68,12 +69,24 @@ public class TruckController extends WebMvcConfigurerAdapter {
         }
     }
     
-    @RequestMapping(value = "trucks/active/{active}", method = RequestMethod.GET)
-    public String listActive(@PathVariable boolean active, Model model){
-        System.out.println("Returning active trucks:");
-        model.addAttribute("trucks", truckService.listActiveTrucks(active));
-        return "trucks";
-    }
-    
+	@RequestMapping(value = "trucks/search", method = RequestMethod.GET)
+	public String listActive(
+			@RequestParam(defaultValue="0", value = "option", required = false) int option,
+			Model model) {
+		
+		switch (option){
+		case 1:
+			model.addAttribute("trucks", truckService.listActiveTrucks(true));
+			break;
+		case 2:
+			model.addAttribute("trucks", truckService.listActiveTrucks(false));
+			break;
+		case 0:
+			model.addAttribute("trucks", truckService.listAllTrucks());
+			break;
+		}
+		
+		return "trucks";
+	}
 
 }

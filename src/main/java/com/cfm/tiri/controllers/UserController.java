@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -77,12 +78,25 @@ public class UserController {
         }
     }
     
-    @RequestMapping(value = "users/active/{active}", method = RequestMethod.GET)
-    public String listActive(@PathVariable boolean active, Model model){
-        System.out.println("Returning active users:");
-        model.addAttribute("users", userService.listActiveUsers(active));
-        return "users";
-    }
+	@RequestMapping(value = "users/search", method = RequestMethod.GET)
+	public String listActive(
+			@RequestParam(defaultValue="0", value = "option", required = false) int option,
+			Model model) {
+		
+		switch (option){
+		case 1:
+			model.addAttribute("users", userService.listActiveUsers(true));
+			break;
+		case 2:
+			model.addAttribute("users", userService.listActiveUsers(false));
+			break;
+		case 0:
+			model.addAttribute("users", userService.listAllUsers());
+			break;
+		}
+		
+		return "users";
+	}
     
     @ModelAttribute("allRoles")
     public List<Role> listAllRoles() {

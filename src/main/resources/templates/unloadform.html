@@ -1,71 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
+<head lang="pl-PL">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Dodaj rozładunek</title>
+<title>Rozładunek</title>
 
 <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
 <body>
 	<div class="container">
+		x
 		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+		<div class="col-md-8">
+			<div class="container">
+				<img src="../../static/images/unload-512x512.png" width="120"
+					height="120" th:src="@{/images/unload-512x512.png}" />
+			</div>
 
-		<div class="container">
-			<img src="../../static/images/unload-512x512.png" width="120"
-				height="120" th:src="@{/images/unload-512x512.png}" />
-		</div>
-
-		<h3>Dodaj rozładunek:</h3>
-		<div>
-			<form class="form-horizontal" th:object="${unload}"
-				th:action="@{/unload}" method="post">
-				<input type="hidden" th:field="*{id}" /> <input type="hidden"
-					value="0" name='amountOfFuel' /> <input type="hidden" value="0"
-					name='weightOfCargo' /> <input type="hidden" value="3"
-					name='routeStatus.id' />
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Nr rejestracyjny
-						ciężarówki:</label>
-					<div class="col-md-10">
-						<select class="form-control" th:field="*{squad.id}">
-							<option th:each="squad : ${activeSquads}" th:value="${squad.id}"
-								th:text="${squad.truck.registrationNumber}">Nr
-								rejestracyjny ciężarówki</option>
-						</select>
-						<div th:if="${#fields.hasErrors('squad.id')}">
-							<label style="color: red">Podaj aktywny pojazd!</label>
-						</div>
-						<div th:if="${#lists.isEmpty(activeSquads)}">
-							<label style="color: red">Brak aktywnych składów. Utwórz
-								najpierw skład.</label>
+			<h3>Rozładunek:</h3>
+			<br />
+			<div>
+				<form class="form-horizontal" th:object="${unload}"
+					th:action="@{/unload}" method="post">
+					<input type="hidden" th:field="*{id}" /> <input type="hidden"
+						value="0" name='amountOfFuel' /> <input type="hidden" value="0"
+						name='weightOfCargo' /> <input type="hidden" value="3"
+						name='routeStatus.id' />
+					<div class="form-group">
+						<label class="col-md-4 control-label">Nr rejestracyjny
+							ciężarówki:</label>
+						<div class="col-md-4">
+							<select class="form-control" th:field="*{squad.id}">
+								<option th:each="squad : ${activeSquads}" th:value="${squad.id}"
+									th:text="${squad.truck.registrationNumber}">Nr
+									rejestracyjny ciężarówki</option>
+							</select>
+							<div th:if="${#fields.hasErrors('squad.id')}">
+								<label style="color: red">Podaj aktywny pojazd!</label>
+							</div>
+							<div th:if="${#lists.isEmpty(activeSquads)}">
+								<label style="color: red">Brak aktywnych składów. Utwórz
+									najpierw skład.</label>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Stan licznika km:</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" th:field="*{odometer}" />
-						<div th:if="${#fields.hasErrors('odometer')}">
-							<label style="color: red">Wprowadź liczbę od 0 do 9999999</label>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Stan licznika km:</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" th:field="*{odometer}" />
+							<div th:if="${#fields.hasErrors('odometer')}">
+								<label style="color: red">Wprowadź liczbę od 0 do
+									9999999</label>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Data rozładunku:</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" th:field="*{routeDate}" />
-						<div th:if="${#fields.hasErrors('routeDate')}">
-							<label style="color: red">Wprowadź datę w formacie
-								YYYY-MM-DD</label>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Data rozładunku:</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" th:field="*{routeDate}" />
+							<div th:if="${#fields.hasErrors('routeDate')}">
+								<label style="color: red">Wprowadź datę w formacie
+									YYYY-MM-DD</label>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default">Zapisz</button>
+					<div class="form-group">
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<button type="submit" class="btn btn-primary btn-md">Zapisz</button>
+						</div>
 					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 	</div>
 
