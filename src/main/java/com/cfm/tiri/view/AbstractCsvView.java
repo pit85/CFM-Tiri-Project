@@ -12,16 +12,12 @@ public abstract class AbstractCsvView extends AbstractView {
 private static final String CONTENT_TYPE = "text/csv";
 
 
-private String url;
-
-
 public AbstractCsvView() {
     setContentType(CONTENT_TYPE);
 }
 
 
 public void setUrl(String url) {
-    this.url = url;
 }
 
 @Override

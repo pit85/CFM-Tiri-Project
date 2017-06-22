@@ -1,4 +1,4 @@
-/*package com.cfm.tiri.repositories;
+package com.cfm.tiri.repositories;
 
 import com.cfm.tiri.configuration.RepositoryConfiguration;
 import com.cfm.tiri.domain.Truck;
@@ -15,9 +15,10 @@ import static org.junit.Assert.*;
 @SpringBootTest(classes = { RepositoryConfiguration.class })
 public class TruckRepositoryTest {
 
+	@Autowired
 	private TruckRepository truckRepository;
 
-	@Autowired
+
 	public void setTruckRepository(TruckRepository truckRepository) {
 		this.truckRepository = truckRepository;
 	}
@@ -29,9 +30,10 @@ public class TruckRepositoryTest {
 		truck.setRegistrationNumber("TEST1234");
 		truck.setProducer("Mercedes");
 		truck.setModel("Actros");
-		truck.setEuroStandard("setEuroStandard");
+		truck.setEuroStandard("EURO5");
 		truck.setProductionYear(2012);
 		truck.setHorsePower(440);
+		truck.setActive(true);
 
 		// save truck, verify has ID value after save
 		assertNull(truck.getId()); // null before save
@@ -48,7 +50,7 @@ public class TruckRepositoryTest {
 		assertEquals(truck.getRegistrationNumber(), fetchedTruck.getRegistrationNumber());
 
 		// update registration number and save
-		fetchedTruck.setRegistrationNumber("TEST1234");
+		fetchedTruck.setRegistrationNumber("TEST4321");
 		truckRepository.save(fetchedTruck);
 
 		// get from DB, should be updated
@@ -71,4 +73,3 @@ public class TruckRepositoryTest {
 		assertEquals(count, 1);
 	}
 }
-*/

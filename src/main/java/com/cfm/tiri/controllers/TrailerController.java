@@ -37,7 +37,6 @@ public class TrailerController {
     @RequestMapping(value = "/trailers", method = RequestMethod.GET)
     public String list(Model model){
         model.addAttribute("trailers", trailerService.listAllTrailers());
-        System.out.println("Returning trailers:");
         return "trailers";
     }
 

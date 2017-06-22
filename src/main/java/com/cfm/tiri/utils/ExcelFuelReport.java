@@ -1,6 +1,5 @@
 package com.cfm.tiri.utils;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +21,7 @@ import com.cfm.tiri.pojo.RouteReport;
 
 public class ExcelFuelReport extends AbstractXlsxView {
 
+	@SuppressWarnings("deprecation")
 	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 
