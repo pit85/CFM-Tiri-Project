@@ -11,6 +11,8 @@ import com.cfm.tiri.domain.Truck;
 public interface TruckRepository extends CrudRepository<Truck, Long> {
 
 	Iterable<Truck> findByActive(boolean active);
+	
+	Truck findById(long id);
 	// Zgodnie z
 	// https://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html
 	

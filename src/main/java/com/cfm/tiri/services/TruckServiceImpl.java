@@ -7,35 +7,36 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TruckServiceImpl implements TruckService {
+	
 	private TruckRepository truckRepository;
-
+	
 	@Autowired
 	public void setTruckRepository(TruckRepository truckRepository) {
 		this.truckRepository = truckRepository;
 	}
 
 	@Override
-	public Iterable<Truck> listAllTrucks() {
+	public Iterable<Truck> findAll() {
 		return truckRepository.findAll();
 	}
 
 	@Override
-	public Truck getTruckById(long id) {
-		return truckRepository.findOne(id);
+	public Truck findById(long id) {
+		return truckRepository.findById(id);
 	}
 
 	@Override
-	public Truck saveTruck(Truck truck) {
+	public Truck save(Truck truck) {
 		return truckRepository.save(truck);
 	}
 
 	@Override
-	public Iterable<Truck> listActiveTrucks(boolean active) {
+	public Iterable<Truck> findByActive(boolean active) {
 		return truckRepository.findByActive(active);
 	}
 
 	@Override
-	public Iterable<Truck> listActiveAndFreeTrucks(long squadId) {
+	public Iterable<Truck> findActiveAndFree(long squadId) {
 		return truckRepository.findActiveAndFree(squadId);
 	}
 

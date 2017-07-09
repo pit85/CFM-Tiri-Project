@@ -1,5 +1,6 @@
 package com.cfm.tiri.repositories;
 
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -11,6 +12,9 @@ import com.cfm.tiri.domain.Trailer;
 public interface TrailerRepository extends CrudRepository<Trailer, Long> {
 
 	Iterable<Trailer> findByActive(boolean active);
+	
+	Trailer findByRegistrationNumber(String registrationNumber);
+	
 	// Zgodnie z
 	// https://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html
 

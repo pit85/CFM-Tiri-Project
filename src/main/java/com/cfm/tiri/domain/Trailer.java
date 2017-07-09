@@ -33,12 +33,13 @@ public class Trailer {
 	public Trailer(){
 	}
 	
-	public Trailer( String registrationNumber, String producer, String model, int productionYear, Boolean active, int idTrailerType ){
+	public Trailer( String registrationNumber, String producer, String model, int productionYear, Boolean active, TrailerType trailerType ){
 		this.registrationNumber = registrationNumber;
 		this.producer = producer;
 		this.model = model;
 		this.productionYear = productionYear;
 		this.active = active;
+		this.trailerType = trailerType;
 	}
 	
 	@Version

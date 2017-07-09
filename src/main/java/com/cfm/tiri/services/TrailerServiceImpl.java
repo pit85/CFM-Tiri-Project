@@ -17,7 +17,7 @@ public class TrailerServiceImpl implements TrailerService{
 
 	@Override
 	public Iterable<Trailer> listAllTrailers() {
-		return trailerRepository.findAll();
+		return this.trailerRepository.findAll();
 	}
 
 	@Override

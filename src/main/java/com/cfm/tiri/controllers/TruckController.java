@@ -28,20 +28,20 @@ public class TruckController extends WebMvcConfigurerAdapter {
 
     @RequestMapping(value = "/trucks", method = RequestMethod.GET)
     public String list(Model model){
-        model.addAttribute("trucks", truckService.listAllTrucks());
+        model.addAttribute("trucks", truckService.findAll());
         System.out.println("Returning trucks:");
         return "trucks";
     }
 
     @RequestMapping("truck/{id}")
     public String showTruck(@PathVariable long id, Model model){
-        model.addAttribute("truck", truckService.getTruckById(id));
+        model.addAttribute("truck", truckService.findById(id));
         return "truckshow";
     }
 
     @RequestMapping("truck/edit/{id}")
     public String edit(@PathVariable long id, Model model){
-        model.addAttribute("truck", truckService.getTruckById(id));
+        model.addAttribute("truck", truckService.findById(id));
         return "truckform";
     }
     
@@ -64,7 +64,7 @@ public class TruckController extends WebMvcConfigurerAdapter {
             return "truckform";
         } else {
             //form is filled properly
-        	truckService.saveTruck(truck);
+        	truckService.save(truck);
             return "redirect:/truck/" + truck.getId();
         }
     }
@@ -76,13 +76,13 @@ public class TruckController extends WebMvcConfigurerAdapter {
 		
 		switch (option){
 		case 1:
-			model.addAttribute("trucks", truckService.listActiveTrucks(true));
+			model.addAttribute("trucks", truckService.findByActive(true));
 			break;
 		case 2:
-			model.addAttribute("trucks", truckService.listActiveTrucks(false));
+			model.addAttribute("trucks", truckService.findByActive(false));
 			break;
 		case 0:
-			model.addAttribute("trucks", truckService.listAllTrucks());
+			model.addAttribute("trucks", truckService.findAll());
 			break;
 		}
 		

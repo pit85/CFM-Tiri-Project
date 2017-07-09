@@ -47,8 +47,9 @@ public class Truck {
 	public Truck(){
 	}
 	
-	public Truck( String registrationNumber, String producer, String model, 
+	public Truck(long id, String registrationNumber, String producer, String model, 
 			String euroStandard, int productionYear, int horsePower, boolean active){
+		this.id = id;
 		this.registrationNumber = registrationNumber;
 		this.producer = producer;
 		this.model = model;

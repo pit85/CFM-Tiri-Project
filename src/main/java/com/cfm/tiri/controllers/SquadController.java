@@ -53,7 +53,7 @@ public class SquadController {
     public String list(Model model){
         model.addAttribute("squads", squadService.listAllSquads());
         model.addAttribute("allActiveAndFreeDrivers", userService.listActiveAndFreeDrivers(0));
-        model.addAttribute("allActiveAndFreeTrucks", truckService.listActiveAndFreeTrucks(0));
+        model.addAttribute("allActiveAndFreeTrucks", truckService.findActiveAndFree(0));
         model.addAttribute("allActiveAndFreeTrailers", trailerService.listActiveAndFreeTrailers(0));
         System.out.println("Returning squads:");
         return "squads";
@@ -69,7 +69,7 @@ public class SquadController {
     public String edit(@PathVariable long id, Model model){
         model.addAttribute("squad", squadService.getSquadById(id));
         model.addAttribute("allActiveAndFreeDrivers", userService.listActiveAndFreeDrivers(id));
-        model.addAttribute("allActiveAndFreeTrucks", truckService.listActiveAndFreeTrucks(id));
+        model.addAttribute("allActiveAndFreeTrucks", truckService.findActiveAndFree(id));
         model.addAttribute("allActiveAndFreeTrailers", trailerService.listActiveAndFreeTrailers(id));
         return "squadform";
     }
@@ -78,7 +78,7 @@ public class SquadController {
     public String newSquad(Model model){
         model.addAttribute("squad", new Squad());
         model.addAttribute("allActiveAndFreeDrivers", userService.listActiveAndFreeDrivers(0));
-        model.addAttribute("allActiveAndFreeTrucks", truckService.listActiveAndFreeTrucks(0));
+        model.addAttribute("allActiveAndFreeTrucks", truckService.findActiveAndFree(0));
         model.addAttribute("allActiveAndFreeTrailers", trailerService.listActiveAndFreeTrailers(0));
         return "squadform";
     }

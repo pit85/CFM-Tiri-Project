@@ -1,18 +1,21 @@
 package com.cfm.tiri.services;
 
-import com.cfm.tiri.domain.Truck;;
+import com.cfm.tiri.domain.Truck;
+import com.cfm.tiri.repositories.TruckRepository;;
 
 public interface TruckService {
-
-	Iterable<Truck> listAllTrucks();
-
-	Truck getTruckById(long id);
-
-	Truck saveTruck(Truck truck);
-
-	Iterable<Truck> listActiveTrucks(boolean active);
 	
-	Iterable<Truck> listActiveAndFreeTrucks(long squadId);
+	void setTruckRepository(TruckRepository truckRepository);
+
+	Iterable<Truck> findAll();
+	
+	Truck findById(long id);
+
+	Truck save(Truck truck);
+
+	Iterable<Truck> findByActive(boolean active);
+	
+	Iterable<Truck> findActiveAndFree(long squadId);
 	
 	
 }
